@@ -39,4 +39,5 @@ Thumbs.db
 .idea
 *.iml
 atlassian-ide-plugin.xml
+out
 target
