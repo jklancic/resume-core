@@ -3,15 +3,15 @@ package xyz.blackmonster.resume.repositories;
 import java.sql.Date;
 import java.util.List;
 
-import org.skife.jdbi.v2.sqlobject.Bind;
-import org.skife.jdbi.v2.sqlobject.SqlQuery;
-import org.skife.jdbi.v2.sqlobject.SqlUpdate;
-import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper;
+import org.jdbi.v3.sqlobject.config.RegisterRowMapper;
+import org.jdbi.v3.sqlobject.customizer.Bind;
+import org.jdbi.v3.sqlobject.statement.SqlQuery;
+import org.jdbi.v3.sqlobject.statement.SqlUpdate;
 
 import xyz.blackmonster.resume.models.Achievement;
 import xyz.blackmonster.resume.repositories.mappers.AchievementMapper;
 
-@RegisterMapper(AchievementMapper.class)
+@RegisterRowMapper(AchievementMapper.class)
 public interface AchievementDAO {
 
 	@SqlQuery("SELECT uuid, date, description, user_uuid FROM achievement WHERE user_uuid = :user_uuid")

@@ -3,6 +3,7 @@ package xyz.blackmonster.resume.controllers;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -22,6 +23,7 @@ public class AchievementController extends BaseController {
 	
 	private AchievementService achievementService;
 	
+	@Inject
 	public AchievementController(AchievementService achievementService) {
 		this.achievementService = achievementService;
 	}
@@ -39,7 +41,7 @@ public class AchievementController extends BaseController {
 	}
 
 	@GET
-	@Path("test")
+	@Path("/test")
 	public String hello() {
 		return "Hello Stranger!";
 	}

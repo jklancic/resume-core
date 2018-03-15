@@ -2,6 +2,8 @@ package xyz.blackmonster.resume.services;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import xyz.blackmonster.resume.models.Achievement;
 import xyz.blackmonster.resume.repositories.AchievementDAO;
 
@@ -12,6 +14,7 @@ public class AchievementServiceImpl implements AchievementService {
 	
 	private AchievementDAO achievementDAO;
 	
+	@Inject
 	public AchievementServiceImpl(AchievementDAO achievementDAO) {
 		this.achievementDAO = achievementDAO;
 	}
