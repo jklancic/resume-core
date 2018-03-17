@@ -50,3 +50,5 @@ logging:
       archivedFileCount: 7
       timeZone: UTC
       maxFileSize: 10MB
+
+authenticationCachePolicy: maximumSize=10000, expireAfterAccess=10m

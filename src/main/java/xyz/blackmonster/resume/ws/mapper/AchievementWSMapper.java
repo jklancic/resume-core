@@ -10,7 +10,7 @@ public class AchievementWSMapper {
 	
 	public static AchievementWS convert(Achievement achievement) {
 		return new AchievementWS(
-			achievement.getUuid(), achievement.getDate(), achievement.getDescription(), achievement.getUserUuid());
+			achievement.getUuid(), achievement.getDate(), achievement.getDescription(), achievement.getPersonUuid());
 	}
 	
 	public static Achievement convert(AchievementWS achievementWS) {

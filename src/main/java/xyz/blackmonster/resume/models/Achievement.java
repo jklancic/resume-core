@@ -10,17 +10,17 @@ public class Achievement {
 	private String uuid;
 	private Date date;
 	private String description;
-	private String userUuid;
+	private String personUuid;
 	
 	public Achievement() {
 		
 	}
 	
-	public Achievement(String uuid, Date date, String description, String userUuid) {
+	public Achievement(String uuid, Date date, String description, String personUuid) {
 		this.uuid = uuid;
 		this.date = date;
 		this.description = description;
-		this.userUuid = userUuid;
+		this.personUuid = personUuid;
 	}
 
 	public String getUuid() {
@@ -47,11 +47,11 @@ public class Achievement {
 		this.description = description;
 	}
 
-	public String getUserUuid() {
-		return userUuid;
+	public String getPersonUuid() {
+		return personUuid;
 	}
 
-	public void setUserUuid(String userUuid) {
-		this.userUuid = userUuid;
+	public void setPersonUuid(String personUuid) {
+		this.personUuid = personUuid;
 	}
 }

@@ -22,6 +22,7 @@ repositories {
 dependencies {
     compile group: 'io.dropwizard', name: 'dropwizard-core', version: dropwizardVersion
     compile group: 'io.dropwizard', name: 'dropwizard-jdbi3', version: dropwizardVersion
+    compile group: 'io.dropwizard', name: 'dropwizard-auth', version: dropwizardVersion
     compile group: 'io.dropwizard', name: 'dropwizard-metrics-graphite', version: dropwizardVersion
     compile group: 'mysql', name: 'mysql-connector-java', version: mysqlConnectorVersion
     compile group: 'com.google.dagger', name: 'dagger', version: daggerVersion
