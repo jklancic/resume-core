@@ -28,7 +28,7 @@ public class ResumeConfiguration extends Configuration {
 	}
 
 	@JsonProperty(AUTH_CACHE_POLICY)
-	public CacheBuilderSpec getCacheBuilderSpec(String authenticationCachePolicy) {
-		return CacheBuilderSpec.parse(authenticationCachePolicy);
+	public String getAuthenticationCachePolicy() {
+		return authenticationCachePolicy;
 	}
 }

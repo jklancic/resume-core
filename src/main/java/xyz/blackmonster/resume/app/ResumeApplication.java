@@ -3,8 +3,10 @@ package xyz.blackmonster.resume.app;
 import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
 import org.jdbi.v3.core.Jdbi;
 
+import com.google.common.cache.CacheBuilderSpec;
 import io.dropwizard.Application;
 import io.dropwizard.auth.AuthDynamicFeature;
+import io.dropwizard.auth.AuthValueFactoryProvider;
 import io.dropwizard.auth.CachingAuthenticator;
 import io.dropwizard.auth.basic.BasicCredentialAuthFilter;
 import io.dropwizard.auth.basic.BasicCredentials;
@@ -39,7 +41,9 @@ public class ResumeApplication extends Application<ResumeConfiguration> {
 
 		CachingAuthenticator<BasicCredentials, User> cachingAuthenticator =
 			new CachingAuthenticator<>(
-				environment.metrics(), beanComponent.getResumeAuthenticator(), configuration.getCacheBuilderSpec());
+				environment.metrics(), 
+				beanComponent.getResumeAuthenticator(), 
+				CacheBuilderSpec.parse(configuration.getAuthenticationCachePolicy()));
 		
 		environment.jersey().register(new AuthDynamicFeature(
 			new BasicCredentialAuthFilter.Builder<User>()
@@ -48,5 +52,6 @@ public class ResumeApplication extends Application<ResumeConfiguration> {
 				.setRealm(REALM)
 				.buildAuthFilter()));
 		environment.jersey().register(RolesAllowedDynamicFeature.class);
+		environment.jersey().register(new AuthValueFactoryProvider.Binder<>(User.class));
 	}
 }
