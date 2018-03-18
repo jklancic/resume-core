@@ -14,12 +14,13 @@ public class Experience {
 	private String description;
 	private String city;
 	private String country;
+	private String personUuid;
 	
 	public Experience() {
 		
 	}
 
-	public Experience(String uuid, Date startDate, Date endDate, String title, String description, String city, String country) {
+	public Experience(String uuid, Date startDate, Date endDate, String title, String description, String city, String country, String personUuid) {
 		this.uuid = uuid;
 		this.startDate = startDate;
 		this.endDate = endDate;
@@ -27,6 +28,7 @@ public class Experience {
 		this.description = description;
 		this.city = city;
 		this.country = country;
+		this.personUuid = personUuid;
 	}
 
 	public String getUuid() {
@@ -83,5 +85,13 @@ public class Experience {
 
 	public void setCountry(String country) {
 		this.country = country;
+	}
+
+	public String getPersonUuid() {
+		return personUuid;
+	}
+
+	public void setPersonUuid(String personUuid) {
+		this.personUuid = personUuid;
 	}
 }

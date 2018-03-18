@@ -2,8 +2,7 @@ package xyz.blackmonster.resume.services;
 
 import java.util.List;
 
-import xyz.blackmonster.resume.models.Achievement;
-import xyz.blackmonster.resume.ws.AchievementWS;
+import xyz.blackmonster.resume.ws.response.AchievementWS;
 
 public interface AchievementService {
 

@@ -5,6 +5,7 @@ package xyz.blackmonster.resume.models;
  */
 public class Skill {
 	
+	private String uuid;
 	private String mastery;
 	private int level;
 	private String categoryUuid;
@@ -14,11 +15,20 @@ public class Skill {
 		
 	}
 
-	public Skill(String mastery, int level, String categoryUuid, String personUuid) {
+	public Skill(String uuid, String mastery, int level, String categoryUuid, String personUuid) {
+		this.uuid = uuid;
 		this.mastery = mastery;
 		this.level = level;
 		this.categoryUuid = categoryUuid;
 		this.personUuid = personUuid;
+	}
+
+	public String getUuid() {
+		return uuid;
+	}
+
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
 	}
 
 	public String getMastery() {

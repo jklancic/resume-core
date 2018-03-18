@@ -1,7 +1,7 @@
 package xyz.blackmonster.resume.ws.mapper;
 
 import xyz.blackmonster.resume.models.Achievement;
-import xyz.blackmonster.resume.ws.AchievementWS;
+import xyz.blackmonster.resume.ws.response.AchievementWS;
 
 /**
  * Mapper to convert from and to AchievementWS

@@ -5,8 +5,8 @@ import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 
-import xyz.blackmonster.resume.repositories.AchievementDAO;
-import xyz.blackmonster.resume.ws.AchievementWS;
+import xyz.blackmonster.resume.repositories.dao.AchievementDAO;
+import xyz.blackmonster.resume.ws.response.AchievementWS;
 import xyz.blackmonster.resume.ws.mapper.AchievementWSMapper;
 
 /**
@@ -23,7 +23,7 @@ public class AchievementServiceImpl implements AchievementService {
 
 	@Override
 	public List<AchievementWS> getAllByUser(String personUuid) {
-		return achievementDAO.getAllByUser(personUuid).stream().map(AchievementWSMapper::convert).collect(Collectors.toList());
+		return achievementDAO.getAllByPerson(personUuid).stream().map(AchievementWSMapper::convert).collect(Collectors.toList());
 	}
 
 	@Override

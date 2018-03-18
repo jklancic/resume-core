@@ -17,7 +17,7 @@ import javax.ws.rs.core.Response;
 import io.dropwizard.auth.Auth;
 import xyz.blackmonster.resume.security.model.User;
 import xyz.blackmonster.resume.services.AchievementService;
-import xyz.blackmonster.resume.ws.AchievementWS;
+import xyz.blackmonster.resume.ws.response.AchievementWS;
 
 /**
  * Achievement controller

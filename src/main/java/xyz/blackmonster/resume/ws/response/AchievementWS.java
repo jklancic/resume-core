@@ -1,4 +1,4 @@
-package xyz.blackmonster.resume.ws;
+package xyz.blackmonster.resume.ws.response;
 
 import java.sql.Date;
 

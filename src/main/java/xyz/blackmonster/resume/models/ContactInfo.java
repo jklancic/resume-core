@@ -3,7 +3,7 @@ package xyz.blackmonster.resume.models;
 /**
  * Contact information for a person
  */
-public class ContactInformation {
+public class ContactInfo {
 	
 	private String uuid;
 	private String email;
@@ -13,11 +13,11 @@ public class ContactInformation {
 	private String postalCode;
 	private String country;
 	
-	public ContactInformation() {
+	public ContactInfo() {
 		
 	}
 
-	public ContactInformation(String uuid, String email, String phone, String street, String city, String postalCode, String country) {
+	public ContactInfo(String uuid, String email, String phone, String street, String city, String postalCode, String country) {
 		this.uuid = uuid;
 		this.email = email;
 		this.phone = phone;

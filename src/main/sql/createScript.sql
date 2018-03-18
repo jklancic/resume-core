@@ -71,12 +71,12 @@ CREATE TABLE `persons`
  `first_name`               VARCHAR(45) NOT NULL ,
  `last_name`                VARCHAR(45) NOT NULL ,
  `overview`                 VARCHAR(255) NOT NULL ,
- `created_by`               VARCHAR(36) NOT NULL ,
+ `created_by_user_uuid`     VARCHAR(36) NOT NULL ,
  `contact_information_uuid` VARCHAR(36) NOT NULL ,
 
  PRIMARY KEY (`uuid`),
- KEY `fkIdx_18` (`created_by`),
- CONSTRAINT `FK_18` FOREIGN KEY `fkIdx_18` (`created_by`) REFERENCES `users` (`uuid`),
+ KEY `fkIdx_18` (`created_by_user_uuid`),
+ CONSTRAINT `FK_18` FOREIGN KEY `fkIdx_18` (`created_by_user_uuid`) REFERENCES `users` (`uuid`),
  KEY `fkIdx_67` (`contact_information_uuid`),
  CONSTRAINT `FK_67` FOREIGN KEY `fkIdx_67` (`contact_information_uuid`) REFERENCES `contact_informations` (`uuid`)
 );

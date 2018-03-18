@@ -6,9 +6,7 @@ import org.jdbi.v3.core.Jdbi;
 
 import dagger.Module;
 import dagger.Provides;
-import io.dropwizard.auth.Authenticator;
-import xyz.blackmonster.resume.repositories.AchievementDAO;
-import xyz.blackmonster.resume.security.auth.ResumeAuthenticator;
+import xyz.blackmonster.resume.repositories.dao.AchievementDAO;
 import xyz.blackmonster.resume.security.repository.UserDAO;
 import xyz.blackmonster.resume.services.AchievementService;
 import xyz.blackmonster.resume.services.AchievementServiceImpl;

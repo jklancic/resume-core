@@ -8,7 +8,10 @@ import org.jdbi.v3.core.statement.StatementContext;
 
 import xyz.blackmonster.resume.models.Achievement;
 
-public class AchievementMapper implements RowMapper<Achievement> {
+/**
+ * Row mapper for achievement model
+ */
+public class AchievementSQLMapper implements RowMapper<Achievement> {
 
 	private static final String UUID = "uuid";
 	private static final String DATE = "date";

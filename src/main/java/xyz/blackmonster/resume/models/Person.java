@@ -13,20 +13,20 @@ public class Person {
 	private String lastName;
 	private String overview;
 	private String contactInfoUuid;
-	private String createdBy;
+	private String createdByUser;
 	
 	public Person() {
 		
 	}
 
-	public Person(String uuid, Date birthDate, String firstName, String lastName, String overview, String contactInfoUuid, String createdBy) {
+	public Person(String uuid, Date birthDate, String firstName, String lastName, String overview, String contactInfoUuid, String createdByUser) {
 		this.uuid = uuid;
 		this.birthDate = birthDate;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.overview = overview;
 		this.contactInfoUuid = contactInfoUuid;
-		this.createdBy = createdBy;
+		this.createdByUser = createdByUser;
 	}
 
 	public String getUuid() {
@@ -77,11 +77,11 @@ public class Person {
 		this.contactInfoUuid = contactInfoUuid;
 	}
 
-	public String getCreatedBy() {
-		return createdBy;
+	public String getCreatedByUser() {
+		return createdByUser;
 	}
 
-	public void setCreatedBy(String createdBy) {
-		this.createdBy = createdBy;
+	public void setCreatedByUser(String createdByUser) {
+		this.createdByUser = createdByUser;
 	}
 }
