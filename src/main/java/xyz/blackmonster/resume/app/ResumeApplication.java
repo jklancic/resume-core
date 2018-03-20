@@ -14,7 +14,7 @@ import io.dropwizard.jdbi3.JdbiFactory;
 import io.dropwizard.setup.Environment;
 import xyz.blackmonster.resume.config.bean.BeanComponent;
 import xyz.blackmonster.resume.config.bean.BeanModule;
-import xyz.blackmonster.resume.config.DaggerBeanComponent;
+import xyz.blackmonster.resume.config.bean.DaggerBeanComponent;
 import xyz.blackmonster.resume.config.ResumeConfiguration;
 import xyz.blackmonster.resume.security.auth.ResumeAuthorizer;
 import xyz.blackmonster.resume.security.model.User;
