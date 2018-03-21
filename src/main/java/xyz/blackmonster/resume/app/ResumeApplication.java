@@ -44,13 +44,14 @@ public class ResumeApplication extends Application<ResumeConfiguration> {
 				environment.metrics(), 
 				beanComponent.getResumeAuthenticator(), 
 				CacheBuilderSpec.parse(configuration.getAuthenticationCachePolicy()));
+
+		BasicCredentialAuthFilter<User> authFilter = new BasicCredentialAuthFilter.Builder<User>()
+			.setAuthenticator(cachingAuthenticator)
+			.setAuthorizer(new ResumeAuthorizer())
+			.setRealm(REALM)
+			.buildAuthFilter();
 		
-		environment.jersey().register(new AuthDynamicFeature(
-			new BasicCredentialAuthFilter.Builder<User>()
-				.setAuthenticator(cachingAuthenticator)
-				.setAuthorizer(new ResumeAuthorizer())
-				.setRealm(REALM)
-				.buildAuthFilter()));
+		environment.jersey().register(new AuthDynamicFeature(authFilter));
 		environment.jersey().register(RolesAllowedDynamicFeature.class);
 		environment.jersey().register(new AuthValueFactoryProvider.Binder<>(User.class));
 	}

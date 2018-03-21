@@ -15,6 +15,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import io.dropwizard.auth.Auth;
+import io.dropwizard.auth.AuthenticationException;
+import xyz.blackmonster.resume.controllers.access.AchievementSecurity;
 import xyz.blackmonster.resume.security.model.User;
 import xyz.blackmonster.resume.services.AchievementService;
 import xyz.blackmonster.resume.ws.response.AchievementWS;
@@ -26,10 +28,13 @@ import xyz.blackmonster.resume.ws.response.AchievementWS;
 @Produces(MediaType.APPLICATION_JSON)
 public class AchievementController extends BaseController {
 	
+	private AchievementSecurity achievementSecurity;
+	
 	private AchievementService achievementService;
 	
 	@Inject
-	public AchievementController(AchievementService achievementService) {
+	public AchievementController(AchievementSecurity achievementSecurity, AchievementService achievementService) {
+		this.achievementSecurity = achievementSecurity;
 		this.achievementService = achievementService;
 	}
 	
@@ -46,23 +51,29 @@ public class AchievementController extends BaseController {
 	}
 	
 	@POST
-	@RolesAllowed("ADMIN")
 	@Path("/user/{personUuid}/achievements/")
-	public AchievementWS create(@Auth User user, AchievementWS achievementWS) {
+	public AchievementWS create(@Auth User user, @PathParam("personUuid") String personUuid, AchievementWS achievementWS) throws AuthenticationException {
+		if(!achievementSecurity.canCreateAchievement(user, personUuid)) {
+			throw new AuthenticationException("User not authorized.");
+		}
 		return null;
 	}
 	
 	@PUT
-	@RolesAllowed("ADMIN")
 	@Path("/user/{personUuid}/achievements/{achievementUuid}")
-	public AchievementWS update(@Auth User user, AchievementWS achievementWS) {
+	public AchievementWS update(@Auth User user, @PathParam("personUuid") String personUuid, AchievementWS achievementWS) throws AuthenticationException {
+		if(!achievementSecurity.canUpdateAchievement(user, personUuid)) {
+			throw new AuthenticationException("User not authorized.");
+		}
 		return null;
 	}
 	
 	@DELETE
-	@RolesAllowed("ADMIN")
 	@Path("/user/{personUuid}/achievements/{achievementUuid}")
-	public Response delete(AchievementWS achievementWS) {
+	public Response delete(@Auth User user, @PathParam("personUuid") String personUuid) throws AuthenticationException {
+		if(!achievementSecurity.canDeleteAchievement(user, personUuid)) {
+			throw new AuthenticationException("User not authorized.");
+		}
 		return null;
 	}
 }

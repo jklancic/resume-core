@@ -23,6 +23,9 @@ public interface PersonDAO {
 	@SqlQuery("SELECT * FROM persons WHERE uuid = :uuid")
 	Person getByUuid(@Bind("uuid") String uuid);
 
+	@SqlQuery("SELECT * FROM persons WHERE uuid = :uuid AND created_by_user_uuid = :ownerUuid")
+	Person getByUuidAndOwnerUuid(@Bind("uuid") String uuid, @Bind("ownerUuid") String ownerUuid);
+
 	@SqlUpdate("INSERT INTO persons(uuid, birth_date, first_name, last_name, overview, contact_information_uuid, created_by_user_uuid) VALUES (:uuid, :birthDate, :firstName, :lastName, :overview, :contactInfoUuid, :createdByUser)")
 	void create(@BindBean Person person);
 
