@@ -9,7 +9,7 @@ import org.jdbi.v3.core.statement.StatementContext;
 import xyz.blackmonster.resume.models.Skill;
 
 /**
- * Row mapper for skill model
+ * Row mapper for skill models
  */
 public class SkillSQLMapper implements RowMapper<Skill> {
 

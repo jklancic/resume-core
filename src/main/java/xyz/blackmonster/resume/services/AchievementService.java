@@ -4,6 +4,9 @@ import java.util.List;
 
 import xyz.blackmonster.resume.ws.response.AchievementWS;
 
+/**
+ * Achievement service interface
+ */
 public interface AchievementService {
 
 	/**
@@ -11,7 +14,7 @@ public interface AchievementService {
 	 * @param personUuid
 	 * @return
 	 */
-	List<AchievementWS> getAllByUser(String personUuid);
+	List<AchievementWS> getAllByPerson(String personUuid);
 
 	/**
 	 * Returns achievement for specific achievement uuid and person uuid.

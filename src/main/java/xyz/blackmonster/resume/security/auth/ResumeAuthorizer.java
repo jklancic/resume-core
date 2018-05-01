@@ -1,7 +1,7 @@
 package xyz.blackmonster.resume.security.auth;
 
 import io.dropwizard.auth.Authorizer;
-import xyz.blackmonster.resume.security.model.User;
+import xyz.blackmonster.resume.security.models.User;
 
 /**
  * Authorizer logic to determine user authorization for accessing resources.

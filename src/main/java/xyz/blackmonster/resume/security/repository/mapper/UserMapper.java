@@ -6,8 +6,8 @@ import java.sql.SQLException;
 import org.jdbi.v3.core.mapper.RowMapper;
 import org.jdbi.v3.core.statement.StatementContext;
 
-import xyz.blackmonster.resume.security.model.Role;
-import xyz.blackmonster.resume.security.model.User;
+import xyz.blackmonster.resume.security.models.Role;
+import xyz.blackmonster.resume.security.models.User;
 
 public class UserMapper implements RowMapper<User> {
 

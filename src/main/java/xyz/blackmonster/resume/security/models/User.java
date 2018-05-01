@@ -1,4 +1,4 @@
-package xyz.blackmonster.resume.security.model;
+package xyz.blackmonster.resume.security.models;
 
 import java.security.Principal;
 

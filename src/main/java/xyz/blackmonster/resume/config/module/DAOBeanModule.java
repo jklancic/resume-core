@@ -1,4 +1,4 @@
-package xyz.blackmonster.resume.config.bean;
+package xyz.blackmonster.resume.config.module;
 
 import javax.inject.Singleton;
 
@@ -6,9 +6,6 @@ import org.jdbi.v3.core.Jdbi;
 
 import dagger.Module;
 import dagger.Provides;
-import xyz.blackmonster.resume.controllers.access.AchievementSecurity;
-import xyz.blackmonster.resume.controllers.access.AchievementSecurityImpl;
-import xyz.blackmonster.resume.models.Education;
 import xyz.blackmonster.resume.repositories.dao.AchievementDAO;
 import xyz.blackmonster.resume.repositories.dao.CategoryDAO;
 import xyz.blackmonster.resume.repositories.dao.EducationDAO;
@@ -16,19 +13,17 @@ import xyz.blackmonster.resume.repositories.dao.ExperienceDAO;
 import xyz.blackmonster.resume.repositories.dao.PersonDAO;
 import xyz.blackmonster.resume.repositories.dao.SkillDAO;
 import xyz.blackmonster.resume.security.repository.UserDAO;
-import xyz.blackmonster.resume.services.AchievementService;
-import xyz.blackmonster.resume.services.AchievementServiceImpl;
 
 @Module
-public class BeanModule {
-	
+public class DAOBeanModule {
+
 	private Jdbi jdbi;
-	
-	public BeanModule(Jdbi jdbi) {
+
+	public DAOBeanModule(Jdbi jdbi) {
 		this.jdbi = jdbi;
 	}
-	
-	@Singleton	
+
+	@Singleton
 	@Provides
 	AchievementDAO provideAchievementDAO() {
 		return jdbi.onDemand(AchievementDAO.class);
@@ -68,17 +63,5 @@ public class BeanModule {
 	@Provides
 	UserDAO provideUserDAO() {
 		return jdbi.onDemand(UserDAO.class);
-	}
-	
-	@Singleton
-	@Provides
-	AchievementService provideAchievementService(AchievementServiceImpl achievementService) {
-		return achievementService;
-	}
-	
-	@Singleton
-	@Provides
-	AchievementSecurity provideAchievementSecurity(AchievementSecurityImpl achievementSecurity) {
-		return achievementSecurity;
 	}
 }

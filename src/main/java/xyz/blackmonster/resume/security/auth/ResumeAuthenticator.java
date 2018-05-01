@@ -7,7 +7,7 @@ import javax.inject.Inject;
 import io.dropwizard.auth.AuthenticationException;
 import io.dropwizard.auth.Authenticator;
 import io.dropwizard.auth.basic.BasicCredentials;
-import xyz.blackmonster.resume.security.model.User;
+import xyz.blackmonster.resume.security.models.User;
 import xyz.blackmonster.resume.security.repository.UserDAO;
 import xyz.blackmonster.resume.security.util.PasswordUtil;
 

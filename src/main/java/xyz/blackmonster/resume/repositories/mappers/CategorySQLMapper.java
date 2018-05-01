@@ -9,7 +9,7 @@ import org.jdbi.v3.core.statement.StatementContext;
 import xyz.blackmonster.resume.models.Category;
 
 /**
- * Row mapper for category model
+ * Row mapper for category models
  */
 public class CategorySQLMapper implements RowMapper<Category> {
 

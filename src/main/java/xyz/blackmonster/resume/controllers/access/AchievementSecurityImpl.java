@@ -1,11 +1,13 @@
 package xyz.blackmonster.resume.controllers.access;
 
+import java.util.Optional;
+
 import javax.inject.Inject;
 
 import xyz.blackmonster.resume.models.Person;
 import xyz.blackmonster.resume.repositories.dao.PersonDAO;
-import xyz.blackmonster.resume.security.model.Role;
-import xyz.blackmonster.resume.security.model.User;
+import xyz.blackmonster.resume.security.models.Role;
+import xyz.blackmonster.resume.security.models.User;
 
 public class AchievementSecurityImpl implements AchievementSecurity {
 	
@@ -37,7 +39,7 @@ public class AchievementSecurityImpl implements AchievementSecurity {
 	}
 	
 	private boolean isOwner(User user, String personUuid) {
-		Person person = personDAO.getByUuidAndOwnerUuid(personUuid, user.getUuid());
-		return person != null;
+		Optional<Person> optionalPerson = personDAO.getByUuidAndOwnerUuid(personUuid, user.getUuid());
+		return optionalPerson.isPresent();
 	}
 }

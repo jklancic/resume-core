@@ -1,4 +1,4 @@
-package xyz.blackmonster.resume.config;
+package xyz.blackmonster.resume.config.app;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -6,7 +6,6 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.cache.CacheBuilderSpec;
 import io.dropwizard.Configuration;
 import io.dropwizard.db.DataSourceFactory;
 

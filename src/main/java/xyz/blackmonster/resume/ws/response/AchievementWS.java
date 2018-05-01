@@ -10,17 +10,15 @@ public class AchievementWS {
 	private String uuid;
 	private Date date;
 	private String description;
-	private String userUuid;
 	
 	public AchievementWS() {
 		
 	}
 	
-	public AchievementWS(String uuid, Date date, String description, String userUuid) {
+	public AchievementWS(String uuid, Date date, String description) {
 		this.uuid = uuid;
 		this.date = date;
 		this.description = description;
-		this.userUuid = userUuid;
 	}
 
 	public String getUuid() {
@@ -45,13 +43,5 @@ public class AchievementWS {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public String getUserUuid() {
-		return userUuid;
-	}
-
-	public void setUserUuid(String userUuid) {
-		this.userUuid = userUuid;
 	}
 }

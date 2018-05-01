@@ -9,7 +9,7 @@ import org.jdbi.v3.core.statement.StatementContext;
 import xyz.blackmonster.resume.models.ContactInfo;
 
 /**
- * Row mapper for contact information model
+ * Row mapper for contact information models
  */
 public class ContactInfoSQLMapper implements RowMapper<ContactInfo> {
 

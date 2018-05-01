@@ -4,17 +4,17 @@ import xyz.blackmonster.resume.models.Achievement;
 import xyz.blackmonster.resume.ws.response.AchievementWS;
 
 /**
- * Mapper to convert from and to AchievementWS
+ * Mapper for transforming to and from AchievementWS
  */
 public class AchievementWSMapper {
 	
-	public static AchievementWS convert(Achievement achievement) {
+	public static AchievementWS toWS(Achievement achievement) {
 		return new AchievementWS(
-			achievement.getUuid(), achievement.getDate(), achievement.getDescription(), achievement.getPersonUuid());
+			achievement.getUuid(), achievement.getDate(), achievement.getDescription());
 	}
 	
-	public static Achievement convert(AchievementWS achievementWS) {
+	public static Achievement toModel(AchievementWS achievementWS, String personUuid) {
 		return new Achievement(
-			achievementWS.getUuid(), achievementWS.getDate(), achievementWS.getDescription(), achievementWS.getUserUuid());
+			achievementWS.getUuid(), achievementWS.getDate(), achievementWS.getDescription(), personUuid);
 	}
 }

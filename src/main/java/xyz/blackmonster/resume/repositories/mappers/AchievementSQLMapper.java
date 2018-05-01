@@ -9,7 +9,7 @@ import org.jdbi.v3.core.statement.StatementContext;
 import xyz.blackmonster.resume.models.Achievement;
 
 /**
- * Row mapper for achievement model
+ * Row mapper for achievement models
  */
 public class AchievementSQLMapper implements RowMapper<Achievement> {
 

@@ -1,34 +1,30 @@
-package xyz.blackmonster.resume.models;
+package xyz.blackmonster.resume.ws.response;
 
 import java.sql.Date;
 
 /**
- * Person
+ * Web Service response object for Person
  */
-public class Person {
-	
+public class PersonWS {
+
 	private String uuid;
 	private Date birthDate;
 	private String firstName;
 	private String lastName;
 	private String overview;
-	private String contactInfoUuid;
-	private String baseUrl;
-	private String createdByUser;
+	private ContactInfoWS contactInfo;
 	
-	public Person() {
+	public PersonWS() {
 		
 	}
 
-	public Person(String uuid, Date birthDate, String firstName, String lastName, String overview, String contactInfoUuid, String baseUrl, String createdByUser) {
+	public PersonWS(String uuid, Date birthDate, String firstName, String lastName, String overview, ContactInfoWS contactInfo) {
 		this.uuid = uuid;
 		this.birthDate = birthDate;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.overview = overview;
-		this.contactInfoUuid = contactInfoUuid;
-		this.baseUrl = baseUrl;
-		this.createdByUser = createdByUser;
+		this.contactInfo = contactInfo;
 	}
 
 	public String getUuid() {
@@ -71,27 +67,11 @@ public class Person {
 		this.overview = overview;
 	}
 
-	public String getContactInfoUuid() {
-		return contactInfoUuid;
+	public ContactInfoWS getContactInfo() {
+		return contactInfo;
 	}
 
-	public void setContactInfoUuid(String contactInfoUuid) {
-		this.contactInfoUuid = contactInfoUuid;
-	}
-
-	public String getBaseUrl() {
-		return baseUrl;
-	}
-
-	public void setBaseUrl(String baseUrl) {
-		this.baseUrl = baseUrl;
-	}
-
-	public String getCreatedByUser() {
-		return createdByUser;
-	}
-
-	public void setCreatedByUser(String createdByUser) {
-		this.createdByUser = createdByUser;
+	public void setContactInfo(ContactInfoWS contactInfo) {
+		this.contactInfo = contactInfo;
 	}
 }

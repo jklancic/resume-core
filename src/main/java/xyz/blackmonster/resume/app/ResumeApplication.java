@@ -12,19 +12,20 @@ import io.dropwizard.auth.basic.BasicCredentialAuthFilter;
 import io.dropwizard.auth.basic.BasicCredentials;
 import io.dropwizard.jdbi3.JdbiFactory;
 import io.dropwizard.setup.Environment;
-import xyz.blackmonster.resume.config.bean.BeanComponent;
-import xyz.blackmonster.resume.config.bean.BeanModule;
-import xyz.blackmonster.resume.config.bean.DaggerBeanComponent;
-import xyz.blackmonster.resume.config.ResumeConfiguration;
+import xyz.blackmonster.resume.config.component.ResumeComponent;
+import xyz.blackmonster.resume.config.module.DAOBeanModule;
+import xyz.blackmonster.resume.config.module.ServiceBeanModule;
+import xyz.blackmonster.resume.config.component.DaggerResumeComponent;
+import xyz.blackmonster.resume.config.app.ResumeConfiguration;
 import xyz.blackmonster.resume.security.auth.ResumeAuthorizer;
-import xyz.blackmonster.resume.security.model.User;
+import xyz.blackmonster.resume.security.models.User;
 
 public class ResumeApplication extends Application<ResumeConfiguration> {
 
 	private static final String REALM = "resume";
 	private static final String MYSQL = "mysql";
 	
-	private BeanComponent beanComponent;
+	private ResumeComponent resumeComponent;
 
 	public static void main(String[] args) throws Exception {
 		new ResumeApplication().run(args);
@@ -35,14 +36,18 @@ public class ResumeApplication extends Application<ResumeConfiguration> {
 		final JdbiFactory factory = new JdbiFactory();
 		final Jdbi jdbi = factory.build(environment, configuration.getDataSourceFactory(), MYSQL);
 		
-		beanComponent = DaggerBeanComponent.builder().beanModule(new BeanModule(jdbi)).build();
+		resumeComponent =
+			DaggerResumeComponent.builder()
+				.dAOBeanModule(new DAOBeanModule(jdbi))
+				.serviceBeanModule(new ServiceBeanModule())
+				.build();
 		
-		environment.jersey().register(beanComponent.getAchievementControler());
+		environment.jersey().register(resumeComponent.getAchievementController());
 
 		CachingAuthenticator<BasicCredentials, User> cachingAuthenticator =
 			new CachingAuthenticator<>(
 				environment.metrics(), 
-				beanComponent.getResumeAuthenticator(), 
+				resumeComponent.getResumeAuthenticator(), 
 				CacheBuilderSpec.parse(configuration.getAuthenticationCachePolicy()));
 
 		BasicCredentialAuthFilter<User> authFilter = new BasicCredentialAuthFilter.Builder<User>()

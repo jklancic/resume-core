@@ -9,7 +9,7 @@ import org.jdbi.v3.core.statement.StatementContext;
 import xyz.blackmonster.resume.models.Experience;
 
 /**
- * Row mapper for experience model
+ * Row mapper for experience models
  */
 public class ExperienceSQLMapper implements RowMapper<Experience> {
 

@@ -9,7 +9,7 @@ import org.jdbi.v3.core.statement.StatementContext;
 import xyz.blackmonster.resume.models.Education;
 
 /**
- * Row mapper for education model
+ * Row mapper for education models
  */
 public class EducationSQLMapper implements RowMapper<Education> {
 

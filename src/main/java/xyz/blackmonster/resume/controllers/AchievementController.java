@@ -2,7 +2,6 @@ package xyz.blackmonster.resume.controllers;
 
 import java.util.List;
 
-import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -17,7 +16,7 @@ import javax.ws.rs.core.Response;
 import io.dropwizard.auth.Auth;
 import io.dropwizard.auth.AuthenticationException;
 import xyz.blackmonster.resume.controllers.access.AchievementSecurity;
-import xyz.blackmonster.resume.security.model.User;
+import xyz.blackmonster.resume.security.models.User;
 import xyz.blackmonster.resume.services.AchievementService;
 import xyz.blackmonster.resume.ws.response.AchievementWS;
 
@@ -39,19 +38,19 @@ public class AchievementController extends BaseController {
 	}
 	
 	@GET
-	@Path("/user/{personUuid}/achievements")
+	@Path("/{personUuid}/achievements")
 	public List<AchievementWS> getAllByUser(@PathParam("personUuid") String personUuid) {
-		return achievementService.getAllByUser(personUuid);
+		return achievementService.getAllByPerson(personUuid);
 	}
 	
 	@GET
-	@Path("/user/{personUuid}/achievements/{uuid}")
+	@Path("/{personUuid}/achievements/{uuid}")
 	public AchievementWS getByUuid(@PathParam("personUuid") String personUuid, @PathParam("uuid") String uuid) {
 		return achievementService.getByUuid(uuid, personUuid);
 	}
 	
 	@POST
-	@Path("/user/{personUuid}/achievements/")
+	@Path("/{personUuid}/achievements/")
 	public AchievementWS create(@Auth User user, @PathParam("personUuid") String personUuid, AchievementWS achievementWS) throws AuthenticationException {
 		if(!achievementSecurity.canCreateAchievement(user, personUuid)) {
 			throw new AuthenticationException("User not authorized.");
@@ -60,7 +59,7 @@ public class AchievementController extends BaseController {
 	}
 	
 	@PUT
-	@Path("/user/{personUuid}/achievements/{achievementUuid}")
+	@Path("/{personUuid}/achievements/{achievementUuid}")
 	public AchievementWS update(@Auth User user, @PathParam("personUuid") String personUuid, AchievementWS achievementWS) throws AuthenticationException {
 		if(!achievementSecurity.canUpdateAchievement(user, personUuid)) {
 			throw new AuthenticationException("User not authorized.");
@@ -69,7 +68,7 @@ public class AchievementController extends BaseController {
 	}
 	
 	@DELETE
-	@Path("/user/{personUuid}/achievements/{achievementUuid}")
+	@Path("/{personUuid}/achievements/{achievementUuid}")
 	public Response delete(@Auth User user, @PathParam("personUuid") String personUuid) throws AuthenticationException {
 		if(!achievementSecurity.canDeleteAchievement(user, personUuid)) {
 			throw new AuthenticationException("User not authorized.");
