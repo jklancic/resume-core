@@ -8,17 +8,15 @@ public class SkillWS {
 	private String uuid;
 	private String mastery;
 	private int level;
-	private CategoryWS categoryWS;
 	
 	public SkillWS() {
 		
 	}
 
-	public SkillWS(String uuid, String mastery, int level, CategoryWS categoryWS) {
+	public SkillWS(String uuid, String mastery, int level) {
 		this.uuid = uuid;
 		this.mastery = mastery;
 		this.level = level;
-		this.categoryWS = categoryWS;
 	}
 
 	public String getUuid() {
@@ -43,13 +41,5 @@ public class SkillWS {
 
 	public void setLevel(int level) {
 		this.level = level;
-	}
-
-	public CategoryWS getCategoryWS() {
-		return categoryWS;
-	}
-
-	public void setCategoryWS(CategoryWS categoryWS) {
-		this.categoryWS = categoryWS;
 	}
 }

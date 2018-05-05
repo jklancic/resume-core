@@ -16,12 +16,11 @@ public class SkillSQLMapper implements RowMapper<Skill> {
 	private static final String UUID = "uuid";
 	private static final String MASTERY = "mastery";
 	private static final String LEVEL = "level";
-	private static final String CATEGORY_UUID = "category_uuid";
 	private static final String PERSON_UUID = "person_uuid";
 	
 	@Override
 	public Skill map(ResultSet rs, StatementContext ctx) throws SQLException {
 		return new Skill(rs.getString(UUID), rs.getString(MASTERY), 
-			rs.getShort(LEVEL), rs.getString(CATEGORY_UUID), rs.getString(PERSON_UUID));
+			rs.getShort(LEVEL), rs.getString(PERSON_UUID));
 	}
 }

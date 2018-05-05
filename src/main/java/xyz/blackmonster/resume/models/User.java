@@ -1,4 +1,4 @@
-package xyz.blackmonster.resume.security.models;
+package xyz.blackmonster.resume.models;
 
 import java.security.Principal;
 
@@ -53,6 +53,6 @@ public class User implements Principal {
 
 	@Override
 	public String getName() {
-		return this.username;
+		return getRole().name();
 	}
 }

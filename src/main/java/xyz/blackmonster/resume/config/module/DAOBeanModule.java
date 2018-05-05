@@ -7,12 +7,12 @@ import org.jdbi.v3.core.Jdbi;
 import dagger.Module;
 import dagger.Provides;
 import xyz.blackmonster.resume.repositories.dao.AchievementDAO;
-import xyz.blackmonster.resume.repositories.dao.CategoryDAO;
+import xyz.blackmonster.resume.repositories.dao.ContactInfoDAO;
 import xyz.blackmonster.resume.repositories.dao.EducationDAO;
 import xyz.blackmonster.resume.repositories.dao.ExperienceDAO;
 import xyz.blackmonster.resume.repositories.dao.PersonDAO;
 import xyz.blackmonster.resume.repositories.dao.SkillDAO;
-import xyz.blackmonster.resume.security.repository.UserDAO;
+import xyz.blackmonster.resume.repositories.dao.UserDAO;
 
 @Module
 public class DAOBeanModule {
@@ -31,8 +31,8 @@ public class DAOBeanModule {
 
 	@Singleton
 	@Provides
-	CategoryDAO provideCategoryDAO() {
-		return jdbi.onDemand(CategoryDAO.class);
+	ContactInfoDAO provideContactInfoDAO() {
+		return jdbi.onDemand(ContactInfoDAO.class);
 	}
 
 	@Singleton

@@ -21,6 +21,9 @@ public interface ContactInfoDAO {
 	@SqlQuery("SELECT * FROM contact_informations WHERE uuid = :uuid")
 	Optional<ContactInfo> getByUuid(@Bind("uuid") String uuid);
 
+	@SqlQuery("SELECT * FROM contact_informations INNER JOIN persons ON contact_informations.uuid = persons.contact_information_uuid WHERE persons.uuid = :uuid")
+	Optional<ContactInfo> getByPersonUuid(@Bind("uuid") String uuid);
+
 	@Transaction
 	@SqlUpdate("INSERT INTO contact_informations(uuid, email, phone, street, city, postal_code, country) VALUES (:uuid, :email, :phone, :street, :city, :postalCode, :country)")
 	void create(@BindBean ContactInfo contactInfo);

@@ -1,4 +1,4 @@
-package xyz.blackmonster.resume.security.repository.mapper;
+package xyz.blackmonster.resume.repositories.mappers;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -6,10 +6,10 @@ import java.sql.SQLException;
 import org.jdbi.v3.core.mapper.RowMapper;
 import org.jdbi.v3.core.statement.StatementContext;
 
-import xyz.blackmonster.resume.security.models.Role;
-import xyz.blackmonster.resume.security.models.User;
+import xyz.blackmonster.resume.models.Role;
+import xyz.blackmonster.resume.models.User;
 
-public class UserMapper implements RowMapper<User> {
+public class UserSQLMapper implements RowMapper<User> {
 
 	private static final String UUID = "uuid";
 	private static final String USERNAME = "username";

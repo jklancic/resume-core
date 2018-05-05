@@ -26,11 +26,11 @@ public interface SkillDAO {
 	Optional<Skill> getByUuid(@Bind("uuid") String uuid, @Bind("personUuid") String personUuid);
 
 	@Transaction
-	@SqlUpdate("INSERT INTO skills(uuid, birth_date, first_name, last_name, overview, contact_information_uuid, created_by_user_uuid) VALUES (:uuid, :birthDate, :firstName, :lastName, :overview, :contactInfoUuid, :createdByUser)")
+	@SqlUpdate("INSERT INTO skills(uuid, mastery, level, person_uuid) VALUES (:uuid, :mastery, :level, :personUuid)")
 	void create(@BindBean Skill skill);
 
 	@Transaction
-	@SqlUpdate("UPDATE skills SET birth_date = :birthDate, first_name = :firstName, last_name = :lastName, overview = :overview, contact_information_uuid = :contactInfoUuid")
+	@SqlUpdate("UPDATE skills SET mastery = :mastery, level = :level, person_uuid = :personUuid")
 	void update(@BindBean Skill skill);
 
 	@Transaction

@@ -8,18 +8,16 @@ public class Skill {
 	private String uuid;
 	private String mastery;
 	private int level;
-	private String categoryUuid;
 	private String personUuid;
 	
 	public Skill() {
 		
 	}
 
-	public Skill(String uuid, String mastery, int level, String categoryUuid, String personUuid) {
+	public Skill(String uuid, String mastery, int level, String personUuid) {
 		this.uuid = uuid;
 		this.mastery = mastery;
 		this.level = level;
-		this.categoryUuid = categoryUuid;
 		this.personUuid = personUuid;
 	}
 
@@ -45,14 +43,6 @@ public class Skill {
 
 	public void setLevel(int level) {
 		this.level = level;
-	}
-
-	public String getCategoryUuid() {
-		return categoryUuid;
-	}
-
-	public void setCategoryUuid(String categoryUuid) {
-		this.categoryUuid = categoryUuid;
 	}
 
 	public String getPersonUuid() {

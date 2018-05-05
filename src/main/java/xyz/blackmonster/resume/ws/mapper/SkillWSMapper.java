@@ -1,8 +1,6 @@
 package xyz.blackmonster.resume.ws.mapper;
 
-import xyz.blackmonster.resume.models.Category;
 import xyz.blackmonster.resume.models.Skill;
-import xyz.blackmonster.resume.ws.response.CategoryWS;
 import xyz.blackmonster.resume.ws.response.SkillWS;
 
 /**
@@ -10,13 +8,11 @@ import xyz.blackmonster.resume.ws.response.SkillWS;
  */
 public class SkillWSMapper {
 
-	public static SkillWS toWS(Skill skill, Category category) {
-		CategoryWS categoryWS = CategoryWSMapper.toWS(category);
+	public static SkillWS toWS(Skill skill) {
 		return new SkillWS(
 			skill.getUuid(),
 			skill.getMastery(),
-			skill.getLevel(),
-			categoryWS);
+			skill.getLevel());
 	}
 
 	public static Skill toModel(SkillWS skillWS, String personUuid) {
@@ -24,7 +20,6 @@ public class SkillWSMapper {
 			skillWS.getUuid(),
 			skillWS.getMastery(),
 			skillWS.getLevel(),
-			skillWS.getCategoryWS().getUuid(),
 			personUuid);
 	}
 }

@@ -1,5 +1,6 @@
 package xyz.blackmonster.resume.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.inject.Inject;
@@ -25,6 +26,11 @@ public class PersonServiceImpl implements PersonService {
 	public PersonServiceImpl(PersonDAO personDAO, ContactInfoDAO contactInfoDAO) {
 		this.personDAO = personDAO;
 		this.contactInfoDAO = contactInfoDAO;
+	}
+
+	@Override
+	public List<PersonWS> getAll() {
+		return null;
 	}
 
 	@Override

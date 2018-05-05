@@ -21,8 +21,6 @@ DROP TABLE `persons`;
 
 DROP TABLE `contact_informations`;
 
-DROP TABLE `categories`;
-
 DROP TABLE `users`;
 
 -- ****************** Create tables ******************;
@@ -38,16 +36,6 @@ CREATE TABLE `contact_informations`
   `city`        VARCHAR(45)  NOT NULL,
   `postal_code` VARCHAR(45)  NOT NULL,
   `country`     VARCHAR(45)  NOT NULL,
-
-  PRIMARY KEY (`uuid`)
-);
-
--- ************************************** `categories`
-
-CREATE TABLE `categories`
-(
-  `uuid` VARCHAR(36) NOT NULL,
-  `name` VARCHAR(45) NOT NULL,
 
   PRIMARY KEY (`uuid`)
 );
@@ -124,15 +112,13 @@ CREATE TABLE `educations`
 CREATE TABLE `skills`
 (
   `uuid`          VARCHAR(36) NOT NULL,
+  `mastery`       VARCHAR(45) NOT NULL,
   `level`         TINYINT     NOT NULL,
   `person_uuid`   VARCHAR(36) NOT NULL,
-  `category_uuid` VARCHAR(36) NOT NULL,
 
   PRIMARY KEY (`uuid`),
   KEY `fkIdx_42` (`person_uuid`),
-  CONSTRAINT `FK_42` FOREIGN KEY `fkIdx_42` (`person_uuid`) REFERENCES `persons` (`uuid`),
-  KEY `fkIdx_53` (`category_uuid`),
-  CONSTRAINT `FK_53` FOREIGN KEY `fkIdx_53` (`category_uuid`) REFERENCES `categories` (`uuid`)
+  CONSTRAINT `FK_42` FOREIGN KEY `fkIdx_42` (`person_uuid`) REFERENCES `persons` (`uuid`)
 );
 
 -- ************************************** `achievements`

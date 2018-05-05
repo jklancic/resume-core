@@ -5,7 +5,12 @@ import javax.inject.Singleton;
 import dagger.Component;
 import xyz.blackmonster.resume.config.module.DAOBeanModule;
 import xyz.blackmonster.resume.config.module.ServiceBeanModule;
-import xyz.blackmonster.resume.controllers.AchievementController;
+import xyz.blackmonster.resume.controllers.v1.AchievementController;
+import xyz.blackmonster.resume.controllers.v1.ContactInfoController;
+import xyz.blackmonster.resume.controllers.v1.EducationController;
+import xyz.blackmonster.resume.controllers.v1.ExperienceController;
+import xyz.blackmonster.resume.controllers.v1.PersonController;
+import xyz.blackmonster.resume.controllers.v1.SkillController;
 import xyz.blackmonster.resume.security.auth.ResumeAuthenticator;
 
 @Singleton
@@ -13,5 +18,10 @@ import xyz.blackmonster.resume.security.auth.ResumeAuthenticator;
 public interface ResumeComponent {
 	
 	AchievementController getAchievementController();
+	ContactInfoController getContactInfoController();
+	EducationController getEducationController();
+	ExperienceController getExperienceController();
+	PersonController getPersonController();
+	SkillController getSkillController();
 	ResumeAuthenticator getResumeAuthenticator();
 }

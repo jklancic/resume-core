@@ -1,4 +1,4 @@
-package xyz.blackmonster.resume.security.models;
+package xyz.blackmonster.resume.models;
 
 public enum Role {
 	USER(0), 

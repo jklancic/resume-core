@@ -38,4 +38,19 @@ public class AchievementServiceImpl implements AchievementService {
 		}
 		return AchievementWSMapper.toWS(optionalAchievement.get());
 	}
+
+	@Override
+	public AchievementWS create(AchievementWS achievementWS) {
+		return null;
+	}
+
+	@Override
+	public AchievementWS update(String uuid, AchievementWS achievementWS) {
+		return null;
+	}
+
+	@Override
+	public void delete(String uuid) {
+
+	}
 }

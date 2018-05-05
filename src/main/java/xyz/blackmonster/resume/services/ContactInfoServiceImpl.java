@@ -31,4 +31,14 @@ public class ContactInfoServiceImpl implements ContactInfoService {
 		}
 		return ContactInfoWSMapper.toWS(optionalContactInfo.get());
 	}
+
+	@Override
+	public ContactInfoWS getByPersonUuid(String userUuid) {
+		Optional<ContactInfo> optionalContactInfo = contactInfoDAO.getByPersonUuid(userUuid);
+		if(!optionalContactInfo.isPresent()) {
+			throw new NotFoundException(
+				String.format("Could not find any contact info for person with uuid=%s", userUuid));
+		}
+		return ContactInfoWSMapper.toWS(optionalContactInfo.get());
+	}
 }

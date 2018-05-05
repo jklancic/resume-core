@@ -8,4 +8,6 @@ import xyz.blackmonster.resume.ws.response.ContactInfoWS;
 public interface ContactInfoService {
 	
 	ContactInfoWS getByUuid(String uuid);
+
+	ContactInfoWS getByPersonUuid(String userUuid);
 }

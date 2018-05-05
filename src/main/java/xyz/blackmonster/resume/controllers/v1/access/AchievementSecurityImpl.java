@@ -1,4 +1,4 @@
-package xyz.blackmonster.resume.controllers.access;
+package xyz.blackmonster.resume.controllers.v1.access;
 
 import java.util.Optional;
 
@@ -6,8 +6,8 @@ import javax.inject.Inject;
 
 import xyz.blackmonster.resume.models.Person;
 import xyz.blackmonster.resume.repositories.dao.PersonDAO;
-import xyz.blackmonster.resume.security.models.Role;
-import xyz.blackmonster.resume.security.models.User;
+import xyz.blackmonster.resume.models.Role;
+import xyz.blackmonster.resume.models.User;
 
 public class AchievementSecurityImpl implements AchievementSecurity {
 	

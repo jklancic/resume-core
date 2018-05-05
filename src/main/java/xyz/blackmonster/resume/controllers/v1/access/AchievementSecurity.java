@@ -1,6 +1,6 @@
-package xyz.blackmonster.resume.controllers.access;
+package xyz.blackmonster.resume.controllers.v1.access;
 
-import xyz.blackmonster.resume.security.models.User;
+import xyz.blackmonster.resume.models.User;
 
 public interface AchievementSecurity {
 	

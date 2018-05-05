@@ -22,4 +22,10 @@ public interface AchievementService {
 	 * @return
 	 */
 	AchievementWS getByUuid(String uuid, String personUuid);
+
+	AchievementWS create(AchievementWS achievementWS);
+
+	AchievementWS update(String uuid, AchievementWS achievementWS);
+
+	void delete(String uuid);
 }

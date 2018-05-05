@@ -7,8 +7,8 @@ import javax.inject.Inject;
 import io.dropwizard.auth.AuthenticationException;
 import io.dropwizard.auth.Authenticator;
 import io.dropwizard.auth.basic.BasicCredentials;
-import xyz.blackmonster.resume.security.models.User;
-import xyz.blackmonster.resume.security.repository.UserDAO;
+import xyz.blackmonster.resume.models.User;
+import xyz.blackmonster.resume.repositories.dao.UserDAO;
 import xyz.blackmonster.resume.security.util.PasswordUtil;
 
 /**
@@ -44,6 +44,6 @@ public class ResumeAuthenticator implements Authenticator<BasicCredentials, User
 	 * @return
 	 */
 	private Optional<User> retrieveUser(String username) throws Exception {
-		return Optional.ofNullable(userDAO.getByUsername(username));
+		return userDAO.getByUsername(username);
 	}
 }
