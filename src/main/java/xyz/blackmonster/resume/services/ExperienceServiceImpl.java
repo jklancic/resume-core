@@ -2,10 +2,13 @@ package xyz.blackmonster.resume.services;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 import javax.ws.rs.NotFoundException;
+
+import org.jdbi.v3.sqlobject.transaction.Transaction;
 
 import xyz.blackmonster.resume.models.Experience;
 import xyz.blackmonster.resume.repositories.dao.ExperienceDAO;
@@ -25,11 +28,13 @@ public class ExperienceServiceImpl implements ExperienceService {
 	}
 
 	@Override
+	@Transaction
 	public List<ExperienceWS> getAllByPerson(String personUuid) {
 		return experienceDAO.getAllByPerson(personUuid).stream().map(ExperienceWSMapper::toWS).collect(Collectors.toList());
 	}
 
 	@Override
+	@Transaction
 	public ExperienceWS getByUuid(String uuid, String personUuid) {
 		Optional<Experience> optionalExperience = experienceDAO.getByUuid(uuid, personUuid);
 		if(!optionalExperience.isPresent()) {
@@ -37,5 +42,26 @@ public class ExperienceServiceImpl implements ExperienceService {
 				String.format("Could not find any experience entry with uuid=%s and person uuid=%s", uuid, personUuid));
 		}
 		return ExperienceWSMapper.toWS(optionalExperience.get());
+	}
+
+	@Override
+	@Transaction
+	public ExperienceWS create(ExperienceWS experienceWS, String personUuid) {
+		experienceWS.setUuid(UUID.randomUUID().toString());
+		experienceDAO.create(ExperienceWSMapper.toModel(experienceWS, personUuid));
+		return getByUuid(experienceWS.getUuid(), personUuid);
+	}
+
+	@Override
+	@Transaction
+	public ExperienceWS update(ExperienceWS experienceWS, String personUuid) {
+		experienceDAO.update(ExperienceWSMapper.toModel(experienceWS, personUuid));
+		return getByUuid(experienceWS.getUuid(), personUuid);
+	}
+
+	@Override
+	@Transaction
+	public void delete(String uuid) {
+		experienceDAO.delete(uuid);
 	}
 }

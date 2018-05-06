@@ -2,10 +2,13 @@ package xyz.blackmonster.resume.services;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 import javax.ws.rs.NotFoundException;
+
+import org.jdbi.v3.sqlobject.transaction.Transaction;
 
 import xyz.blackmonster.resume.models.Achievement;
 import xyz.blackmonster.resume.repositories.dao.AchievementDAO;
@@ -25,11 +28,13 @@ public class AchievementServiceImpl implements AchievementService {
 	}
 
 	@Override
+	@Transaction
 	public List<AchievementWS> getAllByPerson(String personUuid) {
 		return achievementDAO.getAllByPerson(personUuid).stream().map(AchievementWSMapper::toWS).collect(Collectors.toList());
 	}
 
 	@Override
+	@Transaction
 	public AchievementWS getByUuid(String uuid, String personUuid) {
 		Optional<Achievement> optionalAchievement = achievementDAO.getByUuid(uuid, personUuid);
 		if(!optionalAchievement.isPresent()) {
@@ -40,17 +45,23 @@ public class AchievementServiceImpl implements AchievementService {
 	}
 
 	@Override
-	public AchievementWS create(AchievementWS achievementWS) {
-		return null;
+	@Transaction
+	public AchievementWS create(AchievementWS achievementWS, String personUuid) {
+		achievementWS.setUuid(UUID.randomUUID().toString());
+		achievementDAO.create(AchievementWSMapper.toModel(achievementWS, personUuid));
+		return getByUuid(achievementWS.getUuid(), personUuid);
 	}
 
 	@Override
-	public AchievementWS update(String uuid, AchievementWS achievementWS) {
-		return null;
+	@Transaction
+	public AchievementWS update(AchievementWS achievementWS, String personUuid) {
+		achievementDAO.update(AchievementWSMapper.toModel(achievementWS, personUuid));
+		return getByUuid(achievementWS.getUuid(), personUuid);
 	}
 
 	@Override
+	@Transaction
 	public void delete(String uuid) {
-
+		achievementDAO.delete(uuid);
 	}
 }

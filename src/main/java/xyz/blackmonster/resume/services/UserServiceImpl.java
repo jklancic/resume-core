@@ -8,6 +8,8 @@ import java.util.stream.Collectors;
 import javax.inject.Inject;
 import javax.ws.rs.NotFoundException;
 
+import org.jdbi.v3.sqlobject.transaction.Transaction;
+
 import xyz.blackmonster.resume.models.Role;
 import xyz.blackmonster.resume.models.User;
 import xyz.blackmonster.resume.repositories.dao.UserDAO;
@@ -28,11 +30,13 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	@Transaction
 	public List<UserWS> getAll() {
 		return userDAO.getAll().stream().map(UserWSMapper::toWS).collect(Collectors.toList());
 	}
 
 	@Override
+	@Transaction
 	public UserWS getByUuid(String uuid) {
 		return getUser(
 			userDAO.getByUuid(uuid),
@@ -40,6 +44,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	@Transaction
 	public UserWS getByUsername(String username) {
 		return getUser(
 			userDAO.getByUsername(username),
@@ -54,6 +59,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	@Transaction
 	public UserWS createUser(UserWS userWS) {
 		String uuid = UUID.randomUUID().toString();
 		userDAO.create(uuid, userWS.getUsername(), userWS.getPassword(), Role.valueOf(userWS.getRole()).getRoleIndex());
@@ -61,16 +67,18 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserWS updateUser(String uuid, UserWS userWS) {
+	@Transaction
+	public UserWS updateUser(UserWS userWS) {
 		userDAO.update(
 			userWS.getUsername(),
 			PasswordUtil.generateSecurePassword(userWS.getPassword()),
 			Role.valueOf(userWS.getRole()).getRoleIndex(),
-			uuid);
+			userWS.getUuid());
 		return getByUuid(userWS.getUuid());
 	}
 
 	@Override
+	@Transaction
 	public void deleteUser(String uuid) {
 		userDAO.delete(uuid);
 	}

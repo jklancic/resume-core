@@ -23,9 +23,25 @@ public interface AchievementService {
 	 */
 	AchievementWS getByUuid(String uuid, String personUuid);
 
-	AchievementWS create(AchievementWS achievementWS);
+	/**
+	 * Create and return new achievement.
+	 * @param achievementWS
+	 * @param personUuid
+	 * @return
+	 */
+	AchievementWS create(AchievementWS achievementWS, String personUuid);
 
-	AchievementWS update(String uuid, AchievementWS achievementWS);
+	/**
+	 * Update and return updated achievement.
+	 * @param achievementWS
+	 * @param personUuid
+	 * @return
+	 */
+	AchievementWS update(AchievementWS achievementWS, String personUuid);
 
+	/**
+	 * Delete achievement.
+	 * @param uuid
+	 */
 	void delete(String uuid);
 }

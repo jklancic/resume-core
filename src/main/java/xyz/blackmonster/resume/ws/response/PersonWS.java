@@ -13,18 +13,20 @@ public class PersonWS {
 	private String lastName;
 	private String overview;
 	private ContactInfoWS contactInfo;
+	private String baseUrl;
 	
 	public PersonWS() {
 		
 	}
 
-	public PersonWS(String uuid, Date birthDate, String firstName, String lastName, String overview, ContactInfoWS contactInfo) {
+	public PersonWS(String uuid, Date birthDate, String firstName, String lastName, String overview, ContactInfoWS contactInfo, String baseUrl) {
 		this.uuid = uuid;
 		this.birthDate = birthDate;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.overview = overview;
 		this.contactInfo = contactInfo;
+		this.baseUrl = baseUrl;
 	}
 
 	public String getUuid() {
@@ -73,5 +75,13 @@ public class PersonWS {
 
 	public void setContactInfo(ContactInfoWS contactInfo) {
 		this.contactInfo = contactInfo;
+	}
+
+	public String getBaseUrl() {
+		return baseUrl;
+	}
+
+	public void setBaseUrl(String baseUrl) {
+		this.baseUrl = baseUrl;
 	}
 }

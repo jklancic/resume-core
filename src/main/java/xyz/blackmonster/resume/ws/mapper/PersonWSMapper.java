@@ -18,10 +18,11 @@ public class PersonWSMapper {
 			person.getFirstName(),
 			person.getLastName(),
 			person.getOverview(),
-			contactInfoWS);
+			contactInfoWS,
+			person.getBaseUrl());
 	}
 
-	public static Person toModel(PersonWS personWS, String baseUrl, String createdByUser) {
+	public static Person toModel(PersonWS personWS, String createdByUser) {
 		return new Person(
 			personWS.getUuid(),
 			personWS.getBirthDate(),
@@ -29,7 +30,7 @@ public class PersonWSMapper {
 			personWS.getLastName(),
 			personWS.getOverview(),
 			personWS.getContactInfo().getUuid(),
-			baseUrl,
+			personWS.getBaseUrl(),
 			createdByUser);
 	}
 }

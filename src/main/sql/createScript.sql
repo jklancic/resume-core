@@ -78,7 +78,7 @@ CREATE TABLE `experiences`
 (
   `uuid`        VARCHAR(36)  NOT NULL,
   `start_date`  DATE         NOT NULL,
-  `end_date`    DATE         NOT NULL,
+  `end_date`    DATE         NULL,
   `title`       VARCHAR(30)  NOT NULL,
   `description` VARCHAR(255) NOT NULL,
   `city`        VARCHAR(45)  NOT NULL,

@@ -58,7 +58,7 @@ public class AchievementController {
 		if(!achievementSecurity.canCreateAchievement(user, personUuid)) {
 			throw new AuthenticationException("User not authorized.");
 		}
-		AchievementWS newAchievement = achievementService.create(achievementWS);
+		AchievementWS newAchievement = achievementService.create(achievementWS, personUuid);
 		return Response.status(Response.Status.CREATED).entity(newAchievement).build();
 	}
 	
@@ -68,7 +68,8 @@ public class AchievementController {
 		if(!achievementSecurity.canUpdateAchievement(user, personUuid)) {
 			throw new AuthenticationException("User not authorized.");
 		}
-		AchievementWS achievement = achievementService.update(achievementUuid, achievementWS);
+		achievementWS.setUuid(achievementUuid);
+		AchievementWS achievement = achievementService.update(achievementWS, personUuid);
 		return Response.status(Response.Status.OK).entity(achievement).build();
 	}
 	

@@ -59,7 +59,8 @@ public class UserController {
 	@PUT
 	@Path("/users/{userUuid}")
 	public Response update(@PathParam("userUuid") String userUuid, UserWS userWS) {
-		UserWS user = userService.updateUser(userUuid, userWS);
+		userWS.setUuid(userUuid);
+		UserWS user = userService.updateUser(userWS);
 		return Response.status(Response.Status.OK).entity(user).build();
 	}
 

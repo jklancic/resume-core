@@ -19,4 +19,26 @@ public interface SkillService {
 	 * @return
 	 */
 	SkillWS getByUuid(String uuid, String personUuid);
+
+	/**
+	 * Create and return new skill.
+	 * @param skillWS
+	 * @param personUuid
+	 * @return
+	 */
+	SkillWS create(SkillWS skillWS, String personUuid);
+
+	/**
+	 * Update and return updated skill.
+	 * @param skillWS
+	 * @param personUuid
+	 * @return
+	 */
+	SkillWS update(SkillWS skillWS, String personUuid);
+
+	/**
+	 * Delete skill.
+	 * @param uuid
+	 */
+	void delete(String uuid);
 }
