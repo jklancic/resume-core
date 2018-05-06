@@ -23,6 +23,12 @@ public interface PersonService {
 	PersonWS getByUuid(String uuid);
 
 	/**
+	 * Return uuid by matching base uri.
+	 * @return
+	 */
+	String getUuid(String uri);
+
+	/**
 	 * Create and return person.
 	 * @param personWS
 	 * @return
@@ -34,7 +40,14 @@ public interface PersonService {
 	 * @param personWS
 	 * @return
 	 */
-	PersonWS update(PersonWS personWS, String userUuid);
+	PersonWS updateAll(PersonWS personWS, String userUuid);
+
+	/**
+	 * Update and return person.
+	 * @param personWS
+	 * @return
+	 */
+	PersonWS update(PersonWS personWS);
 
 	/**
 	 * Delete person.

@@ -1,7 +1,5 @@
 package xyz.blackmonster.resume.controllers.v1;
 
-import java.util.List;
-
 import javax.inject.Inject;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -31,37 +29,32 @@ public class UserController {
 	@GET
 	@Path("/users")
 	public Response getAll() {
-		List<UserWS> userList = userService.getAll();
-		return Response.status(Response.Status.OK).entity(userList).build();
+		return Response.status(Response.Status.OK).entity(userService.getAll()).build();
 	}
 
 	@GET
 	@Path("/users/{uuid}")
 	public Response getByUuid(@PathParam("uuid") String uuid) {
-		UserWS user = userService.getByUuid(uuid);
-		return Response.status(Response.Status.OK).entity(user).build();
+		return Response.status(Response.Status.OK).entity(userService.getByUuid(uuid)).build();
 	}
 
 	@GET
 	@Path("/users/{username}")
 	public Response getByUsername(@PathParam("username") String username) {
-		UserWS user = userService.getByUsername(username);
-		return Response.status(Response.Status.OK).entity(user).build();
+		return Response.status(Response.Status.OK).entity(userService.getByUsername(username)).build();
 	}
 
 	@POST
 	@Path("/users")
 	public Response create(UserWS userWS) {
-		UserWS newUser = userService.createUser(userWS);
-		return Response.status(Response.Status.CREATED).entity(newUser).build();
+		return Response.status(Response.Status.CREATED).entity(userService.createUser(userWS)).build();
 	}
 
 	@PUT
 	@Path("/users/{userUuid}")
 	public Response update(@PathParam("userUuid") String userUuid, UserWS userWS) {
 		userWS.setUuid(userUuid);
-		UserWS user = userService.updateUser(userWS);
-		return Response.status(Response.Status.OK).entity(user).build();
+		return Response.status(Response.Status.OK).entity(userService.updateUser(userWS)).build();
 	}
 
 	@DELETE

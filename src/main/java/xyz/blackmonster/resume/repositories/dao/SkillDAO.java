@@ -27,7 +27,7 @@ public interface SkillDAO {
 	@SqlUpdate("INSERT INTO skills(uuid, mastery, level, person_uuid) VALUES (:uuid, :mastery, :level, :personUuid)")
 	void create(@BindBean Skill skill);
 
-	@SqlUpdate("UPDATE skills SET mastery = :mastery, level = :level, person_uuid = :personUuid WHERE uuid = :uuid")
+	@SqlUpdate("UPDATE skills SET mastery = :mastery, level = :level WHERE uuid = :uuid AND person_uuid = :personUuid")
 	void update(@BindBean Skill skill);
 
 	@SqlUpdate("DELETE FROM skills WHERE uuid = :uuid")

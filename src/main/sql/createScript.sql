@@ -29,7 +29,7 @@ DROP TABLE `users`;
 
 CREATE TABLE `contact_informations`
 (
-  `uuid`        VARCHAR(36)  NOT NULL,
+  `uuid`        VARCHAR(36)  NOT NULL UNIQUE,
   `email`       VARCHAR(100) NOT NULL,
   `phone`       VARCHAR(30)  NOT NULL,
   `street`      VARCHAR(45)  NOT NULL,
@@ -44,7 +44,7 @@ CREATE TABLE `contact_informations`
 
 CREATE TABLE `users`
 (
-  `uuid`     VARCHAR(36)  NOT NULL,
+  `uuid`     VARCHAR(36)  NOT NULL UNIQUE,
   `username` VARCHAR(100) NOT NULL,
   `password` VARCHAR(255) NOT NULL,
   `role`     TINYINT      NOT NULL,
@@ -56,13 +56,13 @@ CREATE TABLE `users`
 
 CREATE TABLE `persons`
 (
-  `uuid`                     VARCHAR(36)  NOT NULL,
+  `uuid`                     VARCHAR(36)  NOT NULL UNIQUE,
   `birth_date`               DATE         NOT NULL,
   `first_name`               VARCHAR(45)  NOT NULL,
   `last_name`                VARCHAR(45)  NOT NULL,
   `overview`                 VARCHAR(255) NOT NULL,
   `created_by_user_uuid`     VARCHAR(36)  NOT NULL,
-  `base_url`                 VARCHAR(255) NOT NULL,
+  `base_url`                 VARCHAR(255) NOT NULL UNIQUE,
   `contact_information_uuid` VARCHAR(36)  NOT NULL,
 
   PRIMARY KEY (`uuid`),
@@ -76,7 +76,7 @@ CREATE TABLE `persons`
 
 CREATE TABLE `experiences`
 (
-  `uuid`        VARCHAR(36)  NOT NULL,
+  `uuid`        VARCHAR(36)  NOT NULL UNIQUE,
   `start_date`  DATE         NOT NULL,
   `end_date`    DATE         NULL,
   `title`       VARCHAR(30)  NOT NULL,
@@ -94,7 +94,7 @@ CREATE TABLE `experiences`
 
 CREATE TABLE `educations`
 (
-  `uuid`        VARCHAR(36) NOT NULL,
+  `uuid`        VARCHAR(36) NOT NULL UNIQUE,
   `date`        DATE        NOT NULL,
   `title`       VARCHAR(45) NOT NULL,
   `institution` VARCHAR(45) NOT NULL,
@@ -111,7 +111,7 @@ CREATE TABLE `educations`
 
 CREATE TABLE `skills`
 (
-  `uuid`          VARCHAR(36) NOT NULL,
+  `uuid`          VARCHAR(36) NOT NULL UNIQUE,
   `mastery`       VARCHAR(45) NOT NULL,
   `level`         TINYINT     NOT NULL,
   `person_uuid`   VARCHAR(36) NOT NULL,
@@ -125,7 +125,7 @@ CREATE TABLE `skills`
 
 CREATE TABLE `achievements`
 (
-  `uuid`        VARCHAR(36)  NOT NULL,
+  `uuid`        VARCHAR(36)  NOT NULL UNIQUE,
   `date`        DATE         NOT NULL,
   `description` VARCHAR(255) NOT NULL,
   `person_uuid` VARCHAR(36)  NOT NULL,

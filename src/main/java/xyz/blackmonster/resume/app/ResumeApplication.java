@@ -1,5 +1,11 @@
 package xyz.blackmonster.resume.app;
 
+import java.util.EnumSet;
+
+import javax.servlet.DispatcherType;
+import javax.servlet.FilterRegistration;
+
+import org.eclipse.jetty.servlets.CrossOriginFilter;
 import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
 import org.jdbi.v3.core.Jdbi;
 
@@ -39,6 +45,7 @@ public class ResumeApplication extends Application<ResumeConfiguration> {
 		initInjection(jdbi);
 		initControllers(environment);
 		initAuthentication(configuration, environment);
+		initCORS(environment);
 	}
 
 	private void initInjection(Jdbi jdbi) {
@@ -56,6 +63,7 @@ public class ResumeApplication extends Application<ResumeConfiguration> {
 		environment.jersey().register(resumeComponent.getExperienceController());
 		environment.jersey().register(resumeComponent.getPersonController());
 		environment.jersey().register(resumeComponent.getSkillController());
+		environment.jersey().register(resumeComponent.getUserController());
 	}
 
 	private void initAuthentication(ResumeConfiguration configuration, Environment environment) {
@@ -74,5 +82,18 @@ public class ResumeApplication extends Application<ResumeConfiguration> {
 		environment.jersey().register(new AuthDynamicFeature(authFilter));
 		environment.jersey().register(RolesAllowedDynamicFeature.class);
 		environment.jersey().register(new AuthValueFactoryProvider.Binder<>(User.class));
+	}
+
+	private void initCORS(Environment environment) {
+		final FilterRegistration.Dynamic cors =
+			environment.servlets().addFilter("CORS", CrossOriginFilter.class);
+
+		// Configure CORS parameters
+		cors.setInitParameter("allowedOrigins", "*");
+		cors.setInitParameter("allowedHeaders", "X-Requested-With,Content-Type,Accept,Origin");
+		cors.setInitParameter("allowedMethods", "OPTIONS,GET,PUT,POST,DELETE,HEAD");
+
+		// Add URL mapping
+		cors.addMappingForUrlPatterns(EnumSet.allOf(DispatcherType.class), true, "/*");
 	}
 }

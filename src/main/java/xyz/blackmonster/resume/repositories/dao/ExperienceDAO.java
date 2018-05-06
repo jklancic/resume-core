@@ -27,7 +27,7 @@ public interface ExperienceDAO {
 	@SqlUpdate("INSERT INTO experiences(uuid, start_date, end_date, title, description, city, country, person_uuid) VALUES (:uuid, :startDate, :endDate, :title, :description, :city, :country, :personUuid)")
 	void create(@BindBean Experience experience);
 
-	@SqlUpdate("UPDATE experiences SET start_date = :startDate, end_date = :endDate, title = :title, description = :description, city = :city, country = :country")
+	@SqlUpdate("UPDATE experiences SET start_date = :startDate, end_date = :endDate, title = :title, description = :description, city = :city, country = :country WHERE uuid = :uuid AND person_uuid = :personUuid")
 	void update(@BindBean Experience experience);
 
 	@SqlUpdate("DELETE FROM experiences WHERE uuid = :uuid")

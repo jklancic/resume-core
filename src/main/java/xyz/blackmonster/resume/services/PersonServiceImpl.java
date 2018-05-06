@@ -1,5 +1,7 @@
 package xyz.blackmonster.resume.services;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -9,6 +11,8 @@ import javax.inject.Inject;
 import javax.ws.rs.NotFoundException;
 
 import org.jdbi.v3.sqlobject.transaction.Transaction;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import xyz.blackmonster.resume.models.ContactInfo;
 import xyz.blackmonster.resume.models.Person;
@@ -27,6 +31,8 @@ import xyz.blackmonster.resume.ws.response.PersonWS;
  * Person service
  */
 public class PersonServiceImpl implements PersonService {
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(PersonServiceImpl.class);
 
 	private AchievementDAO achievementDAO;
 
@@ -74,6 +80,27 @@ public class PersonServiceImpl implements PersonService {
 	}
 
 	@Override
+	public String getUuid(String url) {
+		String baseUrl = getBaseURL(url);
+		Optional<String> optionalString = personDAO.getUuidByBaseUrl(baseUrl);
+		if (!optionalString.isPresent()) {
+			throw new NotFoundException(
+				String.format("Could not find any person for URL=%s", url));
+		}
+		return optionalString.get();
+	}
+
+	private String getBaseURL(String urlAsString) throws IllegalArgumentException {
+		try {
+			URL url = new URL(urlAsString);
+			return new URL(url.getProtocol(), url.getHost(), url.getPort(), null).toString();
+		} catch (MalformedURLException e) {
+			LOGGER.error("Given URI is not valid.");
+			throw new IllegalArgumentException("Given URI is not valid.", e);
+		}
+	}
+
+	@Override
 	@Transaction
 	public PersonWS create(PersonWS personWS, String userUuid) {
 		ContactInfoWS contactInfoWS = personWS.getContactInfo();
@@ -86,12 +113,19 @@ public class PersonServiceImpl implements PersonService {
 
 	@Override
 	@Transaction
-	public PersonWS update(PersonWS personWS, String userUuid) {
+	public PersonWS updateAll(PersonWS personWS, String userUuid) {
 		ContactInfoWS contactInfoWS = personWS.getContactInfo();
 		if(contactInfoWS != null) {
 			contactInfoDAO.update(ContactInfoWSMapper.toModel(contactInfoWS));
 		}
-		personDAO.update(PersonWSMapper.toModel(personWS, userUuid));
+		personDAO.updateAll(PersonWSMapper.toModel(personWS, userUuid));
+		return getByUuid(personWS.getUuid());
+	}
+
+	@Override
+	@Transaction
+	public PersonWS update(PersonWS personWS) {
+		personDAO.update(PersonWSMapper.toModel(personWS, null));
 		return getByUuid(personWS.getUuid());
 	}
 

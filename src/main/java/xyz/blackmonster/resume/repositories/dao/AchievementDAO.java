@@ -27,7 +27,7 @@ public interface AchievementDAO {
 	@SqlUpdate("INSERT INTO achievements(uuid, date, description, person_uuid) VALUES (:uuid, :date, :description, :personUuid)")
 	void create(@BindBean Achievement achievement);
 
-	@SqlUpdate("UPDATE achievements SET date = :date, description = :description WHERE uuid = :uuid")
+	@SqlUpdate("UPDATE achievements SET date = :date, description = :description WHERE uuid = :uuid AND person_uuid = :personUuid")
 	void update(@BindBean Achievement achievement);
 
 	@SqlUpdate("DELETE FROM achievements WHERE uuid = :uuid")

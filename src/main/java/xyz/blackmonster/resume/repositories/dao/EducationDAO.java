@@ -27,7 +27,7 @@ public interface EducationDAO {
 	@SqlUpdate("INSERT INTO educations(uuid, date, title, institution, city, country, person_uuid) VALUES (:uuid, :date, :title, :institution, :city, :country, :personUuid)")
 	void create(@BindBean Education education);
 
-	@SqlUpdate("UPDATE educations SET date = :date, title = :title, institution = :institution, city = :city, country = :country")
+	@SqlUpdate("UPDATE educations SET date = :date, title = :title, institution = :institution, city = :city, country = :country WHERE uuid = :uuid AND person_uuid = :personUuid")
 	void update(@BindBean Education education);
 
 	@SqlUpdate("DELETE FROM educations WHERE uuid = :uuid")
