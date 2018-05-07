@@ -23,6 +23,9 @@ public interface UserDAO {
 	@SqlQuery("SELECT uuid, date, description, role FROM user WHERE username = :username")
 	Optional<User> getByUsername(@Bind("username") String username);
 
+	@SqlQuery("SELECT uuid, date, description, role FROM user WHERE access_token = :token")
+	Optional<User> getByAccessToken(@Bind("token") String token);
+
 	@SqlUpdate("INSERT INTO user(uuid, username, password, role) VALUES (:uuid, :username, :password, :role)")
 	void create(@Bind("uuid") String uuid, @Bind("username") String username, @Bind("username") String password, @Bind("role") int role);
 

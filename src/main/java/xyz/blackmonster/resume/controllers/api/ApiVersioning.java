@@ -1,4 +1,4 @@
-package xyz.blackmonster.resume.controllers;
+package xyz.blackmonster.resume.controllers.api;
 
 /**
  * API versioning paths

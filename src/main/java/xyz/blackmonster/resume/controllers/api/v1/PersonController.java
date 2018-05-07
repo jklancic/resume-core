@@ -1,5 +1,7 @@
-package xyz.blackmonster.resume.controllers.v1;
+package xyz.blackmonster.resume.controllers.api.v1;
 
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -13,7 +15,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import io.dropwizard.auth.Auth;
-import xyz.blackmonster.resume.controllers.ApiVersioning;
+import xyz.blackmonster.resume.controllers.api.ApiVersioning;
 import xyz.blackmonster.resume.models.User;
 import xyz.blackmonster.resume.services.PersonService;
 import xyz.blackmonster.resume.ws.response.PersonWS;
@@ -31,24 +33,28 @@ public class PersonController {
 
 	@GET
 	@Path("/persons")
+	@RolesAllowed({"ADMIN"})
 	public Response getAll() {
 		return Response.status(Response.Status.OK).entity(personService.getAll()).build();
 	}
 
 	@GET
 	@Path("/persons/{personUuid}")
+	@PermitAll
 	public Response getByUuid(@PathParam("personUuid") String personUuid) {
 		return Response.status(Response.Status.OK).entity(personService.getByUuid(personUuid)).build();
 	}
 
 	@GET
 	@Path("/persons/retrieve")
+	@PermitAll
 	public Response retrieveUuid(@HeaderParam("Origin") String origin) {
 		return Response.status(Response.Status.OK).entity(personService.getUuid(origin)).build();
 	}
 
 	@PUT
 	@Path("/persons/{personUuid}")
+	@RolesAllowed({"ADMIN", "USER"})
 	public Response update(@PathParam("personUuid") String personUuid, PersonWS personWS) {
 		personWS.setUuid(personUuid);
 		return Response.status(Response.Status.OK).entity(personService.update(personWS)).build();
@@ -56,12 +62,14 @@ public class PersonController {
 
 	@POST
 	@Path("/persons/admin")
+	@RolesAllowed({"ADMIN"})
 	public Response create(@Auth User user, PersonWS personWS) {
 		return Response.status(Response.Status.CREATED).entity(personService.create(personWS, user.getUuid())).build();
 	}
 
 	@PUT
 	@Path("/persons/{personUuid}/admin")
+	@RolesAllowed({"ADMIN"})
 	public Response updateAll(@Auth User user, @PathParam("personUuid") String personUuid, PersonWS personWS) {
 		personWS.setUuid(personUuid);
 		return Response.status(Response.Status.OK).entity(personService.updateAll(personWS, user.getUuid())).build();
@@ -69,6 +77,7 @@ public class PersonController {
 
 	@DELETE
 	@Path("/persons/{personUuid}/admin")
+	@RolesAllowed({"ADMIN"})
 	public Response delete(@PathParam("personUuid") String personUuid) {
 		personService.delete(personUuid);
 		return Response.status(Response.Status.NO_CONTENT).build();

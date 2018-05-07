@@ -1,5 +1,7 @@
-package xyz.blackmonster.resume.controllers.v1;
+package xyz.blackmonster.resume.controllers.api.v1;
 
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -11,7 +13,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import xyz.blackmonster.resume.controllers.ApiVersioning;
+import xyz.blackmonster.resume.controllers.api.ApiVersioning;
 import xyz.blackmonster.resume.services.SkillService;
 import xyz.blackmonster.resume.ws.response.SkillWS;
 
@@ -27,32 +29,37 @@ public class SkillController {
 	}
 
 	@GET
-	@Path("/{personUuid}/skills")
+	@Path("/person/{personUuid}/skills")
+	@PermitAll
 	public Response getAllByPerson(@PathParam("personUuid") String personUuid) {
 		return Response.status(Response.Status.OK).entity(skillService.getAllByPerson(personUuid)).build();
 	}
 
 	@GET
-	@Path("/{personUuid}/skills/{skillUuid}")
+	@Path("/person/{personUuid}/skills/{skillUuid}")
+	@PermitAll
 	public Response getAllByUuid(@PathParam("personUuid") String personUuid, @PathParam("skillUuid") String skillUuid) {
 		return Response.status(Response.Status.OK).entity(skillService.getByUuid(skillUuid, personUuid)).build();
 	}
 
 	@POST
-	@Path("/{personUuid}/skills")
+	@Path("/person/{personUuid}/skills")
+	@RolesAllowed({"ADMIN", "USER"})
 	public Response create(@PathParam("personUuid") String personUuid, SkillWS skillWS) {
 		return Response.status(Response.Status.CREATED).entity(skillService.create(skillWS, personUuid)).build();
 	}
 
 	@PUT
-	@Path("/{personUuid}/skills/{skillUuid}")
+	@Path("/person/{personUuid}/skills/{skillUuid}")
+	@RolesAllowed({"ADMIN", "USER"})
 	public Response update(@PathParam("personUuid") String personUuid, @PathParam("skillUuid") String skillUuid, SkillWS skillWS) {
 		skillWS.setUuid(skillUuid);
 		return Response.status(Response.Status.CREATED).entity(skillService.create(skillWS, personUuid)).build();
 	}
 
 	@DELETE
-	@Path("/{personUuid}/skills/{skillUuid}")
+	@Path("/person/{personUuid}/skills/{skillUuid}")
+	@RolesAllowed({"ADMIN", "USER"})
 	public Response delete(@PathParam("personUuid") String personUuid, @PathParam("skillUuid") String skillUuid) {
 		skillService.delete(skillUuid);
 		return Response.status(Response.Status.NO_CONTENT).build();

@@ -1,5 +1,7 @@
-package xyz.blackmonster.resume.controllers.v1;
+package xyz.blackmonster.resume.controllers.api.v1;
 
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -12,7 +14,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import io.dropwizard.auth.Auth;
-import xyz.blackmonster.resume.controllers.ApiVersioning;
+import xyz.blackmonster.resume.controllers.api.ApiVersioning;
 import xyz.blackmonster.resume.models.User;
 import xyz.blackmonster.resume.services.EducationService;
 import xyz.blackmonster.resume.ws.response.EducationWS;
@@ -29,32 +31,37 @@ public class EducationController {
 	}
 
 	@GET
-	@Path("/{personUuid}/educations")
+	@Path("/person/{personUuid}/educations")
+	@PermitAll
 	public Response getAllByPerson(@PathParam("personUuid") String personUuid) {
 		return Response.status(Response.Status.OK).entity(educationService.getAllByPerson(personUuid)).build();
 	}
 
 	@GET
-	@Path("/{personUuid}/educations/{educationUuid}")
+	@Path("/person/{personUuid}/educations/{educationUuid}")
+	@PermitAll
 	public Response getByUuid(@PathParam("personUuid") String personUuid, @PathParam("educationUuid") String educationUuid) {
 		return Response.status(Response.Status.OK).entity(educationService.getByUuid(educationUuid, personUuid)).build();
 	}
 
 	@POST
-	@Path("/{personUuid}/educations")
+	@Path("/person/{personUuid}/educations")
+	@RolesAllowed({"ADMIN", "USER"})
 	public Response create(@Auth User user, @PathParam("personUuid") String personUuid, EducationWS educationWS) {
 		return Response.status(Response.Status.CREATED).entity(educationService.create(educationWS, personUuid)).build();
 	}
 
 	@PUT
-	@Path("/{personUuid}/educations/{educationUuid}")
+	@Path("/person/{personUuid}/educations/{educationUuid}")
+	@RolesAllowed({"ADMIN", "USER"})
 	public Response update(@Auth User user, @PathParam("personUuid") String personUuid, @PathParam("educationUuid") String educationUuid, EducationWS educationWS) {
 		educationWS.setUuid(educationUuid);
 		return Response.status(Response.Status.OK).entity(educationService.update(educationWS, personUuid)).build();
 	}
 
 	@DELETE
-	@Path("/{personUuid}/educations/{educationUuid}")
+	@Path("/person/{personUuid}/educations/{educationUuid}")
+	@RolesAllowed({"ADMIN", "USER"})
 	public Response delete(@PathParam("educationUuid") String educationUuid) {
 		educationService.delete(educationUuid);
 		return Response.status(Response.Status.NO_CONTENT).build();

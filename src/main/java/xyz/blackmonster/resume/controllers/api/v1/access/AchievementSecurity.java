@@ -1,4 +1,4 @@
-package xyz.blackmonster.resume.controllers.v1.access;
+package xyz.blackmonster.resume.controllers.api.v1.access;
 
 import xyz.blackmonster.resume.models.User;
 

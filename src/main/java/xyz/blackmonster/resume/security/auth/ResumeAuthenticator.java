@@ -1,49 +1,57 @@
 package xyz.blackmonster.resume.security.auth;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 import javax.inject.Inject;
 
 import io.dropwizard.auth.AuthenticationException;
 import io.dropwizard.auth.Authenticator;
-import io.dropwizard.auth.basic.BasicCredentials;
+import xyz.blackmonster.resume.models.Role;
 import xyz.blackmonster.resume.models.User;
+import xyz.blackmonster.resume.repositories.dao.PersonDAO;
 import xyz.blackmonster.resume.repositories.dao.UserDAO;
-import xyz.blackmonster.resume.security.util.PasswordUtil;
 
-/**
- * Authenticator to verify user credentials.
- */
-public class ResumeAuthenticator implements Authenticator<BasicCredentials, User> {
-	
+public class ResumeAuthenticator implements Authenticator<CustomCredentials, ResumeAuthUser> {
+
 	private UserDAO userDAO;
-	
+
+	private PersonDAO personDAO;
+
 	@Inject
-	public ResumeAuthenticator(UserDAO userDAO) {
+	public ResumeAuthenticator(UserDAO userDAO, PersonDAO personDAO) {
 		this.userDAO = userDAO;
-	}
-	
-	@Override
-	public Optional<User> authenticate(BasicCredentials credentials) throws AuthenticationException {
-		try {
-			Optional<User> optionalUser = retrieveUser(credentials.getUsername());
-			if(optionalUser.isPresent() &&
-				PasswordUtil.verifyUserPassword(optionalUser.get().getPassword(), credentials.getPassword())) {
-				return optionalUser;
-			}
-			return Optional.empty();
-		} catch (Exception e) {
-			throw new AuthenticationException(e);
-		}
+		this.personDAO = personDAO;
 	}
 
-	/**
-	 * Searching for username in the DB.
-	 * 
-	 * @param username
-	 * @return
-	 */
-	private Optional<User> retrieveUser(String username) throws Exception {
-		return userDAO.getByUsername(username);
+	@Override
+	public Optional<ResumeAuthUser> authenticate(CustomCredentials credentials) throws AuthenticationException {
+		if(credentials.getAccessToken() == null || credentials.getAccessToken().isEmpty()) {
+			throw new AuthenticationException("Access token is not valid.");
+		}
+		// TODO: Validate token first and throw AuthenticationException if expired, and then search for user.
+		Optional<User> optionalUser = userDAO.getByAccessToken(credentials.getAccessToken());
+		if(optionalUser.isPresent()) {
+			User user = optionalUser.get();
+			if(user.getRole().equals(Role.USER)) {
+				List<String> uuidList = personDAO.getAllPersonUuidByOwnerUuid(user.getUuid());
+				return Optional.of(
+					new ResumeAuthUser(
+						user.getUuid(),
+						user.getUsername(),
+						user.getPassword(),
+						user.getRole(),
+						uuidList));
+			}
+			return Optional.of(
+				new ResumeAuthUser(
+					user.getUuid(),
+					user.getUsername(),
+					user.getPassword(),
+					user.getRole(),
+					Collections.EMPTY_LIST));
+		}
+		return Optional.empty();
 	}
 }

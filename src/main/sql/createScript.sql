@@ -45,7 +45,7 @@ CREATE TABLE `contact_informations`
 CREATE TABLE `users`
 (
   `uuid`     VARCHAR(36)  NOT NULL UNIQUE,
-  `username` VARCHAR(100) NOT NULL,
+  `username` VARCHAR(100) NOT NULL UNIQUE,
   `password` VARCHAR(255) NOT NULL,
   `role`     TINYINT      NOT NULL,
 

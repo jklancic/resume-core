@@ -4,8 +4,8 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import xyz.blackmonster.resume.controllers.v1.access.AchievementSecurity;
-import xyz.blackmonster.resume.controllers.v1.access.AchievementSecurityImpl;
+import xyz.blackmonster.resume.controllers.api.v1.access.AchievementSecurity;
+import xyz.blackmonster.resume.controllers.api.v1.access.AchievementSecurityImpl;
 import xyz.blackmonster.resume.services.AchievementService;
 import xyz.blackmonster.resume.services.AchievementServiceImpl;
 import xyz.blackmonster.resume.services.ContactInfoService;

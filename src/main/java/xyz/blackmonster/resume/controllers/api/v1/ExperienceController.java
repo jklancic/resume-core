@@ -1,5 +1,7 @@
-package xyz.blackmonster.resume.controllers.v1;
+package xyz.blackmonster.resume.controllers.api.v1;
 
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -12,7 +14,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import io.dropwizard.auth.Auth;
-import xyz.blackmonster.resume.controllers.ApiVersioning;
+import xyz.blackmonster.resume.controllers.api.ApiVersioning;
 import xyz.blackmonster.resume.models.User;
 import xyz.blackmonster.resume.services.ExperienceService;
 import xyz.blackmonster.resume.ws.response.ExperienceWS;
@@ -29,32 +31,37 @@ public class ExperienceController {
 	}
 
 	@GET
-	@Path("/{personUuid}/experiences")
+	@Path("/person/{personUuid}/experiences")
+	@PermitAll
 	public Response getAllByPerson(@PathParam("personUuid") String personUuid) {
 		return Response.status(Response.Status.OK).entity(experienceService.getAllByPerson(personUuid)).build();
 	}
 
 	@GET
-	@Path("/{personUuid}/experiences/{experienceUuid}")
+	@Path("/person/{personUuid}/experiences/{experienceUuid}")
+	@PermitAll
 	public Response getByUuid(@PathParam("personUuid") String personUuid, @PathParam("experienceUuid") String experienceUuid) {
 		return Response.status(Response.Status.OK).entity(experienceService.getByUuid(experienceUuid, personUuid)).build();
 	}
 
 	@POST
-	@Path("/{personUuid}/experiences")
+	@Path("/person/{personUuid}/experiences")
+	@RolesAllowed({"ADMIN", "USER"})
 	public Response create(@Auth User user, @PathParam("personUuid") String personUuid, ExperienceWS experienceWS) {
 		return Response.status(Response.Status.CREATED).entity(experienceService.create(experienceWS, personUuid)).build();
 	}
 
 	@PUT
-	@Path("/{personUuid}/experiences/{experienceUuid}")
+	@Path("/person/{personUuid}/experiences/{experienceUuid}")
+	@RolesAllowed({"ADMIN", "USER"})
 	public Response update(@Auth User user, @PathParam("personUuid") String personUuid, @PathParam("experienceUuid") String experienceUuid, ExperienceWS experienceWS) {
 		experienceWS.setUuid(experienceUuid);
 		return Response.status(Response.Status.OK).entity(experienceService.update(experienceWS, personUuid)).build();
 	}
 
 	@DELETE
-	@Path("/{personUuid}/experiences/{experienceUuid}")
+	@Path("/person/{personUuid}/experiences/{experienceUuid}")
+	@RolesAllowed({"ADMIN", "USER"})
 	public Response delete(@PathParam("experienceUuid") String experienceUuid) {
 		experienceService.delete(experienceUuid);
 		return Response.status(Response.Status.NO_CONTENT).build();

@@ -24,6 +24,9 @@ public interface PersonDAO {
 	@SqlQuery("SELECT * FROM persons")
 	List<Person> getAll();
 
+	@SqlQuery("SELECT uuid FROM persons WHERE created_by_user_uuid = :ownerUuid")
+	List<String> getAllPersonUuidByOwnerUuid(@Bind("ownerUuid") String ownerUuid);
+
 	@SqlQuery("SELECT * FROM persons WHERE uuid = :uuid")
 	Optional<Person> getByUuid(@Bind("uuid") String uuid);
 

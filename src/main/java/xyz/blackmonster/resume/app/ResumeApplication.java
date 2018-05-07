@@ -9,13 +9,8 @@ import org.eclipse.jetty.servlets.CrossOriginFilter;
 import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
 import org.jdbi.v3.core.Jdbi;
 
-import com.google.common.cache.CacheBuilderSpec;
 import io.dropwizard.Application;
 import io.dropwizard.auth.AuthDynamicFeature;
-import io.dropwizard.auth.AuthValueFactoryProvider;
-import io.dropwizard.auth.CachingAuthenticator;
-import io.dropwizard.auth.basic.BasicCredentialAuthFilter;
-import io.dropwizard.auth.basic.BasicCredentials;
 import io.dropwizard.jdbi3.JdbiFactory;
 import io.dropwizard.setup.Environment;
 import xyz.blackmonster.resume.config.app.ResumeConfiguration;
@@ -23,8 +18,7 @@ import xyz.blackmonster.resume.config.component.ResumeComponent;
 import xyz.blackmonster.resume.config.component.DaggerResumeComponent;
 import xyz.blackmonster.resume.config.module.DAOBeanModule;
 import xyz.blackmonster.resume.config.module.ServiceBeanModule;
-import xyz.blackmonster.resume.security.auth.ResumeAuthorizer;
-import xyz.blackmonster.resume.models.User;
+import xyz.blackmonster.resume.security.auth.ResumeAuthFilter;
 
 public class ResumeApplication extends Application<ResumeConfiguration> {
 
@@ -67,21 +61,9 @@ public class ResumeApplication extends Application<ResumeConfiguration> {
 	}
 
 	private void initAuthentication(ResumeConfiguration configuration, Environment environment) {
-		CachingAuthenticator<BasicCredentials, User> cachingAuthenticator =
-			new CachingAuthenticator<>(
-				environment.metrics(),
-				resumeComponent.getResumeAuthenticator(),
-				CacheBuilderSpec.parse(configuration.getAuthenticationCachePolicy()));
-
-		BasicCredentialAuthFilter<User> authFilter = new BasicCredentialAuthFilter.Builder<User>()
-			.setAuthenticator(cachingAuthenticator)
-			.setAuthorizer(new ResumeAuthorizer())
-			.setRealm(REALM)
-			.buildAuthFilter();
-
-		environment.jersey().register(new AuthDynamicFeature(authFilter));
+		ResumeAuthFilter filter = new ResumeAuthFilter(resumeComponent.getResumeAuthenticator());
+		environment.jersey().register(new AuthDynamicFeature(filter));
 		environment.jersey().register(RolesAllowedDynamicFeature.class);
-		environment.jersey().register(new AuthValueFactoryProvider.Binder<>(User.class));
 	}
 
 	private void initCORS(Environment environment) {
