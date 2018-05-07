@@ -1,6 +1,5 @@
 package xyz.blackmonster.resume.controllers.api.v1;
 
-import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.ws.rs.DELETE;
@@ -32,14 +31,12 @@ public class ExperienceController {
 
 	@GET
 	@Path("/person/{personUuid}/experiences")
-	@PermitAll
 	public Response getAllByPerson(@PathParam("personUuid") String personUuid) {
 		return Response.status(Response.Status.OK).entity(experienceService.getAllByPerson(personUuid)).build();
 	}
 
 	@GET
 	@Path("/person/{personUuid}/experiences/{experienceUuid}")
-	@PermitAll
 	public Response getByUuid(@PathParam("personUuid") String personUuid, @PathParam("experienceUuid") String experienceUuid) {
 		return Response.status(Response.Status.OK).entity(experienceService.getByUuid(experienceUuid, personUuid)).build();
 	}

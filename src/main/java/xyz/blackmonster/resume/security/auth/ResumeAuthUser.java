@@ -14,11 +14,7 @@ public class ResumeAuthUser extends User {
 		this.personList = personList;
 	}
 
-	public boolean isUserAuthorized(String parentUuid) {
-		if(parentUuid == null) {
-			return true;
-		}
-
-		return personList.contains(parentUuid);
+	public List<String> getPersonList() {
+		return personList;
 	}
 }

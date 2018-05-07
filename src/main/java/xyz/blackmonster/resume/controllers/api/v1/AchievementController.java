@@ -2,7 +2,6 @@ package xyz.blackmonster.resume.controllers.api.v1;
 
 import java.util.List;
 
-import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.ws.rs.DELETE;
@@ -42,7 +41,6 @@ public class AchievementController {
 	
 	@GET
 	@Path("/person/{personUuid}/achievements")
-	@PermitAll
 	public Response getAllByPerson(@PathParam("personUuid") String personUuid) {
 		List<AchievementWS> achievementList = achievementService.getAllByPerson(personUuid);
 		return Response.status(Response.Status.OK).entity(achievementList).build();
@@ -50,7 +48,6 @@ public class AchievementController {
 	
 	@GET
 	@Path("/person/{personUuid}/achievements/{uuid}")
-	@PermitAll
 	public Response getByUuid(@PathParam("personUuid") String personUuid, @PathParam("uuid") String uuid) {
 		AchievementWS achievement = achievementService.getByUuid(uuid, personUuid);
 		return Response.status(Response.Status.OK).entity(achievement).build();

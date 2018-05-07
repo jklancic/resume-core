@@ -1,6 +1,5 @@
 package xyz.blackmonster.resume.controllers.api.v1;
 
-import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.ws.rs.DELETE;
@@ -30,14 +29,12 @@ public class SkillController {
 
 	@GET
 	@Path("/person/{personUuid}/skills")
-	@PermitAll
 	public Response getAllByPerson(@PathParam("personUuid") String personUuid) {
 		return Response.status(Response.Status.OK).entity(skillService.getAllByPerson(personUuid)).build();
 	}
 
 	@GET
 	@Path("/person/{personUuid}/skills/{skillUuid}")
-	@PermitAll
 	public Response getAllByUuid(@PathParam("personUuid") String personUuid, @PathParam("skillUuid") String skillUuid) {
 		return Response.status(Response.Status.OK).entity(skillService.getByUuid(skillUuid, personUuid)).build();
 	}

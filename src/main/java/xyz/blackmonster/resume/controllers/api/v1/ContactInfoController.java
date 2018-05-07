@@ -1,6 +1,5 @@
 package xyz.blackmonster.resume.controllers.api.v1;
 
-import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
@@ -30,14 +29,12 @@ public class ContactInfoController {
 
 	@GET
 	@Path("/person/{personUuid}/contact")
-	@PermitAll
 	public Response getContactInformation(@PathParam("personUuid") String personUuid) {
 		return Response.status(Response.Status.OK).entity(contactInfoService.getByPersonUuid(personUuid)).build();
 	}
 
 	@GET
 	@Path("/person/{personUuid}/contact/{contactUuid}")
-	@PermitAll
 	public Response getByUuid(@PathParam("personUuid") String personUuid, @PathParam("contactUuid") String contactUuid) {
 		return Response.status(Response.Status.OK).entity(contactInfoService.getByUuid(contactUuid)).build();
 	}

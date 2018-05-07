@@ -27,12 +27,15 @@ public class ResumeSecurityContext implements SecurityContext {
 
 	@Override
 	public boolean isUserInRole(String role) {
-		if(role.equals(Role.ADMIN.name()) && role.equals(principal.getRole().name())) {
-			return true;
+		if (role.equals(principal.getRole().name())) {
+			if (principal.getRole() == Role.ADMIN) {
+				return true;
+			} else if (personUuid == null) {
+				return true;
+			}
+			return principal.getPersonList().contains(personUuid);
 		}
-		return role.equals(Role.USER.name()) &&
-			role.equals(principal.getRole().name()) &&
-			principal.isUserAuthorized(personUuid);
+		return false;
 	}
 
 	@Override

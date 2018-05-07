@@ -29,35 +29,35 @@ public class UserController {
 
 	@GET
 	@Path("/users")
-	@RolesAllowed({"ADMIN"})
+	@RolesAllowed("ADMIN")
 	public Response getAll() {
 		return Response.status(Response.Status.OK).entity(userService.getAll()).build();
 	}
 
 	@GET
 	@Path("/users/{uuid}")
-	@RolesAllowed({"ADMIN"})
+	@RolesAllowed("ADMIN")
 	public Response getByUuid(@PathParam("uuid") String uuid) {
 		return Response.status(Response.Status.OK).entity(userService.getByUuid(uuid)).build();
 	}
 
 	@GET
 	@Path("/users/{username}")
-	@RolesAllowed({"ADMIN"})
+	@RolesAllowed("ADMIN")
 	public Response getByUsername(@PathParam("username") String username) {
 		return Response.status(Response.Status.OK).entity(userService.getByUsername(username)).build();
 	}
 
 	@POST
 	@Path("/users")
-	@RolesAllowed({"ADMIN"})
+	@RolesAllowed("ADMIN")
 	public Response create(UserWS userWS) {
 		return Response.status(Response.Status.CREATED).entity(userService.createUser(userWS)).build();
 	}
 
 	@PUT
 	@Path("/users/{userUuid}")
-	@RolesAllowed({"ADMIN"})
+	@RolesAllowed("ADMIN")
 	public Response update(@PathParam("userUuid") String userUuid, UserWS userWS) {
 		userWS.setUuid(userUuid);
 		return Response.status(Response.Status.OK).entity(userService.updateUser(userWS)).build();
@@ -65,7 +65,7 @@ public class UserController {
 
 	@DELETE
 	@Path("/users/{userUuid}")
-	@RolesAllowed({"ADMIN"})
+	@RolesAllowed("ADMIN")
 	public Response delete(@PathParam("userUuid") String userUuid) {
 		userService.deleteUser(userUuid);
 		return Response.status(Response.Status.NO_CONTENT).build();
