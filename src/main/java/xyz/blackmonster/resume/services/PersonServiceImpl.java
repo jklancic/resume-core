@@ -16,12 +16,14 @@ import org.slf4j.LoggerFactory;
 
 import xyz.blackmonster.resume.models.ContactInfo;
 import xyz.blackmonster.resume.models.Person;
+import xyz.blackmonster.resume.models.User;
 import xyz.blackmonster.resume.repositories.dao.AchievementDAO;
 import xyz.blackmonster.resume.repositories.dao.ContactInfoDAO;
 import xyz.blackmonster.resume.repositories.dao.EducationDAO;
 import xyz.blackmonster.resume.repositories.dao.ExperienceDAO;
 import xyz.blackmonster.resume.repositories.dao.PersonDAO;
 import xyz.blackmonster.resume.repositories.dao.SkillDAO;
+import xyz.blackmonster.resume.repositories.dao.UserDAO;
 import xyz.blackmonster.resume.ws.mapper.ContactInfoWSMapper;
 import xyz.blackmonster.resume.ws.mapper.PersonWSMapper;
 import xyz.blackmonster.resume.ws.response.ContactInfoWS;
@@ -46,17 +48,20 @@ public class PersonServiceImpl implements PersonService {
 
 	private SkillDAO skillDAO;
 
+	private UserDAO userDAO;
+
 	@Inject
 	public PersonServiceImpl(
 		AchievementDAO achievementDAO, ContactInfoDAO contactInfoDAO,
 		EducationDAO educationDAO, ExperienceDAO experienceDAO,
-		PersonDAO personDAO, SkillDAO skillDAO) {
+		PersonDAO personDAO, SkillDAO skillDAO, UserDAO userDAO) {
 		this.achievementDAO = achievementDAO;
 		this.contactInfoDAO = contactInfoDAO;
 		this.educationDAO = educationDAO;
 		this.experienceDAO = experienceDAO;
 		this.personDAO = personDAO;
 		this.skillDAO = skillDAO;
+		this.userDAO = userDAO;
 	}
 
 	@Override
@@ -102,7 +107,8 @@ public class PersonServiceImpl implements PersonService {
 
 	@Override
 	@Transaction
-	public PersonWS create(PersonWS personWS, String userUuid) {
+	public PersonWS create(PersonWS personWS, String accessToken) {
+		String userUuid = getUserUuid(accessToken);
 		ContactInfoWS contactInfoWS = personWS.getContactInfo();
 		contactInfoWS.setUuid(UUID.randomUUID().toString());
 		contactInfoDAO.create(ContactInfoWSMapper.toModel(contactInfoWS));
@@ -113,7 +119,8 @@ public class PersonServiceImpl implements PersonService {
 
 	@Override
 	@Transaction
-	public PersonWS updateAll(PersonWS personWS, String userUuid) {
+	public PersonWS updateAll(PersonWS personWS, String accessToken) {
+		String userUuid = getUserUuid(accessToken);
 		ContactInfoWS contactInfoWS = personWS.getContactInfo();
 		if(contactInfoWS != null) {
 			contactInfoDAO.update(ContactInfoWSMapper.toModel(contactInfoWS));
@@ -149,5 +156,14 @@ public class PersonServiceImpl implements PersonService {
 				String.format("Could not find any person entry with uuid=%s", uuid));
 		}
 		return optionalPerson.get();
+	}
+
+	private String getUserUuid(String accessToken) {
+		Optional<User> optionalUser = userDAO.getByAccessToken(accessToken);
+		if(!optionalUser.isPresent()) {
+			// TODO: remove access token from DB if exists
+			throw new IllegalStateException("Access token does not belong to any user.");
+		}
+		return optionalUser.get().getUuid();
 	}
 }

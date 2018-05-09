@@ -12,12 +12,15 @@ import org.jdbi.v3.core.Jdbi;
 import io.dropwizard.Application;
 import io.dropwizard.auth.AuthDynamicFeature;
 import io.dropwizard.jdbi3.JdbiFactory;
+import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import io.dropwizard.views.ViewBundle;
 import xyz.blackmonster.resume.config.app.ResumeConfiguration;
-import xyz.blackmonster.resume.config.component.ResumeComponent;
 import xyz.blackmonster.resume.config.component.DaggerResumeComponent;
+import xyz.blackmonster.resume.config.component.ResumeComponent;
 import xyz.blackmonster.resume.config.module.DAOBeanModule;
 import xyz.blackmonster.resume.config.module.ServiceBeanModule;
+import xyz.blackmonster.resume.controllers.views.HomeViewController;
 import xyz.blackmonster.resume.security.auth.ResumeAuthFilter;
 
 public class ResumeApplication extends Application<ResumeConfiguration> {
@@ -29,6 +32,11 @@ public class ResumeApplication extends Application<ResumeConfiguration> {
 
 	public static void main(String[] args) throws Exception {
 		new ResumeApplication().run(args);
+	}
+
+	@Override
+	public void initialize(Bootstrap<ResumeConfiguration> bootstrap) {
+		bootstrap.addBundle(new ViewBundle<ResumeConfiguration>());
 	}
 
 	@Override
@@ -58,12 +66,15 @@ public class ResumeApplication extends Application<ResumeConfiguration> {
 		environment.jersey().register(resumeComponent.getPersonController());
 		environment.jersey().register(resumeComponent.getSkillController());
 		environment.jersey().register(resumeComponent.getUserController());
+
+		environment.jersey().register(new HomeViewController());
 	}
 
 	private void initAuthentication(ResumeConfiguration configuration, Environment environment) {
 		ResumeAuthFilter filter = new ResumeAuthFilter(resumeComponent.getResumeAuthenticator());
 		environment.jersey().register(new AuthDynamicFeature(filter));
 		environment.jersey().register(RolesAllowedDynamicFeature.class);
+//		environment.jersey().register(new AuthValueFactoryProvider.Binder<>(ResumeAuthUser.class));
 	}
 
 	private void initCORS(Environment environment) {

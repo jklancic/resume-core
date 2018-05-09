@@ -2,6 +2,7 @@ package xyz.blackmonster.resume.controllers.api.v1;
 
 import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
+import javax.ws.rs.CookieParam;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
@@ -13,9 +14,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import io.dropwizard.auth.Auth;
 import xyz.blackmonster.resume.controllers.api.ApiVersioning;
-import xyz.blackmonster.resume.models.User;
+import xyz.blackmonster.resume.security.auth.ResumeAuthFilter;
 import xyz.blackmonster.resume.services.PersonService;
 import xyz.blackmonster.resume.ws.response.PersonWS;
 
@@ -60,16 +60,16 @@ public class PersonController {
 	@POST
 	@Path("/persons/admin")
 	@RolesAllowed("ADMIN")
-	public Response create(@Auth User user, PersonWS personWS) {
-		return Response.status(Response.Status.CREATED).entity(personService.create(personWS, user.getUuid())).build();
+	public Response create(@CookieParam(ResumeAuthFilter.COOKIE_ACCESS_TOKEN) String accessToken, PersonWS personWS) {
+		return Response.status(Response.Status.CREATED).entity(personService.create(personWS, accessToken)).build();
 	}
 
 	@PUT
 	@Path("/persons/{personUuid}/admin")
 	@RolesAllowed("ADMIN")
-	public Response updateAll(@Auth User user, @PathParam("personUuid") String personUuid, PersonWS personWS) {
+	public Response updateAll(@CookieParam(ResumeAuthFilter.COOKIE_ACCESS_TOKEN) String accessToken, @PathParam("personUuid") String personUuid, PersonWS personWS) {
 		personWS.setUuid(personUuid);
-		return Response.status(Response.Status.OK).entity(personService.updateAll(personWS, user.getUuid())).build();
+		return Response.status(Response.Status.OK).entity(personService.updateAll(personWS, accessToken)).build();
 	}
 
 	@DELETE

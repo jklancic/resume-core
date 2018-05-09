@@ -42,7 +42,7 @@ public class UserController {
 	}
 
 	@GET
-	@Path("/users/{username}")
+	@Path("/users/username/{username}")
 	@RolesAllowed("ADMIN")
 	public Response getByUsername(@PathParam("username") String username) {
 		return Response.status(Response.Status.OK).entity(userService.getByUsername(username)).build();

@@ -18,7 +18,7 @@ import io.dropwizard.auth.AuthenticationException;
 @Priority(Priorities.AUTHENTICATION)
 public class ResumeAuthFilter extends AuthFilter {
 
-	private static final String ACCESS_TOKEN = "access_token";
+	public static final String COOKIE_ACCESS_TOKEN = "access_token";
 
 	private ResumeAuthenticator resumeAuthenticator;
 
@@ -47,7 +47,7 @@ public class ResumeAuthFilter extends AuthFilter {
 
 	private CustomCredentials getCredentials(ContainerRequestContext requestContext) {
 		try {
-			String rawToken = requestContext.getCookies().get(ACCESS_TOKEN).getValue();
+			String rawToken = requestContext.getCookies().get(COOKIE_ACCESS_TOKEN).getValue();
 			return new CustomCredentials(rawToken);
 		} catch (Exception e) {
 			throw new WebApplicationException("Unable to retrieve credentials.", Response.Status.UNAUTHORIZED);

@@ -25,5 +25,6 @@ public interface ResumeComponent {
 	PersonController getPersonController();
 	SkillController getSkillController();
 	UserController getUserController();
+
 	ResumeAuthenticator getResumeAuthenticator();
 }

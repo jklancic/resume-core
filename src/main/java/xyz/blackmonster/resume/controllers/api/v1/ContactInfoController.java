@@ -10,9 +10,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import io.dropwizard.auth.Auth;
 import xyz.blackmonster.resume.controllers.api.ApiVersioning;
-import xyz.blackmonster.resume.models.User;
 import xyz.blackmonster.resume.services.ContactInfoService;
 import xyz.blackmonster.resume.ws.response.ContactInfoWS;
 
@@ -42,7 +40,7 @@ public class ContactInfoController {
 	@PUT
 	@Path("/person/{personUuid}/contact/{contactUuid}")
 	@RolesAllowed({"ADMIN", "USER"})
-	public Response update(@Auth User user, @PathParam("personUuid") String personUuid, @PathParam("contactUuid") String contactUuid, ContactInfoWS contactInfoWS) {
+	public Response update(@PathParam("personUuid") String personUuid, @PathParam("contactUuid") String contactUuid, ContactInfoWS contactInfoWS) {
 		contactInfoWS.setUuid(contactUuid);
 		return Response.status(Response.Status.OK).entity(contactInfoService.update(contactInfoWS)).build();
 	}

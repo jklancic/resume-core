@@ -14,11 +14,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import io.dropwizard.auth.Auth;
 import io.dropwizard.auth.AuthenticationException;
 import xyz.blackmonster.resume.controllers.api.ApiVersioning;
 import xyz.blackmonster.resume.controllers.api.v1.access.AchievementSecurity;
-import xyz.blackmonster.resume.models.User;
 import xyz.blackmonster.resume.services.AchievementService;
 import xyz.blackmonster.resume.ws.response.AchievementWS;
 
@@ -56,7 +54,7 @@ public class AchievementController {
 	@POST
 	@Path("/person/{personUuid}/achievements/")
 	@RolesAllowed({"ADMIN", "USER"})
-	public Response create(@Auth User user, @PathParam("personUuid") String personUuid, AchievementWS achievementWS) throws AuthenticationException {
+	public Response create(@PathParam("personUuid") String personUuid, AchievementWS achievementWS) throws AuthenticationException {
 		AchievementWS newAchievement = achievementService.create(achievementWS, personUuid);
 		return Response.status(Response.Status.CREATED).entity(newAchievement).build();
 	}
@@ -64,7 +62,7 @@ public class AchievementController {
 	@PUT
 	@Path("/person/{personUuid}/achievements/{achievementUuid}")
 	@RolesAllowed({"ADMIN", "USER"})
-	public Response update(@Auth User user, @PathParam("personUuid") String personUuid, @PathParam("achievementUuid") String achievementUuid, AchievementWS achievementWS) throws AuthenticationException {
+	public Response update(@PathParam("personUuid") String personUuid, @PathParam("achievementUuid") String achievementUuid, AchievementWS achievementWS) throws AuthenticationException {
 		achievementWS.setUuid(achievementUuid);
 		AchievementWS achievement = achievementService.update(achievementWS, personUuid);
 		return Response.status(Response.Status.OK).entity(achievement).build();
@@ -73,7 +71,7 @@ public class AchievementController {
 	@DELETE
 	@Path("/person/{personUuid}/achievements/{achievementUuid}")
 	@RolesAllowed({"ADMIN", "USER"})
-	public Response delete(@Auth User user, @PathParam("personUuid") String personUuid, @PathParam("achievementUuid") String achievementUuid) throws AuthenticationException {
+	public Response delete(@PathParam("personUuid") String personUuid, @PathParam("achievementUuid") String achievementUuid) throws AuthenticationException {
 		achievementService.delete(achievementUuid);
 		return Response.status(Response.Status.NO_CONTENT).build();
 	}

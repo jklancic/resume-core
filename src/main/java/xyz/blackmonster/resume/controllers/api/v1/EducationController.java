@@ -12,9 +12,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import io.dropwizard.auth.Auth;
 import xyz.blackmonster.resume.controllers.api.ApiVersioning;
-import xyz.blackmonster.resume.models.User;
 import xyz.blackmonster.resume.services.EducationService;
 import xyz.blackmonster.resume.ws.response.EducationWS;
 
@@ -44,14 +42,14 @@ public class EducationController {
 	@POST
 	@Path("/person/{personUuid}/educations")
 	@RolesAllowed({"ADMIN", "USER"})
-	public Response create(@Auth User user, @PathParam("personUuid") String personUuid, EducationWS educationWS) {
+	public Response create(@PathParam("personUuid") String personUuid, EducationWS educationWS) {
 		return Response.status(Response.Status.CREATED).entity(educationService.create(educationWS, personUuid)).build();
 	}
 
 	@PUT
 	@Path("/person/{personUuid}/educations/{educationUuid}")
 	@RolesAllowed({"ADMIN", "USER"})
-	public Response update(@Auth User user, @PathParam("personUuid") String personUuid, @PathParam("educationUuid") String educationUuid, EducationWS educationWS) {
+	public Response update(@PathParam("personUuid") String personUuid, @PathParam("educationUuid") String educationUuid, EducationWS educationWS) {
 		educationWS.setUuid(educationUuid);
 		return Response.status(Response.Status.OK).entity(educationService.update(educationWS, personUuid)).build();
 	}

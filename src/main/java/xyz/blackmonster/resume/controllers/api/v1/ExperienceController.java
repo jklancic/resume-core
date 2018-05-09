@@ -12,9 +12,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import io.dropwizard.auth.Auth;
 import xyz.blackmonster.resume.controllers.api.ApiVersioning;
-import xyz.blackmonster.resume.models.User;
 import xyz.blackmonster.resume.services.ExperienceService;
 import xyz.blackmonster.resume.ws.response.ExperienceWS;
 
@@ -44,14 +42,14 @@ public class ExperienceController {
 	@POST
 	@Path("/person/{personUuid}/experiences")
 	@RolesAllowed({"ADMIN", "USER"})
-	public Response create(@Auth User user, @PathParam("personUuid") String personUuid, ExperienceWS experienceWS) {
+	public Response create(@PathParam("personUuid") String personUuid, ExperienceWS experienceWS) {
 		return Response.status(Response.Status.CREATED).entity(experienceService.create(experienceWS, personUuid)).build();
 	}
 
 	@PUT
 	@Path("/person/{personUuid}/experiences/{experienceUuid}")
 	@RolesAllowed({"ADMIN", "USER"})
-	public Response update(@Auth User user, @PathParam("personUuid") String personUuid, @PathParam("experienceUuid") String experienceUuid, ExperienceWS experienceWS) {
+	public Response update(@PathParam("personUuid") String personUuid, @PathParam("experienceUuid") String experienceUuid, ExperienceWS experienceWS) {
 		experienceWS.setUuid(experienceUuid);
 		return Response.status(Response.Status.OK).entity(experienceService.update(experienceWS, personUuid)).build();
 	}

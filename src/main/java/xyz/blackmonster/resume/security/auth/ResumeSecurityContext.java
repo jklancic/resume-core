@@ -45,6 +45,6 @@ public class ResumeSecurityContext implements SecurityContext {
 
 	@Override
 	public String getAuthenticationScheme() {
-		return "ACCESS_TOKEN";
+		return "COOKIE_ACCESS_TOKEN";
 	}
 }
