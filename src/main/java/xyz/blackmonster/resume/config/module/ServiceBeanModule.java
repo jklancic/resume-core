@@ -14,6 +14,8 @@ import xyz.blackmonster.resume.services.EducationService;
 import xyz.blackmonster.resume.services.EducationServiceImpl;
 import xyz.blackmonster.resume.services.ExperienceService;
 import xyz.blackmonster.resume.services.ExperienceServiceImpl;
+import xyz.blackmonster.resume.services.HttpService;
+import xyz.blackmonster.resume.services.HttpServiceImpl;
 import xyz.blackmonster.resume.services.PersonService;
 import xyz.blackmonster.resume.services.PersonServiceImpl;
 import xyz.blackmonster.resume.services.SkillService;
@@ -70,5 +72,11 @@ public class ServiceBeanModule {
 	@Provides
 	UserService provideUserService(UserServiceImpl userService) {
 		return userService;
+	}
+
+	@Singleton
+	@Provides
+	HttpService provideHttpService(HttpServiceImpl httpService) {
+		return httpService;
 	}
 }

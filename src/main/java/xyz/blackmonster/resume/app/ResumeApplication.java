@@ -67,7 +67,7 @@ public class ResumeApplication extends Application<ResumeConfiguration> {
 		environment.jersey().register(resumeComponent.getSkillController());
 		environment.jersey().register(resumeComponent.getUserController());
 
-		environment.jersey().register(new HomeViewController());
+		environment.jersey().register(resumeComponent.getHomeViewController());
 	}
 
 	private void initAuthentication(ResumeConfiguration configuration, Environment environment) {

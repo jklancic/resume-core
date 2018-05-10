@@ -14,6 +14,7 @@ ext {
     javaJwtVersion = "3.3.0"
     daggerVersion = "2.16"
     mockitoVersion = "2.16.0"
+    googleHttpClientVersion = "1.23.0"
 }
 
 repositories {
@@ -29,6 +30,7 @@ dependencies {
     compile group: 'io.dropwizard', name: 'dropwizard-views-freemarker', version: dropwizardVersion
     compile group: 'mysql', name: 'mysql-connector-java', version: mysqlConnectorVersion
     compile group: 'com.auth0', name: 'java-jwt', version: javaJwtVersion
+    compile group: 'com.google.http-client', name: 'google-http-client', version: googleHttpClientVersion
     annotationProcessor group: 'com.google.dagger', name: 'dagger-compiler', version: daggerVersion
     implementation group: 'com.google.dagger', name: 'dagger', version: daggerVersion
     testCompile group: 'io.dropwizard', name: 'dropwizard-testing', version: dropwizardVersion
