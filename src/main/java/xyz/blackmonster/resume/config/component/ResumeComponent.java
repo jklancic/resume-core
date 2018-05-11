@@ -12,7 +12,6 @@ import xyz.blackmonster.resume.controllers.api.v1.ExperienceController;
 import xyz.blackmonster.resume.controllers.api.v1.PersonController;
 import xyz.blackmonster.resume.controllers.api.v1.SkillController;
 import xyz.blackmonster.resume.controllers.api.v1.UserController;
-import xyz.blackmonster.resume.controllers.views.HomeViewController;
 import xyz.blackmonster.resume.security.auth.ResumeAuthenticator;
 
 @Singleton
@@ -28,6 +27,4 @@ public interface ResumeComponent {
 	UserController getUserController();
 
 	ResumeAuthenticator getResumeAuthenticator();
-
-	HomeViewController getHomeViewController();
 }

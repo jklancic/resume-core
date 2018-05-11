@@ -24,6 +24,8 @@ server:
     - type: http
       port: 8081
 
+  rootPath: /api/
+
 # Logging settings.
 logging:
 

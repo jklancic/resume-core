@@ -31,6 +31,12 @@ public class PersonController {
 	}
 
 	@GET
+	@Path("/persons/test/hello")
+	public Response hello() {
+		return Response.status(Response.Status.OK).entity("Hello").build();
+	}
+
+	@GET
 	@Path("/persons")
 	@RolesAllowed("ADMIN")
 	public Response getAll() {
