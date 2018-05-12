@@ -2,6 +2,8 @@ package xyz.blackmonster.resume.services;
 
 import java.util.List;
 
+import javax.naming.AuthenticationException;
+
 import xyz.blackmonster.resume.ws.response.UserWS;
 
 /**
@@ -28,6 +30,14 @@ public interface UserService {
 	 * @return
 	 */
 	UserWS getByUsername(String username);
+
+	/**
+	 * Validates credentials and returns access token.
+	 * @param username
+	 * @param password
+	 * @return
+	 */
+	String authenticateUser(String username, String password) throws AuthenticationException;
 
 	/**
 	 * Create and return new user.

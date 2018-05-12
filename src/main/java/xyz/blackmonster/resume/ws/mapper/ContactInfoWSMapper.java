@@ -1,6 +1,7 @@
 package xyz.blackmonster.resume.ws.mapper;
 
 import xyz.blackmonster.resume.models.ContactInfo;
+import xyz.blackmonster.resume.models.builder.ContactInfoBuilder;
 import xyz.blackmonster.resume.ws.response.ContactInfoWS;
 
 /**
@@ -9,24 +10,18 @@ import xyz.blackmonster.resume.ws.response.ContactInfoWS;
 public class ContactInfoWSMapper {
 
 	public static ContactInfoWS toWS(ContactInfo contactInfo) {
-		return new ContactInfoWS(
-			contactInfo.getUuid(), 
-			contactInfo.getEmail(), 
-			contactInfo.getPhone(), 
-			contactInfo.getStreet(), 
-			contactInfo.getCity(), 
-			contactInfo.getPostalCode(), 
-			contactInfo.getCountry());
+		return new ContactInfoWS(contactInfo);
 	}
 
 	public static ContactInfo toModel(ContactInfoWS contactInfoWS) {
-		return new ContactInfo(
-			contactInfoWS.getUuid(),
-			contactInfoWS.getEmail(),
-			contactInfoWS.getPhone(),
-			contactInfoWS.getStreet(),
-			contactInfoWS.getCity(),
-			contactInfoWS.getPostalCode(),
-			contactInfoWS.getCountry());
+		return new ContactInfoBuilder()
+			.uuid(contactInfoWS.getUuid())
+			.email(contactInfoWS.getEmail())
+			.phone(contactInfoWS.getPhone())
+			.street(contactInfoWS.getStreet())
+			.city(contactInfoWS.getCity())
+			.postalCode(contactInfoWS.getPostalCode())
+			.country(contactInfoWS.getCountry())
+			.build();
 	}
 }

@@ -10,17 +10,16 @@ import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
 import org.jdbi.v3.core.Jdbi;
 
 import io.dropwizard.Application;
-import io.dropwizard.assets.AssetsBundle;
 import io.dropwizard.auth.AuthDynamicFeature;
 import io.dropwizard.jdbi3.JdbiFactory;
-import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
-import io.dropwizard.views.ViewBundle;
 import xyz.blackmonster.resume.config.app.ResumeConfiguration;
 import xyz.blackmonster.resume.config.component.DaggerResumeComponent;
 import xyz.blackmonster.resume.config.component.ResumeComponent;
 import xyz.blackmonster.resume.config.module.DAOBeanModule;
 import xyz.blackmonster.resume.config.module.ServiceBeanModule;
+import xyz.blackmonster.resume.controllers.mappers.AuthenticationExceptionMapper;
+import xyz.blackmonster.resume.controllers.mappers.NotFoundExceptionMapper;
 import xyz.blackmonster.resume.security.auth.ResumeAuthFilter;
 
 public class ResumeApplication extends Application<ResumeConfiguration> {
@@ -32,12 +31,6 @@ public class ResumeApplication extends Application<ResumeConfiguration> {
 
 	public static void main(String[] args) throws Exception {
 		new ResumeApplication().run(args);
-	}
-
-	@Override
-	public void initialize(Bootstrap<ResumeConfiguration> bootstrap) {
-		bootstrap.addBundle(new ViewBundle<ResumeConfiguration>());
-		bootstrap.addBundle(new AssetsBundle("/assets", "/", "index.html"));
 	}
 
 	@Override
@@ -59,6 +52,11 @@ public class ResumeApplication extends Application<ResumeConfiguration> {
 				.build();
 	}
 
+	private void initExceptionHandlers(Environment environment) {
+		environment.jersey().register(new NotFoundExceptionMapper());
+		environment.jersey().register(new AuthenticationExceptionMapper());
+	}
+
 	private void initControllers(Environment environment) {
 		environment.jersey().register(resumeComponent.getAchievementController());
 		environment.jersey().register(resumeComponent.getContactInfoController());
@@ -73,7 +71,6 @@ public class ResumeApplication extends Application<ResumeConfiguration> {
 		ResumeAuthFilter filter = new ResumeAuthFilter(resumeComponent.getResumeAuthenticator());
 		environment.jersey().register(new AuthDynamicFeature(filter));
 		environment.jersey().register(RolesAllowedDynamicFeature.class);
-//		environment.jersey().register(new AuthValueFactoryProvider.Binder<>(ResumeAuthUser.class));
 	}
 
 	private void initCORS(Environment environment) {

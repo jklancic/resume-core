@@ -14,13 +14,6 @@ public class Skill {
 		
 	}
 
-	public Skill(String uuid, String mastery, int level, String personUuid) {
-		this.uuid = uuid;
-		this.mastery = mastery;
-		this.level = level;
-		this.personUuid = personUuid;
-	}
-
 	public String getUuid() {
 		return uuid;
 	}

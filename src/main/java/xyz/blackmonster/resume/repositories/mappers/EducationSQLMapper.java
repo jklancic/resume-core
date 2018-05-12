@@ -7,6 +7,7 @@ import org.jdbi.v3.core.mapper.RowMapper;
 import org.jdbi.v3.core.statement.StatementContext;
 
 import xyz.blackmonster.resume.models.Education;
+import xyz.blackmonster.resume.models.builder.EducationBuilder;
 
 /**
  * Row mapper for education models
@@ -23,8 +24,14 @@ public class EducationSQLMapper implements RowMapper<Education> {
 	
 	@Override
 	public Education map(ResultSet rs, StatementContext ctx) throws SQLException {
-		return new Education(
-			rs.getString(UUID), rs.getDate(DATE), rs.getString(TITLE), 
-			rs.getString(INSTITUTION), rs.getString(CITY), rs.getString(COUNTRY), rs.getString(PERSON_UUID));
+		return new EducationBuilder()
+			.uuid(rs.getString(UUID))
+			.date(rs.getDate(DATE))
+			.title(rs.getString(TITLE))
+			.institution(rs.getString(INSTITUTION))
+			.city(rs.getString(CITY))
+			.country(rs.getString(COUNTRY))
+			.personUuid(rs.getString(PERSON_UUID))
+			.build();
 	}
 }

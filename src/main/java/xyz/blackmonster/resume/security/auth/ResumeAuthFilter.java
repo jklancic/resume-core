@@ -28,7 +28,7 @@ public class ResumeAuthFilter extends AuthFilter {
 
 	@Override
 	public void filter(ContainerRequestContext requestContext) throws IOException {
-		CustomCredentials credentials = getCredentials(requestContext);
+		CookieToken credentials = getCredentials(requestContext);
 		Optional<ResumeAuthUser> optionalUser;
 		try {
 			optionalUser = resumeAuthenticator.authenticate(credentials);
@@ -45,10 +45,10 @@ public class ResumeAuthFilter extends AuthFilter {
 		requestContext.setSecurityContext(securityContext);
 	}
 
-	private CustomCredentials getCredentials(ContainerRequestContext requestContext) {
+	private CookieToken getCredentials(ContainerRequestContext requestContext) {
 		try {
 			String rawToken = requestContext.getCookies().get(COOKIE_ACCESS_TOKEN).getValue();
-			return new CustomCredentials(rawToken);
+			return new CookieToken(rawToken);
 		} catch (Exception e) {
 			throw new WebApplicationException("Unable to retrieve credentials.", Response.Status.UNAUTHORIZED);
 		}

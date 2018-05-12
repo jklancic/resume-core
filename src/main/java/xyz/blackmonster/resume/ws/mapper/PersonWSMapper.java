@@ -2,7 +2,7 @@ package xyz.blackmonster.resume.ws.mapper;
 
 import xyz.blackmonster.resume.models.ContactInfo;
 import xyz.blackmonster.resume.models.Person;
-import xyz.blackmonster.resume.ws.response.ContactInfoWS;
+import xyz.blackmonster.resume.models.builder.PersonBuilder;
 import xyz.blackmonster.resume.ws.response.PersonWS;
 
 /**
@@ -11,26 +11,22 @@ import xyz.blackmonster.resume.ws.response.PersonWS;
 public class PersonWSMapper {
 
 	public static PersonWS toWS(Person person, ContactInfo contactInfo) {
-		ContactInfoWS contactInfoWS = ContactInfoWSMapper.toWS(contactInfo);
-		return new PersonWS(
-			person.getUuid(),
-			person.getBirthDate(),
-			person.getFirstName(),
-			person.getLastName(),
-			person.getOverview(),
-			contactInfoWS,
-			person.getBaseUrl());
+		return new PersonWS(person, contactInfo);
 	}
 
 	public static Person toModel(PersonWS personWS, String createdByUser) {
-		return new Person(
-			personWS.getUuid(),
-			personWS.getBirthDate(),
-			personWS.getFirstName(),
-			personWS.getLastName(),
-			personWS.getOverview(),
-			personWS.getContactInfo().getUuid(),
-			personWS.getBaseUrl(),
-			createdByUser);
+		return new PersonBuilder()
+			.uuid(personWS.getUuid())
+			.birthDate(personWS.getBirthDate())
+			.firstName(personWS.getFirstName())
+			.lastName(personWS.getLastName())
+			.overview(personWS.getOverview())
+			.contactInfoUuid(personWS.getContactInfo().getUuid())
+			.baseUrl(personWS.getBaseUrl())
+			.linkedInUrl(personWS.getLinkedInUrl())
+			.githubUrl(personWS.getGithubUrl())
+			.facebookUrl(personWS.getFacebookUrl())
+			.twitterUrl(personWS.getTwitterUrl())
+			.build();
 	}
 }

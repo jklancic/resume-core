@@ -1,5 +1,7 @@
 package xyz.blackmonster.resume.ws.response;
 
+import xyz.blackmonster.resume.models.User;
+
 public class UserWS {
 
 	private String uuid;
@@ -11,11 +13,10 @@ public class UserWS {
 
 	}
 
-	public UserWS(String uuid, String username, String password, String role) {
-		this.uuid = uuid;
-		this.username = username;
-		this.password = password;
-		this.role = role;
+	public UserWS(User user) {
+		this.uuid = user.getUuid();
+		this.username = user.getUsername();
+		this.role = user.getRole().name();
 	}
 
 	public String getUuid() {

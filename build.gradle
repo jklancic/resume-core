@@ -29,7 +29,6 @@ dependencies {
     compile group: 'io.dropwizard', name: 'dropwizard-assets', version: dropwizardVersion
     compile group: 'mysql', name: 'mysql-connector-java', version: mysqlConnectorVersion
     compile group: 'com.auth0', name: 'java-jwt', version: javaJwtVersion
-    compile group: 'com.google.http-client', name: 'google-http-client', version: googleHttpClientVersion
     annotationProcessor group: 'com.google.dagger', name: 'dagger-compiler', version: daggerVersion
     implementation group: 'com.google.dagger', name: 'dagger', version: daggerVersion
     testCompile group: 'io.dropwizard', name: 'dropwizard-testing', version: dropwizardVersion

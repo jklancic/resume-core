@@ -17,16 +17,6 @@ public class ContactInfo {
 		
 	}
 
-	public ContactInfo(String uuid, String email, String phone, String street, String city, String postalCode, String country) {
-		this.uuid = uuid;
-		this.email = email;
-		this.phone = phone;
-		this.street = street;
-		this.city = city;
-		this.postalCode = postalCode;
-		this.country = country;
-	}
-
 	public String getUuid() {
 		return uuid;
 	}

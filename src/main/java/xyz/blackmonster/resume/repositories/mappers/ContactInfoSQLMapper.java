@@ -7,6 +7,7 @@ import org.jdbi.v3.core.mapper.RowMapper;
 import org.jdbi.v3.core.statement.StatementContext;
 
 import xyz.blackmonster.resume.models.ContactInfo;
+import xyz.blackmonster.resume.models.builder.ContactInfoBuilder;
 
 /**
  * Row mapper for contact information models
@@ -23,8 +24,14 @@ public class ContactInfoSQLMapper implements RowMapper<ContactInfo> {
 	
 	@Override
 	public ContactInfo map(ResultSet rs, StatementContext ctx) throws SQLException {
-		return new ContactInfo(
-			rs.getString(UUID), rs.getString(EMAIL), rs.getString(PHONE), 
-			rs.getString(STREET), rs.getString(CITY), rs.getString(POSTAL_CODE), rs.getString(COUNTRY));
+		return new ContactInfoBuilder()
+			.uuid(rs.getString(UUID))
+			.email(rs.getString(EMAIL))
+			.phone(rs.getString(PHONE))
+			.street(rs.getString(STREET))
+			.city(rs.getString(CITY))
+			.postalCode(rs.getString(POSTAL_CODE))
+			.country(rs.getString(COUNTRY))
+			.build();
 	}
 }

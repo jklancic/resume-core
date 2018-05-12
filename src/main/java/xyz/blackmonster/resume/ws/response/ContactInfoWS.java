@@ -1,5 +1,7 @@
 package xyz.blackmonster.resume.ws.response;
 
+import xyz.blackmonster.resume.models.ContactInfo;
+
 /**
  * Web Service response object for ContactInfo
  */
@@ -17,14 +19,14 @@ public class ContactInfoWS {
 		
 	}
 
-	public ContactInfoWS(String uuid, String email, String phone, String street, String city, String postalCode, String country) {
-		this.uuid = uuid;
-		this.email = email;
-		this.phone = phone;
-		this.street = street;
-		this.city = city;
-		this.postalCode = postalCode;
-		this.country = country;
+	public ContactInfoWS(ContactInfo contactInfo) {
+		this.uuid = contactInfo.getUuid();
+		this.email = contactInfo.getEmail();
+		this.phone = contactInfo.getPhone();
+		this.street = contactInfo.getStreet();
+		this.city = contactInfo.getCity();
+		this.postalCode = contactInfo.getPostalCode();
+		this.country = contactInfo.getCountry();
 	}
 
 	public String getUuid() {

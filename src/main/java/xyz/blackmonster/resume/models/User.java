@@ -12,6 +12,10 @@ public class User implements Principal {
 	private String password;
 	private Role role;
 
+	public User() {
+
+	}
+
 	public User(String uuid, String username, String password, Role role) {
 		this.uuid = uuid;
 		this.username = username;

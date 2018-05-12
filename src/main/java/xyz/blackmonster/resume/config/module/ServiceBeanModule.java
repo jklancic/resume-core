@@ -4,8 +4,6 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import xyz.blackmonster.resume.controllers.api.v1.access.AchievementSecurity;
-import xyz.blackmonster.resume.controllers.api.v1.access.AchievementSecurityImpl;
 import xyz.blackmonster.resume.services.AchievementService;
 import xyz.blackmonster.resume.services.AchievementServiceImpl;
 import xyz.blackmonster.resume.services.ContactInfoService;
@@ -14,8 +12,6 @@ import xyz.blackmonster.resume.services.EducationService;
 import xyz.blackmonster.resume.services.EducationServiceImpl;
 import xyz.blackmonster.resume.services.ExperienceService;
 import xyz.blackmonster.resume.services.ExperienceServiceImpl;
-import xyz.blackmonster.resume.services.HttpService;
-import xyz.blackmonster.resume.services.HttpServiceImpl;
 import xyz.blackmonster.resume.services.PersonService;
 import xyz.blackmonster.resume.services.PersonServiceImpl;
 import xyz.blackmonster.resume.services.SkillService;
@@ -30,12 +26,6 @@ public class ServiceBeanModule {
 	@Provides
 	AchievementService provideAchievementService(AchievementServiceImpl achievementService) {
 		return achievementService;
-	}
-
-	@Singleton
-	@Provides
-	AchievementSecurity provideAchievementSecurity(AchievementSecurityImpl achievementSecurity) {
-		return achievementSecurity;
 	}
 
 	@Singleton
@@ -72,11 +62,5 @@ public class ServiceBeanModule {
 	@Provides
 	UserService provideUserService(UserServiceImpl userService) {
 		return userService;
-	}
-
-	@Singleton
-	@Provides
-	HttpService provideHttpService(HttpServiceImpl httpService) {
-		return httpService;
 	}
 }

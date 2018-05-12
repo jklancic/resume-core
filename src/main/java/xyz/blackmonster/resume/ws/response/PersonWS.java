@@ -2,6 +2,9 @@ package xyz.blackmonster.resume.ws.response;
 
 import java.sql.Date;
 
+import xyz.blackmonster.resume.models.ContactInfo;
+import xyz.blackmonster.resume.models.Person;
+
 /**
  * Web Service response object for Person
  */
@@ -14,19 +17,27 @@ public class PersonWS {
 	private String overview;
 	private ContactInfoWS contactInfo;
 	private String baseUrl;
+	private String linkedInUrl;
+	private String githubUrl;
+	private String facebookUrl;
+	private String twitterUrl;
 	
 	public PersonWS() {
 		
 	}
 
-	public PersonWS(String uuid, Date birthDate, String firstName, String lastName, String overview, ContactInfoWS contactInfo, String baseUrl) {
-		this.uuid = uuid;
-		this.birthDate = birthDate;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.overview = overview;
-		this.contactInfo = contactInfo;
-		this.baseUrl = baseUrl;
+	public PersonWS(Person person, ContactInfo contactInfo) {
+		this.uuid = person.getUuid();
+		this.birthDate = person.getBirthDate();
+		this.firstName = person.getFirstName();
+		this.lastName = person.getLastName();
+		this.overview = person.getOverview();
+		this.contactInfo = new ContactInfoWS(contactInfo);
+		this.baseUrl = person.getBaseUrl();
+		this.linkedInUrl = person.getLinkedInUrl();
+		this.githubUrl = person.getGithubUrl();
+		this.facebookUrl = person.getFacebookUrl();
+		this.twitterUrl = person.getTwitterUrl();
 	}
 
 	public String getUuid() {
@@ -83,5 +94,37 @@ public class PersonWS {
 
 	public void setBaseUrl(String baseUrl) {
 		this.baseUrl = baseUrl;
+	}
+
+	public String getLinkedInUrl() {
+		return linkedInUrl;
+	}
+
+	public void setLinkedInUrl(String linkedInUrl) {
+		this.linkedInUrl = linkedInUrl;
+	}
+
+	public String getGithubUrl() {
+		return githubUrl;
+	}
+
+	public void setGithubUrl(String githubUrl) {
+		this.githubUrl = githubUrl;
+	}
+
+	public String getFacebookUrl() {
+		return facebookUrl;
+	}
+
+	public void setFacebookUrl(String facebookUrl) {
+		this.facebookUrl = facebookUrl;
+	}
+
+	public String getTwitterUrl() {
+		return twitterUrl;
+	}
+
+	public void setTwitterUrl(String twitterUrl) {
+		this.twitterUrl = twitterUrl;
 	}
 }

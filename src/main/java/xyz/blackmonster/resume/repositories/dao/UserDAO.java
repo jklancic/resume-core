@@ -14,16 +14,16 @@ import xyz.blackmonster.resume.repositories.mappers.UserSQLMapper;
 @RegisterRowMapper(UserSQLMapper.class)
 public interface UserDAO {
 
-	@SqlQuery("SELECT uuid, date, description, role FROM user")
+	@SqlQuery("SELECT uuid, username, password, role FROM user")
 	List<User> getAll();
 
-	@SqlQuery("SELECT uuid, date, description, role FROM user WHERE uuid = :uuid")
+	@SqlQuery("SELECT uuid, username, password, role FROM user WHERE uuid = :uuid")
 	Optional<User> getByUuid(@Bind("username") String uuid);
 
-	@SqlQuery("SELECT uuid, date, description, role FROM user WHERE username = :username")
+	@SqlQuery("SELECT uuid, username, password, role FROM user WHERE username = :username")
 	Optional<User> getByUsername(@Bind("username") String username);
 
-	@SqlQuery("SELECT uuid, date, description, role FROM user WHERE access_token = :token")
+	@SqlQuery("SELECT uuid, username, password, role FROM user WHERE access_token = :token")
 	Optional<User> getByAccessToken(@Bind("token") String token);
 
 	@SqlUpdate("INSERT INTO user(uuid, username, password, role) VALUES (:uuid, :username, :password, :role)")

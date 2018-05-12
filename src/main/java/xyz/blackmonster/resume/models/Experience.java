@@ -20,17 +20,6 @@ public class Experience {
 		
 	}
 
-	public Experience(String uuid, Date startDate, Date endDate, String title, String description, String city, String country, String personUuid) {
-		this.uuid = uuid;
-		this.startDate = startDate;
-		this.endDate = endDate;
-		this.title = title;
-		this.description = description;
-		this.city = city;
-		this.country = country;
-		this.personUuid = personUuid;
-	}
-
 	public String getUuid() {
 		return uuid;
 	}

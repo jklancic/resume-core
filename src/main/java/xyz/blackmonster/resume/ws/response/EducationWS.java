@@ -2,6 +2,8 @@ package xyz.blackmonster.resume.ws.response;
 
 import java.sql.Date;
 
+import xyz.blackmonster.resume.models.Education;
+
 /**
  * Web Service response object for Education
  */
@@ -18,13 +20,13 @@ public class EducationWS {
 		
 	}
 
-	public EducationWS(String uuid, Date date, String title, String institution, String city, String country) {
-		this.uuid = uuid;
-		this.date = date;
-		this.title = title;
-		this.institution = institution;
-		this.city = city;
-		this.country = country;
+	public EducationWS(Education education) {
+		this.uuid = education.getUuid();
+		this.date = education.getDate();
+		this.title = education.getTitle();
+		this.institution = education.getInstitution();
+		this.city = education.getCity();
+		this.country = education.getCountry();
 	}
 
 	public String getUuid() {

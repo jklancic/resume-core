@@ -1,6 +1,7 @@
 package xyz.blackmonster.resume.ws.mapper;
 
 import xyz.blackmonster.resume.models.Experience;
+import xyz.blackmonster.resume.models.builder.ExperienceBuilder;
 import xyz.blackmonster.resume.ws.response.ExperienceWS;
 
 /**
@@ -9,25 +10,18 @@ import xyz.blackmonster.resume.ws.response.ExperienceWS;
 public class ExperienceWSMapper {
 
 	public static ExperienceWS toWS(Experience experience) {
-		return new ExperienceWS(
-			experience.getUuid(),
-			experience.getStartDate(),
-			experience.getEndDate(),
-			experience.getTitle(),
-			experience.getDescription(),
-			experience.getCity(),
-			experience.getCountry());
+		return new ExperienceWS(experience);
 	}
 
 	public static Experience toModel(ExperienceWS experienceWS, String personUuid) {
-		return new Experience(
-			experienceWS.getUuid(),
-			experienceWS.getStartDate(),
-			experienceWS.getEndDate(),
-			experienceWS.getTitle(),
-			experienceWS.getDescription(),
-			experienceWS.getCity(),
-			experienceWS.getCountry(),
-			personUuid);
+		return new ExperienceBuilder()
+			.uuid(experienceWS.getUuid())
+			.startDate(experienceWS.getStartDate())
+			.endDate(experienceWS.getEndDate())
+			.title(experienceWS.getTitle())
+			.description(experienceWS.getDescription())
+			.city(experienceWS.getCity())
+			.country(experienceWS.getCountry())
+			.build();
 	}
 }

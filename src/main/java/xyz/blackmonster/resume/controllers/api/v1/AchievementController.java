@@ -16,7 +16,6 @@ import javax.ws.rs.core.Response;
 
 import io.dropwizard.auth.AuthenticationException;
 import xyz.blackmonster.resume.controllers.api.ApiVersioning;
-import xyz.blackmonster.resume.controllers.api.v1.access.AchievementSecurity;
 import xyz.blackmonster.resume.services.AchievementService;
 import xyz.blackmonster.resume.ws.response.AchievementWS;
 
@@ -27,16 +26,13 @@ import xyz.blackmonster.resume.ws.response.AchievementWS;
 @Produces(MediaType.APPLICATION_JSON)
 public class AchievementController {
 	
-	private AchievementSecurity achievementSecurity;
-	
 	private AchievementService achievementService;
-	
+
 	@Inject
-	public AchievementController(AchievementSecurity achievementSecurity, AchievementService achievementService) {
-		this.achievementSecurity = achievementSecurity;
+	public AchievementController(AchievementService achievementService) {
 		this.achievementService = achievementService;
 	}
-	
+
 	@GET
 	@Path("/person/{personUuid}/achievements")
 	public Response getAllByPerson(@PathParam("personUuid") String personUuid) {

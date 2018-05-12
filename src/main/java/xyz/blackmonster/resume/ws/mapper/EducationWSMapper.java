@@ -1,6 +1,7 @@
 package xyz.blackmonster.resume.ws.mapper;
 
 import xyz.blackmonster.resume.models.Education;
+import xyz.blackmonster.resume.models.builder.EducationBuilder;
 import xyz.blackmonster.resume.ws.response.EducationWS;
 
 /**
@@ -9,23 +10,18 @@ import xyz.blackmonster.resume.ws.response.EducationWS;
 public class EducationWSMapper {
 	
 	public static EducationWS toWS(Education education) {
-		return new EducationWS(
-			education.getUuid(), 
-			education.getDate(), 
-			education.getTitle(), 
-			education.getInstitution(), 
-			education.getCity(), 
-			education.getCountry());
+		return new EducationWS(education);
 	}
 	
 	public static Education toModel(EducationWS educationWS, String personUuid) {
-		return new Education(
-			educationWS.getUuid(), 
-			educationWS.getDate(), 
-			educationWS.getTitle(), 
-			educationWS.getInstitution(), 
-			educationWS.getCity(), 
-			educationWS.getCountry(), 
-			personUuid);
+		return new EducationBuilder()
+			.uuid(educationWS.getUuid())
+			.date(educationWS.getDate())
+			.title(educationWS.getTitle())
+			.institution(educationWS.getInstitution())
+			.city(educationWS.getCity())
+			.country(educationWS.getCountry())
+			.personUuid(personUuid)
+			.build();
 	}
 }

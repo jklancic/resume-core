@@ -1,5 +1,7 @@
 package xyz.blackmonster.resume.ws.response;
 
+import xyz.blackmonster.resume.models.Skill;
+
 /**
  * Web Service response object for Skill
  */
@@ -13,10 +15,10 @@ public class SkillWS {
 		
 	}
 
-	public SkillWS(String uuid, String mastery, int level) {
-		this.uuid = uuid;
-		this.mastery = mastery;
-		this.level = level;
+	public SkillWS(Skill skill) {
+		this.uuid = skill.getUuid();
+		this.mastery = skill.getMastery();
+		this.level = skill.getLevel();
 	}
 
 	public String getUuid() {

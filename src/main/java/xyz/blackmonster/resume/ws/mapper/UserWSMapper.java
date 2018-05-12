@@ -2,6 +2,7 @@ package xyz.blackmonster.resume.ws.mapper;
 
 import xyz.blackmonster.resume.models.Role;
 import xyz.blackmonster.resume.models.User;
+import xyz.blackmonster.resume.models.builder.UserBuilder;
 import xyz.blackmonster.resume.ws.response.UserWS;
 
 /**
@@ -10,18 +11,14 @@ import xyz.blackmonster.resume.ws.response.UserWS;
 public class UserWSMapper {
 
 	public static UserWS toWS(User user) {
-		return new UserWS(
-			user.getUuid(),
-			user.getUsername(),
-			user.getPassword(),
-			user.getRole().name());
+		return new UserWS(user);
 	}
 
 	public static User toModel(UserWS userWS) {
-		return new User(
-			userWS.getUuid(),
-			userWS.getUsername(),
-			userWS.getPassword(),
-			Role.valueOf(userWS.getRole()));
+		return new UserBuilder()
+			.uuid(userWS.getUuid())
+			.username(userWS.getUsername())
+			.role(Role.valueOf(userWS.getRole()))
+			.build();
 	}
 }

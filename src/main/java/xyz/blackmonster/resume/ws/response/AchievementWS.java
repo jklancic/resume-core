@@ -2,6 +2,8 @@ package xyz.blackmonster.resume.ws.response;
 
 import java.sql.Date;
 
+import xyz.blackmonster.resume.models.Achievement;
+
 /**
  * Web Service response object for Achievement
  */
@@ -15,10 +17,10 @@ public class AchievementWS {
 		
 	}
 	
-	public AchievementWS(String uuid, Date date, String description) {
-		this.uuid = uuid;
-		this.date = date;
-		this.description = description;
+	public AchievementWS(Achievement achievement) {
+		this.uuid = achievement.getUuid();
+		this.date = achievement.getDate();
+		this.description = achievement.getDescription();
 	}
 
 	public String getUuid() {

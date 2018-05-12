@@ -14,21 +14,13 @@ public class Person {
 	private String overview;
 	private String contactInfoUuid;
 	private String baseUrl;
+	private String linkedInUrl;
+	private String githubUrl;
+	private String facebookUrl;
+	private String twitterUrl;
 	private String createdByUser;
 	
 	public Person() {
-		
-	}
-
-	public Person(String uuid, Date birthDate, String firstName, String lastName, String overview, String contactInfoUuid, String baseUrl, String createdByUser) {
-		this.uuid = uuid;
-		this.birthDate = birthDate;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.overview = overview;
-		this.contactInfoUuid = contactInfoUuid;
-		this.baseUrl = baseUrl;
-		this.createdByUser = createdByUser;
 	}
 
 	public String getUuid() {
@@ -85,6 +77,38 @@ public class Person {
 
 	public void setBaseUrl(String baseUrl) {
 		this.baseUrl = baseUrl;
+	}
+
+	public String getLinkedInUrl() {
+		return linkedInUrl;
+	}
+
+	public void setLinkedInUrl(String linkedInUrl) {
+		this.linkedInUrl = linkedInUrl;
+	}
+
+	public String getGithubUrl() {
+		return githubUrl;
+	}
+
+	public void setGithubUrl(String githubUrl) {
+		this.githubUrl = githubUrl;
+	}
+
+	public String getFacebookUrl() {
+		return facebookUrl;
+	}
+
+	public void setFacebookUrl(String facebookUrl) {
+		this.facebookUrl = facebookUrl;
+	}
+
+	public String getTwitterUrl() {
+		return twitterUrl;
+	}
+
+	public void setTwitterUrl(String twitterUrl) {
+		this.twitterUrl = twitterUrl;
 	}
 
 	public String getCreatedByUser() {

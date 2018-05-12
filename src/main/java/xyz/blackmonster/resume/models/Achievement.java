@@ -15,13 +15,6 @@ public class Achievement {
 	public Achievement() {
 		
 	}
-	
-	public Achievement(String uuid, Date date, String description, String personUuid) {
-		this.uuid = uuid;
-		this.date = date;
-		this.description = description;
-		this.personUuid = personUuid;
-	}
 
 	public String getUuid() {
 		return uuid;

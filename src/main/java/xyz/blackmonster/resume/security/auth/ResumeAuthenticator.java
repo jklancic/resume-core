@@ -13,7 +13,7 @@ import xyz.blackmonster.resume.models.User;
 import xyz.blackmonster.resume.repositories.dao.PersonDAO;
 import xyz.blackmonster.resume.repositories.dao.UserDAO;
 
-public class ResumeAuthenticator implements Authenticator<CustomCredentials, ResumeAuthUser> {
+public class ResumeAuthenticator implements Authenticator<CookieToken, ResumeAuthUser> {
 
 	private UserDAO userDAO;
 
@@ -26,7 +26,7 @@ public class ResumeAuthenticator implements Authenticator<CustomCredentials, Res
 	}
 
 	@Override
-	public Optional<ResumeAuthUser> authenticate(CustomCredentials credentials) throws AuthenticationException {
+	public Optional<ResumeAuthUser> authenticate(CookieToken credentials) throws AuthenticationException {
 		if(credentials.getAccessToken() == null || credentials.getAccessToken().isEmpty()) {
 			throw new AuthenticationException("Access token is not valid.");
 		}

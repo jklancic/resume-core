@@ -6,6 +6,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 import javax.inject.Inject;
+import javax.naming.AuthenticationException;
 import javax.ws.rs.NotFoundException;
 
 import org.jdbi.v3.sqlobject.transaction.Transaction;
@@ -49,6 +50,17 @@ public class UserServiceImpl implements UserService {
 		return getUser(
 			userDAO.getByUsername(username),
 			String.format("Could not find any user with username=%s", username));
+	}
+
+	@Override
+	@Transaction
+	public String authenticateUser(String username, String password) throws AuthenticationException {
+		UserWS user = getByUsername(username);
+		if(!PasswordUtil.verifyUserPassword(password, user.getPassword())) {
+			throw new AuthenticationException("Credentials are not valid.");
+		}
+		String accessToken = "";
+		return accessToken;
 	}
 
 	private UserWS getUser(Optional<User> optionalUser, String exceptionMessage) {

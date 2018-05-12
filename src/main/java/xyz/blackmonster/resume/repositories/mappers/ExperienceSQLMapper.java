@@ -7,6 +7,7 @@ import org.jdbi.v3.core.mapper.RowMapper;
 import org.jdbi.v3.core.statement.StatementContext;
 
 import xyz.blackmonster.resume.models.Experience;
+import xyz.blackmonster.resume.models.builder.ExperienceBuilder;
 
 /**
  * Row mapper for experience models
@@ -24,8 +25,15 @@ public class ExperienceSQLMapper implements RowMapper<Experience> {
 	
 	@Override
 	public Experience map(ResultSet rs, StatementContext ctx) throws SQLException {
-		return new Experience(
-			rs.getString(UUID), rs.getDate(START_DATE), rs.getDate(END_DATE), rs.getString(TITLE),
-			rs.getString(DESCRIPTION), rs.getString(CITY), rs.getString(COUNTRY), rs.getString(PERSON_UUID));
+		return new ExperienceBuilder()
+			.uuid(rs.getString(UUID))
+			.startDate(rs.getDate(START_DATE))
+			.endDate(rs.getDate(END_DATE))
+			.title(rs.getString(TITLE))
+			.description(rs.getString(DESCRIPTION))
+			.city(rs.getString(CITY))
+			.country(rs.getString(COUNTRY))
+			.personUuid(rs.getString(PERSON_UUID))
+			.build();
 	}
 }

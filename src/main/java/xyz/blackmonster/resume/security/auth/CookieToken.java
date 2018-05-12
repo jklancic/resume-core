@@ -1,13 +1,13 @@
 package xyz.blackmonster.resume.security.auth;
 
-public class CustomCredentials {
+public class CookieToken {
 
 	private String accessToken;
 
-	public CustomCredentials() {
+	public CookieToken() {
 	}
 
-	public CustomCredentials(String accessToken) {
+	public CookieToken(String accessToken) {
 		this.accessToken = accessToken;
 	}
 

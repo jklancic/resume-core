@@ -8,6 +8,7 @@ import org.jdbi.v3.core.statement.StatementContext;
 
 import xyz.blackmonster.resume.models.Role;
 import xyz.blackmonster.resume.models.User;
+import xyz.blackmonster.resume.models.builder.UserBuilder;
 
 public class UserSQLMapper implements RowMapper<User> {
 
@@ -18,6 +19,11 @@ public class UserSQLMapper implements RowMapper<User> {
 	
 	@Override
 	public User map(ResultSet rs, StatementContext ctx) throws SQLException {
-		return new User(rs.getString(UUID), rs.getString(USERNAME), rs.getString(PASSWORD), Role.toRole(rs.getInt(ROLE)));
+		return new UserBuilder()
+			.uuid(rs.getString(UUID))
+			.username(rs.getString(USERNAME))
+			.password(rs.getString(PASSWORD))
+			.role(Role.toRole(rs.getInt(ROLE)))
+			.build();
 	}
 }

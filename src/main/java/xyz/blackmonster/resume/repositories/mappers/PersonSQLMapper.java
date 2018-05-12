@@ -7,6 +7,7 @@ import org.jdbi.v3.core.mapper.RowMapper;
 import org.jdbi.v3.core.statement.StatementContext;
 
 import xyz.blackmonster.resume.models.Person;
+import xyz.blackmonster.resume.models.builder.PersonBuilder;
 
 /**
  * Row mapper for person models
@@ -20,13 +21,27 @@ public class PersonSQLMapper implements RowMapper<Person> {
 	private static final String OVERVIEW = "overview";
 	private static final String CONTACT_INFO_UUID = "contact_information_uuid";
 	private static final String BASE_URL = "base_url";
+	private static final String LINKEDIN_URL = "linkedin_url";
+	private static final String GITHUB_URL = "github_url";
+	private static final String FACEBOOK_URL = "facebook_url";
+	private static final String TWITTER_URL = "twitter_url";
 	private static final String CREATED_BY_USER_UUID = "create_by_user_uuid";
 	
 	@Override
 	public Person map(ResultSet rs, StatementContext ctx) throws SQLException {
-		return new Person(
-			rs.getString(UUID), rs.getDate(BIRTH_DATE), rs.getString(FIRST_NAME),
-			rs.getString(LAST_NAME), rs.getString(OVERVIEW), rs.getString(CONTACT_INFO_UUID),
-			rs.getString(BASE_URL), rs.getString(CREATED_BY_USER_UUID));
+		return new PersonBuilder()
+			.uuid(rs.getString(UUID))
+			.birthDate(rs.getDate(BIRTH_DATE))
+			.firstName(rs.getString(FIRST_NAME))
+			.lastName(rs.getString(LAST_NAME))
+			.overview(rs.getString(OVERVIEW))
+			.contactInfoUuid(rs.getString(CONTACT_INFO_UUID))
+			.baseUrl(rs.getString(BASE_URL))
+			.linkedInUrl(rs.getString(LINKEDIN_URL))
+			.githubUrl(rs.getString(GITHUB_URL))
+			.facebookUrl(rs.getString(FACEBOOK_URL))
+			.twitterUrl(rs.getString(TWITTER_URL))
+			.createdByUser(rs.getString(CREATED_BY_USER_UUID))
+			.build();
 	}
 }

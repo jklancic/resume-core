@@ -1,6 +1,7 @@
 package xyz.blackmonster.resume.ws.mapper;
 
 import xyz.blackmonster.resume.models.Achievement;
+import xyz.blackmonster.resume.models.builder.AchievementBuilder;
 import xyz.blackmonster.resume.ws.response.AchievementWS;
 
 /**
@@ -9,12 +10,15 @@ import xyz.blackmonster.resume.ws.response.AchievementWS;
 public class AchievementWSMapper {
 	
 	public static AchievementWS toWS(Achievement achievement) {
-		return new AchievementWS(
-			achievement.getUuid(), achievement.getDate(), achievement.getDescription());
+		return new AchievementWS(achievement);
 	}
 	
 	public static Achievement toModel(AchievementWS achievementWS, String personUuid) {
-		return new Achievement(
-			achievementWS.getUuid(), achievementWS.getDate(), achievementWS.getDescription(), personUuid);
+		return new AchievementBuilder()
+			.uuid(achievementWS.getUuid())
+			.date(achievementWS.getDate())
+			.description(achievementWS.getDescription())
+			.personUuid(personUuid)
+			.build();
 	}
 }

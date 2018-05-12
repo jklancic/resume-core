@@ -19,16 +19,6 @@ public class Education {
 		
 	}
 
-	public Education(String uuid, Date date, String title, String institution, String city, String country, String personUuid) {
-		this.uuid = uuid;
-		this.date = date;
-		this.title = title;
-		this.institution = institution;
-		this.city = city;
-		this.country = country;
-		this.personUuid = personUuid;
-	}
-
 	public String getUuid() {
 		return uuid;
 	}

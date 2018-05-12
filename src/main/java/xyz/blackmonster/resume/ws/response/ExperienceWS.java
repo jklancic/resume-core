@@ -2,6 +2,8 @@ package xyz.blackmonster.resume.ws.response;
 
 import java.sql.Date;
 
+import xyz.blackmonster.resume.models.Experience;
+
 /**
  * Web Service response object for Experience
  */
@@ -19,14 +21,14 @@ public class ExperienceWS {
 		
 	}
 
-	public ExperienceWS(String uuid, Date startDate, Date endDate, String title, String description, String city, String country) {
-		this.uuid = uuid;
-		this.startDate = startDate;
-		this.endDate = endDate;
-		this.title = title;
-		this.description = description;
-		this.city = city;
-		this.country = country;
+	public ExperienceWS(Experience experience) {
+		this.uuid = experience.getUuid();
+		this.startDate = experience.getStartDate();
+		this.endDate = experience.getEndDate();
+		this.title = experience.getTitle();
+		this.description = experience.getDescription();
+		this.city = experience.getCity();
+		this.country = experience.getCountry();
 	}
 
 	public String getUuid() {
