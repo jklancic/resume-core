@@ -2,7 +2,7 @@ package xyz.blackmonster.resume.ws.response;
 
 import java.sql.Date;
 
-import xyz.blackmonster.resume.models.Education;
+import xyz.blackmonster.resume.model.Education;
 
 /**
  * Web Service response object for Education

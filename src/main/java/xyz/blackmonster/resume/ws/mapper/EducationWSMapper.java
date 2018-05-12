@@ -1,7 +1,7 @@
 package xyz.blackmonster.resume.ws.mapper;
 
-import xyz.blackmonster.resume.models.Education;
-import xyz.blackmonster.resume.models.builder.EducationBuilder;
+import xyz.blackmonster.resume.model.Education;
+import xyz.blackmonster.resume.model.builder.EducationBuilder;
 import xyz.blackmonster.resume.ws.response.EducationWS;
 
 /**

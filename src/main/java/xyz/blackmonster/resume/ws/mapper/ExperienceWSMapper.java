@@ -1,7 +1,7 @@
 package xyz.blackmonster.resume.ws.mapper;
 
-import xyz.blackmonster.resume.models.Experience;
-import xyz.blackmonster.resume.models.builder.ExperienceBuilder;
+import xyz.blackmonster.resume.model.Experience;
+import xyz.blackmonster.resume.model.builder.ExperienceBuilder;
 import xyz.blackmonster.resume.ws.response.ExperienceWS;
 
 /**

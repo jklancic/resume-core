@@ -16,7 +16,7 @@ import javax.ws.rs.core.Response;
 
 import xyz.blackmonster.resume.controllers.api.ApiVersioning;
 import xyz.blackmonster.resume.security.auth.ResumeAuthFilter;
-import xyz.blackmonster.resume.services.PersonService;
+import xyz.blackmonster.resume.service.PersonService;
 import xyz.blackmonster.resume.ws.response.PersonWS;
 
 @Path(ApiVersioning.API_V1)

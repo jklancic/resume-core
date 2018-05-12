@@ -16,7 +16,7 @@ import javax.ws.rs.core.Response;
 
 import io.dropwizard.auth.AuthenticationException;
 import xyz.blackmonster.resume.controllers.api.ApiVersioning;
-import xyz.blackmonster.resume.services.AchievementService;
+import xyz.blackmonster.resume.service.AchievementService;
 import xyz.blackmonster.resume.ws.response.AchievementWS;
 
 /**

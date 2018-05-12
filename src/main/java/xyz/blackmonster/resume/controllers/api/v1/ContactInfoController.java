@@ -11,7 +11,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import xyz.blackmonster.resume.controllers.api.ApiVersioning;
-import xyz.blackmonster.resume.services.ContactInfoService;
+import xyz.blackmonster.resume.service.ContactInfoService;
 import xyz.blackmonster.resume.ws.response.ContactInfoWS;
 
 @Path(ApiVersioning.API_V1)

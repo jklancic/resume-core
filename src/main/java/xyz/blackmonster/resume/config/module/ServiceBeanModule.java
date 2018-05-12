@@ -4,20 +4,20 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import xyz.blackmonster.resume.services.AchievementService;
-import xyz.blackmonster.resume.services.AchievementServiceImpl;
-import xyz.blackmonster.resume.services.ContactInfoService;
-import xyz.blackmonster.resume.services.ContactInfoServiceImpl;
-import xyz.blackmonster.resume.services.EducationService;
-import xyz.blackmonster.resume.services.EducationServiceImpl;
-import xyz.blackmonster.resume.services.ExperienceService;
-import xyz.blackmonster.resume.services.ExperienceServiceImpl;
-import xyz.blackmonster.resume.services.PersonService;
-import xyz.blackmonster.resume.services.PersonServiceImpl;
-import xyz.blackmonster.resume.services.SkillService;
-import xyz.blackmonster.resume.services.SkillServiceImpl;
-import xyz.blackmonster.resume.services.UserService;
-import xyz.blackmonster.resume.services.UserServiceImpl;
+import xyz.blackmonster.resume.service.AchievementService;
+import xyz.blackmonster.resume.service.AchievementServiceImpl;
+import xyz.blackmonster.resume.service.ContactInfoService;
+import xyz.blackmonster.resume.service.ContactInfoServiceImpl;
+import xyz.blackmonster.resume.service.EducationService;
+import xyz.blackmonster.resume.service.EducationServiceImpl;
+import xyz.blackmonster.resume.service.ExperienceService;
+import xyz.blackmonster.resume.service.ExperienceServiceImpl;
+import xyz.blackmonster.resume.service.PersonService;
+import xyz.blackmonster.resume.service.PersonServiceImpl;
+import xyz.blackmonster.resume.service.SkillService;
+import xyz.blackmonster.resume.service.SkillServiceImpl;
+import xyz.blackmonster.resume.service.UserService;
+import xyz.blackmonster.resume.service.UserServiceImpl;
 
 @Module
 public class ServiceBeanModule {

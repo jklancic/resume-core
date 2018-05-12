@@ -4,7 +4,7 @@ import java.security.Principal;
 
 import javax.ws.rs.core.SecurityContext;
 
-import xyz.blackmonster.resume.models.Role;
+import xyz.blackmonster.resume.model.Role;
 
 public class ResumeSecurityContext implements SecurityContext {
 

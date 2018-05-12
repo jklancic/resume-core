@@ -2,7 +2,7 @@ package xyz.blackmonster.resume.ws.response;
 
 import java.sql.Date;
 
-import xyz.blackmonster.resume.models.Achievement;
+import xyz.blackmonster.resume.model.Achievement;
 
 /**
  * Web Service response object for Achievement

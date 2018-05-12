@@ -1,6 +1,6 @@
 package xyz.blackmonster.resume.ws.response;
 
-import xyz.blackmonster.resume.models.User;
+import xyz.blackmonster.resume.model.User;
 
 public class UserWS {
 

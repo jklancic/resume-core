@@ -8,10 +8,10 @@ import javax.inject.Inject;
 
 import io.dropwizard.auth.AuthenticationException;
 import io.dropwizard.auth.Authenticator;
-import xyz.blackmonster.resume.models.Role;
-import xyz.blackmonster.resume.models.User;
-import xyz.blackmonster.resume.repositories.dao.PersonDAO;
-import xyz.blackmonster.resume.repositories.dao.UserDAO;
+import xyz.blackmonster.resume.model.Role;
+import xyz.blackmonster.resume.model.User;
+import xyz.blackmonster.resume.repository.dao.PersonDAO;
+import xyz.blackmonster.resume.repository.dao.UserDAO;
 
 public class ResumeAuthenticator implements Authenticator<CookieToken, ResumeAuthUser> {
 

@@ -2,8 +2,8 @@ package xyz.blackmonster.resume.ws.response;
 
 import java.sql.Date;
 
-import xyz.blackmonster.resume.models.ContactInfo;
-import xyz.blackmonster.resume.models.Person;
+import xyz.blackmonster.resume.model.ContactInfo;
+import xyz.blackmonster.resume.model.Person;
 
 /**
  * Web Service response object for Person

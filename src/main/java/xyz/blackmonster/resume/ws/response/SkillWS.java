@@ -1,6 +1,6 @@
 package xyz.blackmonster.resume.ws.response;
 
-import xyz.blackmonster.resume.models.Skill;
+import xyz.blackmonster.resume.model.Skill;
 
 /**
  * Web Service response object for Skill

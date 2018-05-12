@@ -2,7 +2,7 @@ package xyz.blackmonster.resume.ws.response;
 
 import java.sql.Date;
 
-import xyz.blackmonster.resume.models.Experience;
+import xyz.blackmonster.resume.model.Experience;
 
 /**
  * Web Service response object for Experience

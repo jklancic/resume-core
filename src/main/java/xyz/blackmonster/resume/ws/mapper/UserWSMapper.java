@@ -1,8 +1,8 @@
 package xyz.blackmonster.resume.ws.mapper;
 
-import xyz.blackmonster.resume.models.Role;
-import xyz.blackmonster.resume.models.User;
-import xyz.blackmonster.resume.models.builder.UserBuilder;
+import xyz.blackmonster.resume.model.Role;
+import xyz.blackmonster.resume.model.User;
+import xyz.blackmonster.resume.model.builder.UserBuilder;
 import xyz.blackmonster.resume.ws.response.UserWS;
 
 /**

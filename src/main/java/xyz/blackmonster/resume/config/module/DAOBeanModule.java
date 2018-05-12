@@ -6,13 +6,13 @@ import org.jdbi.v3.core.Jdbi;
 
 import dagger.Module;
 import dagger.Provides;
-import xyz.blackmonster.resume.repositories.dao.AchievementDAO;
-import xyz.blackmonster.resume.repositories.dao.ContactInfoDAO;
-import xyz.blackmonster.resume.repositories.dao.EducationDAO;
-import xyz.blackmonster.resume.repositories.dao.ExperienceDAO;
-import xyz.blackmonster.resume.repositories.dao.PersonDAO;
-import xyz.blackmonster.resume.repositories.dao.SkillDAO;
-import xyz.blackmonster.resume.repositories.dao.UserDAO;
+import xyz.blackmonster.resume.repository.dao.AchievementDAO;
+import xyz.blackmonster.resume.repository.dao.ContactInfoDAO;
+import xyz.blackmonster.resume.repository.dao.EducationDAO;
+import xyz.blackmonster.resume.repository.dao.ExperienceDAO;
+import xyz.blackmonster.resume.repository.dao.PersonDAO;
+import xyz.blackmonster.resume.repository.dao.SkillDAO;
+import xyz.blackmonster.resume.repository.dao.UserDAO;
 
 @Module
 public class DAOBeanModule {

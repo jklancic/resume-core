@@ -2,8 +2,8 @@ package xyz.blackmonster.resume.security.auth;
 
 import java.util.List;
 
-import xyz.blackmonster.resume.models.Role;
-import xyz.blackmonster.resume.models.User;
+import xyz.blackmonster.resume.model.Role;
+import xyz.blackmonster.resume.model.User;
 
 public class ResumeAuthUser extends User {
 

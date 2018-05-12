@@ -12,7 +12,7 @@ import javax.ws.rs.core.Response;
 import xyz.blackmonster.resume.controllers.api.ApiVersioning;
 import xyz.blackmonster.resume.security.auth.Credentials;
 import xyz.blackmonster.resume.security.auth.ResumeAuthFilter;
-import xyz.blackmonster.resume.services.UserService;
+import xyz.blackmonster.resume.service.UserService;
 
 @Path(ApiVersioning.API_V1)
 @Produces(MediaType.APPLICATION_JSON)

@@ -13,7 +13,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import xyz.blackmonster.resume.controllers.api.ApiVersioning;
-import xyz.blackmonster.resume.services.ExperienceService;
+import xyz.blackmonster.resume.service.ExperienceService;
 import xyz.blackmonster.resume.ws.response.ExperienceWS;
 
 @Path(ApiVersioning.API_V1)

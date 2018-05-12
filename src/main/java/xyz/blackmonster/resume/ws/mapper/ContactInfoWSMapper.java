@@ -1,7 +1,7 @@
 package xyz.blackmonster.resume.ws.mapper;
 
-import xyz.blackmonster.resume.models.ContactInfo;
-import xyz.blackmonster.resume.models.builder.ContactInfoBuilder;
+import xyz.blackmonster.resume.model.ContactInfo;
+import xyz.blackmonster.resume.model.builder.ContactInfoBuilder;
 import xyz.blackmonster.resume.ws.response.ContactInfoWS;
 
 /**

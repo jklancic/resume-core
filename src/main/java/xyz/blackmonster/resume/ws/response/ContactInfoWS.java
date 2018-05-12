@@ -1,6 +1,6 @@
 package xyz.blackmonster.resume.ws.response;
 
-import xyz.blackmonster.resume.models.ContactInfo;
+import xyz.blackmonster.resume.model.ContactInfo;
 
 /**
  * Web Service response object for ContactInfo

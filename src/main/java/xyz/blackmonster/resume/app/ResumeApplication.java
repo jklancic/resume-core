@@ -18,8 +18,8 @@ import xyz.blackmonster.resume.config.component.DaggerResumeComponent;
 import xyz.blackmonster.resume.config.component.ResumeComponent;
 import xyz.blackmonster.resume.config.module.DAOBeanModule;
 import xyz.blackmonster.resume.config.module.ServiceBeanModule;
-import xyz.blackmonster.resume.controllers.mappers.AuthenticationExceptionMapper;
-import xyz.blackmonster.resume.controllers.mappers.NotFoundExceptionMapper;
+import xyz.blackmonster.resume.controllers.mapper.AuthenticationExceptionMapper;
+import xyz.blackmonster.resume.controllers.mapper.NotFoundExceptionMapper;
 import xyz.blackmonster.resume.security.auth.ResumeAuthFilter;
 
 public class ResumeApplication extends Application<ResumeConfiguration> {
