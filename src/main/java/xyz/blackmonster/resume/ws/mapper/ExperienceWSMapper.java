@@ -22,6 +22,7 @@ public class ExperienceWSMapper {
 			.description(experienceWS.getDescription())
 			.city(experienceWS.getCity())
 			.country(experienceWS.getCountry())
+			.personUuid(personUuid)
 			.build();
 	}
 }

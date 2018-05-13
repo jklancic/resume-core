@@ -48,6 +48,7 @@ CREATE TABLE `users`
   `username` VARCHAR(100) NOT NULL UNIQUE,
   `password` VARCHAR(255) NOT NULL,
   `role`     TINYINT      NOT NULL,
+  `access_token`     TINYINT      NULL,
 
   PRIMARY KEY (`uuid`)
 );
@@ -63,6 +64,10 @@ CREATE TABLE `persons`
   `overview`                 VARCHAR(255) NOT NULL,
   `created_by_user_uuid`     VARCHAR(36)  NOT NULL,
   `base_url`                 VARCHAR(255) NOT NULL UNIQUE,
+  `linkedin_url`             VARCHAR(255) NULL UNIQUE,
+  `github_url`               VARCHAR(255) NULL UNIQUE,
+  `facebook_url`             VARCHAR(255) NULL UNIQUE,
+  `twitter_url`              VARCHAR(255) NULL UNIQUE,
   `contact_information_uuid` VARCHAR(36)  NOT NULL,
 
   PRIMARY KEY (`uuid`),

@@ -12,6 +12,8 @@ import xyz.blackmonster.resume.service.EducationService;
 import xyz.blackmonster.resume.service.EducationServiceImpl;
 import xyz.blackmonster.resume.service.ExperienceService;
 import xyz.blackmonster.resume.service.ExperienceServiceImpl;
+import xyz.blackmonster.resume.service.JWTService;
+import xyz.blackmonster.resume.service.JWTServiceImpl;
 import xyz.blackmonster.resume.service.PersonService;
 import xyz.blackmonster.resume.service.PersonServiceImpl;
 import xyz.blackmonster.resume.service.SkillService;
@@ -62,5 +64,11 @@ public class ServiceBeanModule {
 	@Provides
 	UserService provideUserService(UserServiceImpl userService) {
 		return userService;
+	}
+
+	@Singleton
+	@Provides
+	JWTService provideJWTService(JWTServiceImpl jwtService) {
+		return jwtService;
 	}
 }

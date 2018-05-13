@@ -50,16 +50,13 @@ public class PasswordUtil {
 	 * @return
 	 */
 	private static String generateSecurePassword(String password, byte[] salt) {
-		String returnValue = null;
 		
 		byte[] securePassword = hash(password.toCharArray(), salt);
 		byte[] securePasswordWithSalt = new byte[SALT_SIZE + securePassword.length];
 		System.arraycopy(salt, 0, securePasswordWithSalt, 0, SALT_SIZE);
 		System.arraycopy(securePassword, 0, securePasswordWithSalt, SALT_SIZE, securePassword.length);
 
-		returnValue = Base64.getEncoder().encodeToString(securePasswordWithSalt);
-
-		return returnValue;
+		return Base64.getEncoder().encodeToString(securePasswordWithSalt);
 	}
 
 	/**
@@ -69,7 +66,6 @@ public class PasswordUtil {
 	 * @return
 	 */
 	public static String generateSecurePassword(String password) {
-		String returnValue = null;
 
 		byte[] salt = new byte[SALT_SIZE];
 		random.nextBytes(salt);
@@ -85,7 +81,6 @@ public class PasswordUtil {
 	 * @return
 	 */
 	public static boolean verifyUserPassword(String providedPassword, String securedPassword) {
-		boolean returnValue = false;
 
 		// Generate New secure password with the same salt
 		byte[] securePasswordWithSalt = Base64.getDecoder().decode(securedPassword);
@@ -93,9 +88,6 @@ public class PasswordUtil {
 		System.arraycopy(securePasswordWithSalt, 0, salt, 0, SALT_SIZE);
 		String newSecurePassword = generateSecurePassword(providedPassword, salt);
 
-		// Check if two passwords are equal
-		returnValue = newSecurePassword.equalsIgnoreCase(securedPassword);
-
-		return returnValue;
+		return newSecurePassword.equalsIgnoreCase(securedPassword);
 	}
 }

@@ -11,6 +11,7 @@ import javax.ws.rs.NotFoundException;
 
 import org.jdbi.v3.sqlobject.transaction.Transaction;
 
+import com.auth0.jwt.exceptions.JWTCreationException;
 import xyz.blackmonster.resume.model.Role;
 import xyz.blackmonster.resume.model.User;
 import xyz.blackmonster.resume.repository.dao.UserDAO;
@@ -25,9 +26,12 @@ public class UserServiceImpl implements UserService {
 
 	private UserDAO userDAO;
 
+	private JWTService jwtService;
+
 	@Inject
-	public UserServiceImpl(UserDAO userDAO) {
+	public UserServiceImpl(UserDAO userDAO, JWTService jwtService) {
 		this.userDAO = userDAO;
+		this.jwtService = jwtService;
 	}
 
 	@Override
@@ -54,13 +58,12 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@Transaction
-	public String authenticateUser(String username, String password) throws AuthenticationException {
-		UserWS user = getByUsername(username);
+	public String authenticateUser(String username, String password) throws AuthenticationException, JWTCreationException {
+		User user = userDAO.getByUsername(username).orElseThrow(() -> new AuthenticationException("Credentials are not valid."));
 		if(!PasswordUtil.verifyUserPassword(password, user.getPassword())) {
 			throw new AuthenticationException("Credentials are not valid.");
 		}
-		String accessToken = "";
-		return accessToken;
+		return jwtService.createToken(user.getUuid(), user.getUsername(), user.getRole().name());
 	}
 
 	private UserWS getUser(Optional<User> optionalUser, String exceptionMessage) {
@@ -74,7 +77,11 @@ public class UserServiceImpl implements UserService {
 	@Transaction
 	public UserWS createUser(UserWS userWS) {
 		String uuid = UUID.randomUUID().toString();
-		userDAO.create(uuid, userWS.getUsername(), userWS.getPassword(), Role.valueOf(userWS.getRole()).getRoleIndex());
+		userDAO.create(
+			uuid,
+			userWS.getUsername(),
+			PasswordUtil.generateSecurePassword(userWS.getPassword()),
+			Role.valueOf(userWS.getRole()).getRoleIndex());
 		return getByUuid(uuid);
 	}
 

@@ -13,6 +13,7 @@ public class ResumeConfiguration extends Configuration {
 	
 	private static final String DATABASE = "database";
 	private static final String AUTH_CACHE_POLICY = "authenticationCachePolicy";
+	private static final String JWT_SECRET = "jwtSecret";
 	
 	@Valid
 	@NotNull
@@ -20,6 +21,9 @@ public class ResumeConfiguration extends Configuration {
 
 	@NotEmpty
 	private String authenticationCachePolicy;
+
+	@NotEmpty
+	private String jwtSecret;
 
 	@JsonProperty(DATABASE)
 	public DataSourceFactory getDataSourceFactory() {
@@ -29,5 +33,10 @@ public class ResumeConfiguration extends Configuration {
 	@JsonProperty(AUTH_CACHE_POLICY)
 	public String getAuthenticationCachePolicy() {
 		return authenticationCachePolicy;
+	}
+
+	@JsonProperty(JWT_SECRET)
+	public String getJwtSecret() {
+		return jwtSecret;
 	}
 }

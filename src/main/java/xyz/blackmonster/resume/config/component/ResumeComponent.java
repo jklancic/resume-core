@@ -10,6 +10,7 @@ import xyz.blackmonster.resume.controllers.api.v1.ContactInfoController;
 import xyz.blackmonster.resume.controllers.api.v1.EducationController;
 import xyz.blackmonster.resume.controllers.api.v1.ExperienceController;
 import xyz.blackmonster.resume.controllers.api.v1.PersonController;
+import xyz.blackmonster.resume.controllers.api.v1.SessionController;
 import xyz.blackmonster.resume.controllers.api.v1.SkillController;
 import xyz.blackmonster.resume.controllers.api.v1.UserController;
 import xyz.blackmonster.resume.security.auth.ResumeAuthenticator;
@@ -25,6 +26,7 @@ public interface ResumeComponent {
 	PersonController getPersonController();
 	SkillController getSkillController();
 	UserController getUserController();
+	SessionController getSessionController();
 
 	ResumeAuthenticator getResumeAuthenticator();
 }

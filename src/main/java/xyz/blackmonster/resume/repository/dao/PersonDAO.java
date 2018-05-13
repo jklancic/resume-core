@@ -36,13 +36,13 @@ public interface PersonDAO {
 	@SqlQuery("SELECT uuid FROM persons WHERE base_url = :baseUrl")
 	Optional<String> getUuidByBaseUrl(@Bind("baseUrl") String baseUrl);
 
-	@SqlUpdate("INSERT INTO persons(uuid, birth_date, first_name, last_name, overview, contact_information_uuid, base_url, created_by_user_uuid) VALUES (:uuid, :birthDate, :firstName, :lastName, :overview, :contactInfoUuid, :baseUrl, :createdByUser)")
+	@SqlUpdate("INSERT INTO persons(uuid, birth_date, first_name, last_name, overview, contact_information_uuid, base_url, linkedin_url, github_url, facebook_url, twitter_url, created_by_user_uuid) VALUES (:uuid, :birthDate, :firstName, :lastName, :overview, :contactInfoUuid, :baseUrl, :linkedInUrl, :githubUrl, :facebookUrl, :twitterUrl :createdByUser)")
 	void create(@BindBean Person person);
 
-	@SqlUpdate("UPDATE persons SET birth_date = :birthDate, first_name = :firstName, last_name = :lastName, overview = :overview, contact_information_uuid = :contactInfoUuid, base_url = :baseUrl, created_by_user_uuid = :createdByUser WHERE uuid = :uuid")
+	@SqlUpdate("UPDATE persons SET birth_date = :birthDate, first_name = :firstName, last_name = :lastName, overview = :overview, contact_information_uuid = :contactInfoUuid, base_url = :baseUrl, linkedin_url = :linkedInUrl, github_url = :githubUrl, facebook_url = :facebookUrl, twitter_url = :twitterUrl, created_by_user_uuid = :createdByUser WHERE uuid = :uuid")
 	void updateAll(@BindBean Person person);
 
-	@SqlUpdate("UPDATE persons SET birth_date = :birthDate, first_name = :firstName, last_name = :lastName, overview = :overview, contact_information_uuid = :contactInfoUuid WHERE uuid = :uuid")
+	@SqlUpdate("UPDATE persons SET birth_date = :birthDate, first_name = :firstName, last_name = :lastName, overview = :overview, linkedin_url = :linkedInUrl, github_url = :githubUrl, facebook_url = :facebookUrl, twitter_url = :twitterUrl WHERE uuid = :uuid")
 	void update(@BindBean Person person);
 
 	@SqlUpdate("DELETE FROM persons WHERE uuid = :uuid")

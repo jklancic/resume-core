@@ -21,12 +21,13 @@ public class PersonWSMapper {
 			.firstName(personWS.getFirstName())
 			.lastName(personWS.getLastName())
 			.overview(personWS.getOverview())
-			.contactInfoUuid(personWS.getContactInfo().getUuid())
+			.contactInfoUuid(personWS.getContactInfo() != null ? personWS.getContactInfo().getUuid() : null)
 			.baseUrl(personWS.getBaseUrl())
 			.linkedInUrl(personWS.getLinkedInUrl())
 			.githubUrl(personWS.getGithubUrl())
 			.facebookUrl(personWS.getFacebookUrl())
 			.twitterUrl(personWS.getTwitterUrl())
+			.createdByUser(createdByUser)
 			.build();
 	}
 }

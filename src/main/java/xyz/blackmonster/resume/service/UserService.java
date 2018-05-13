@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.naming.AuthenticationException;
 
+import com.auth0.jwt.exceptions.JWTCreationException;
 import xyz.blackmonster.resume.ws.response.UserWS;
 
 /**
@@ -37,7 +38,7 @@ public interface UserService {
 	 * @param password
 	 * @return
 	 */
-	String authenticateUser(String username, String password) throws AuthenticationException;
+	String authenticateUser(String username, String password) throws AuthenticationException, JWTCreationException;
 
 	/**
 	 * Create and return new user.

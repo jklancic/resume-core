@@ -14,11 +14,13 @@ import io.dropwizard.auth.AuthDynamicFeature;
 import io.dropwizard.jdbi3.JdbiFactory;
 import io.dropwizard.setup.Environment;
 import xyz.blackmonster.resume.config.app.ResumeConfiguration;
+import xyz.blackmonster.resume.config.app.RuntimeConfiguration;
 import xyz.blackmonster.resume.config.component.DaggerResumeComponent;
 import xyz.blackmonster.resume.config.component.ResumeComponent;
 import xyz.blackmonster.resume.config.module.DAOBeanModule;
 import xyz.blackmonster.resume.config.module.ServiceBeanModule;
 import xyz.blackmonster.resume.controllers.mapper.AuthenticationExceptionMapper;
+import xyz.blackmonster.resume.controllers.mapper.JWTCreationExceptionMapper;
 import xyz.blackmonster.resume.controllers.mapper.NotFoundExceptionMapper;
 import xyz.blackmonster.resume.security.auth.ResumeAuthFilter;
 
@@ -38,9 +40,12 @@ public class ResumeApplication extends Application<ResumeConfiguration> {
 		final JdbiFactory factory = new JdbiFactory();
 		final Jdbi jdbi = factory.build(environment, configuration.getDataSourceFactory(), MYSQL);
 
+		RuntimeConfiguration.get().setJwtSecret(configuration.getJwtSecret());
+
 		initInjection(jdbi);
+		initExceptionHandlers(environment);
 		initControllers(environment);
-		initAuthentication(configuration, environment);
+		initAuthentication(environment);
 		initCORS(environment);
 	}
 
@@ -55,6 +60,7 @@ public class ResumeApplication extends Application<ResumeConfiguration> {
 	private void initExceptionHandlers(Environment environment) {
 		environment.jersey().register(new NotFoundExceptionMapper());
 		environment.jersey().register(new AuthenticationExceptionMapper());
+		environment.jersey().register(new JWTCreationExceptionMapper());
 	}
 
 	private void initControllers(Environment environment) {
@@ -65,9 +71,10 @@ public class ResumeApplication extends Application<ResumeConfiguration> {
 		environment.jersey().register(resumeComponent.getPersonController());
 		environment.jersey().register(resumeComponent.getSkillController());
 		environment.jersey().register(resumeComponent.getUserController());
+		environment.jersey().register(resumeComponent.getSessionController());
 	}
 
-	private void initAuthentication(ResumeConfiguration configuration, Environment environment) {
+	private void initAuthentication(Environment environment) {
 		ResumeAuthFilter filter = new ResumeAuthFilter(resumeComponent.getResumeAuthenticator());
 		environment.jersey().register(new AuthDynamicFeature(filter));
 		environment.jersey().register(RolesAllowedDynamicFeature.class);
