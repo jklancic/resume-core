@@ -2,6 +2,7 @@ package xyz.blackmonster.resume.controllers.api.v1;
 
 import javax.inject.Inject;
 import javax.naming.AuthenticationException;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -35,8 +36,8 @@ public class SessionController {
 			.build();
 	}
 
-	@POST
-	@Path("/session/login")
+	@GET
+	@Path("/session/logout")
 	public Response logout() {
 		return Response
 			.status(Response.Status.OK)

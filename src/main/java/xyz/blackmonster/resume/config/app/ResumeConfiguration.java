@@ -20,19 +20,11 @@ public class ResumeConfiguration extends Configuration {
 	private DataSourceFactory dataSourceFactory = new DataSourceFactory();
 
 	@NotEmpty
-	private String authenticationCachePolicy;
-
-	@NotEmpty
 	private String jwtSecret;
 
 	@JsonProperty(DATABASE)
 	public DataSourceFactory getDataSourceFactory() {
 		return dataSourceFactory;
-	}
-
-	@JsonProperty(AUTH_CACHE_POLICY)
-	public String getAuthenticationCachePolicy() {
-		return authenticationCachePolicy;
 	}
 
 	@JsonProperty(JWT_SECRET)

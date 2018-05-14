@@ -27,7 +27,7 @@ import xyz.blackmonster.resume.security.auth.ResumeAuthFilter;
 public class ResumeApplication extends Application<ResumeConfiguration> {
 
 	private static final String REALM = "resume";
-	private static final String MYSQL = "mysql";
+	private static final String HEALTH_CHECK_NAME = "DB";
 
 	private ResumeComponent resumeComponent;
 
@@ -38,7 +38,7 @@ public class ResumeApplication extends Application<ResumeConfiguration> {
 	@Override
 	public void run(ResumeConfiguration configuration, Environment environment) throws Exception {
 		final JdbiFactory factory = new JdbiFactory();
-		final Jdbi jdbi = factory.build(environment, configuration.getDataSourceFactory(), MYSQL);
+		final Jdbi jdbi = factory.build(environment, configuration.getDataSourceFactory(), HEALTH_CHECK_NAME);
 
 		RuntimeConfiguration.get().setJwtSecret(configuration.getJwtSecret());
 
