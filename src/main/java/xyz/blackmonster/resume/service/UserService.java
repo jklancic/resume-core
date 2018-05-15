@@ -59,4 +59,10 @@ public interface UserService {
 	 * @param uuid
 	 */
 	void deleteUser(String uuid);
+
+	/**
+	 * Delete access token for user.
+	 * @param accessToken
+	 */
+	void deleteAccessToken(String accessToken);
 }

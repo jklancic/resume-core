@@ -34,4 +34,10 @@ public interface UserDAO {
 
 	@SqlUpdate("DELETE FROM user WHERE uuid = :uuid")
 	void delete(@Bind("uuid") String uuid);
+
+	@SqlUpdate("UPDATE user SET access_token = :token WHERE uuid = :uuid")
+	void updateAccessToken(@Bind("uuid") String uuid, @Bind("token") String token);
+
+	@SqlUpdate("UPDATE user SET access_token = NULL WHERE access_token = :token")
+	void deleteAccessToken(@Bind("token") String token);
 }

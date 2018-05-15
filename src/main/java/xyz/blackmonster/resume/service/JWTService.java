@@ -7,5 +7,5 @@ public interface JWTService {
 
 	String createToken(String userUuid, String username, String role) throws JWTCreationException;
 
-	boolean verifyToken(String token) throws JWTVerificationException;
+	String retrievePayloadFromToken(String token) throws JWTVerificationException;
 }

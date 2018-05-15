@@ -101,4 +101,11 @@ public class UserServiceImpl implements UserService {
 	public void deleteUser(String uuid) {
 		userDAO.delete(uuid);
 	}
+
+	@Override
+	public void deleteAccessToken(String accessToken) {
+
+	}
+
+
 }

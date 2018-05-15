@@ -12,6 +12,7 @@ import xyz.blackmonster.resume.model.Role;
 import xyz.blackmonster.resume.model.User;
 import xyz.blackmonster.resume.repository.dao.PersonDAO;
 import xyz.blackmonster.resume.repository.dao.UserDAO;
+import xyz.blackmonster.resume.service.JWTService;
 
 public class ResumeAuthenticator implements Authenticator<CookieToken, ResumeAuthUser> {
 
@@ -19,10 +20,13 @@ public class ResumeAuthenticator implements Authenticator<CookieToken, ResumeAut
 
 	private PersonDAO personDAO;
 
+	private JWTService jwtService;
+
 	@Inject
-	public ResumeAuthenticator(UserDAO userDAO, PersonDAO personDAO) {
+	public ResumeAuthenticator(UserDAO userDAO, PersonDAO personDAO, JWTService jwtService) {
 		this.userDAO = userDAO;
 		this.personDAO = personDAO;
+		this.jwtService = jwtService;
 	}
 
 	@Override
@@ -30,28 +34,47 @@ public class ResumeAuthenticator implements Authenticator<CookieToken, ResumeAut
 		if(credentials.getAccessToken() == null || credentials.getAccessToken().isEmpty()) {
 			throw new AuthenticationException("Access token is not valid.");
 		}
-		// TODO: Validate token first and throw AuthenticationException if expired, and then search for user.
+
+		String userUuid = retrieveUserUuid(credentials.getAccessToken());
 		Optional<User> optionalUser = userDAO.getByAccessToken(credentials.getAccessToken());
 		if(optionalUser.isPresent()) {
 			User user = optionalUser.get();
-			if(user.getRole().equals(Role.USER)) {
-				List<String> uuidList = personDAO.getAllPersonUuidByOwnerUuid(user.getUuid());
-				return Optional.of(
-					new ResumeAuthUser(
-						user.getUuid(),
-						user.getUsername(),
-						user.getPassword(),
-						user.getRole(),
-						uuidList));
-			}
+			return getResumeAuthUser(userUuid, user);
+		}
+		userDAO.updateAccessToken(userUuid, credentials.getAccessToken());
+		optionalUser = userDAO.getByUuid(userUuid);
+		if(!optionalUser.isPresent()) {
+			throw new AuthenticationException("Access token is not valid.");
+		}
+		return getResumeAuthUser(userUuid, optionalUser.get());
+	}
+
+	private Optional<ResumeAuthUser> getResumeAuthUser(String userUuid, User user) throws AuthenticationException {
+		if(user.getUuid().equals(userUuid)) {
+			throw new AuthenticationException("Access token is not valid.");
+		}
+		if(user.getRole().equals(Role.USER)) {
+			List<String> uuidList = personDAO.getAllPersonUuidByOwnerUuid(user.getUuid());
 			return Optional.of(
 				new ResumeAuthUser(
 					user.getUuid(),
 					user.getUsername(),
 					user.getPassword(),
 					user.getRole(),
-					Collections.EMPTY_LIST));
+					uuidList));
 		}
-		return Optional.empty();
+		return Optional.of(
+			new ResumeAuthUser(
+				user.getUuid(),
+				user.getUsername(),
+				user.getPassword(),
+				user.getRole(),
+				Collections.EMPTY_LIST));
+	}
+
+	private String retrieveUserUuid(String accessToken) {
+		// TODO: Retrieve the user uuid from the payload
+		String userUuid = jwtService.retrievePayloadFromToken(accessToken);
+		return userUuid;
 	}
 }
