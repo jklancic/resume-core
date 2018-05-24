@@ -32,7 +32,9 @@ public class PersonWS {
 		this.firstName = person.getFirstName();
 		this.lastName = person.getLastName();
 		this.overview = person.getOverview();
-		this.contactInfo = new ContactInfoWS(contactInfo);
+		if (contactInfo != null) {
+			this.contactInfo = new ContactInfoWS(contactInfo);
+		}
 		this.baseUrl = person.getBaseUrl();
 		this.linkedInUrl = person.getLinkedInUrl();
 		this.githubUrl = person.getGithubUrl();
