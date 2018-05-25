@@ -98,7 +98,7 @@ public class PersonServiceImpl implements PersonService {
 	private String getBaseURL(String urlAsString) throws IllegalArgumentException {
 		try {
 			URL url = new URL(urlAsString);
-			return new URL(url.getProtocol(), url.getHost(), url.getPort(), null).toString();
+			return String.format("%s://%s", url.getProtocol(), url.getAuthority());
 		} catch (MalformedURLException e) {
 			LOGGER.error("Given URI is not valid.");
 			throw new IllegalArgumentException("Given URI is not valid.", e);
@@ -126,7 +126,12 @@ public class PersonServiceImpl implements PersonService {
 			contactInfoDAO.update(ContactInfoWSMapper.toModel(contactInfoWS));
 		}
 		personDAO.updateAll(PersonWSMapper.toModel(personWS, userUuid));
-		return getByUuid(personWS.getUuid());
+		PersonWS returnedPerson = getByUuid(personWS.getUuid());
+		Optional<ContactInfo> optionalContactInfo = contactInfoDAO.getByUuid(returnedPerson.getUuid());
+		if (optionalContactInfo.isPresent()) {
+			returnedPerson.setContactInfo(ContactInfoWSMapper.toWS(optionalContactInfo.get()));
+		}
+		return returnedPerson;
 	}
 
 	@Override
@@ -161,7 +166,6 @@ public class PersonServiceImpl implements PersonService {
 	private String getUserUuid(String accessToken) {
 		Optional<User> optionalUser = userDAO.getByAccessToken(accessToken);
 		if(!optionalUser.isPresent()) {
-			// TODO: remove access token from DB if exists
 			throw new IllegalStateException("Access token does not belong to any user.");
 		}
 		return optionalUser.get().getUuid();
