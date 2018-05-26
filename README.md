@@ -1,5 +1,7 @@
 # vitaCore
 
+[![CircleCI](https://circleci.com/gh/jklancic/resume-core/tree/master.svg?style=svg)](https://circleci.com/gh/jklancic/resume-core/tree/master)
+
 Java API back-end server supporting multi-tenant resume functionality.
 
 ## Getting started
