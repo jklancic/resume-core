@@ -37,11 +37,11 @@ public class ContactInfoServiceImpl implements ContactInfoService {
 
 	@Override
 	@Transaction
-	public ContactInfoWS getByPersonUuid(String userUuid) {
-		Optional<ContactInfo> optionalContactInfo = contactInfoDAO.getByPersonUuid(userUuid);
+	public ContactInfoWS getByPersonUuid(String personUuid) {
+		Optional<ContactInfo> optionalContactInfo = contactInfoDAO.getByPersonUuid(personUuid);
 		if(!optionalContactInfo.isPresent()) {
 			throw new NotFoundException(
-				String.format("Could not find any contact info for person with uuid=%s", userUuid));
+				String.format("Could not find any contact info for person with uuid=%s", personUuid));
 		}
 		return ContactInfoWSMapper.toWS(optionalContactInfo.get());
 	}

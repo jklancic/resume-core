@@ -16,10 +16,10 @@ public interface ContactInfoService {
 
 	/**
 	 * Return contact info by person uuid.
-	 * @param userUuid
+	 * @param personUuid
 	 * @return
 	 */
-	ContactInfoWS getByPersonUuid(String userUuid);
+	ContactInfoWS getByPersonUuid(String personUuid);
 
 	/**
 	 * Update and return contact info.
