@@ -53,7 +53,5 @@ logging:
       timeZone: UTC
       maxFileSize: 10MB
 
-authenticationCachePolicy: maximumSize=10000, expireAfterAccess=10m
-
 # JWT settings
 jwtSecret: secret

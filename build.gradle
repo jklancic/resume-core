@@ -42,3 +42,14 @@ test {
         events "PASSED", "STARTED", "FAILED", "SKIPPED"
     }
 }
+
+jar {
+    manifest {
+        attributes "Main-Class": "xyz.blackmonster.resume.app.ResumeApplication"
+    }
+
+    baseName = 'vitaCore'
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
