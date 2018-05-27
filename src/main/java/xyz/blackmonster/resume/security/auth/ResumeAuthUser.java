@@ -9,6 +9,7 @@ public class ResumeAuthUser extends User {
 
 	private List<String> personList;
 
+	@SuppressWarnings("unchecked")
 	public ResumeAuthUser(String uuid, String username, String password, Role role, List<String> personList) {
 		super(uuid, username, password, role);
 		this.personList = personList;

@@ -69,7 +69,7 @@ public class ResumeAuthenticator implements Authenticator<CookieToken, ResumeAut
 				user.getUsername(),
 				user.getPassword(),
 				user.getRole(),
-				Collections.EMPTY_LIST));
+				Collections.emptyList()));
 	}
 
 	private String retrieveUserUuid(String accessToken) {
