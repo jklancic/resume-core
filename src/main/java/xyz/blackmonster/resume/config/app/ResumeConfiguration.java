@@ -12,7 +12,6 @@ import io.dropwizard.db.DataSourceFactory;
 public class ResumeConfiguration extends Configuration {
 	
 	private static final String DATABASE = "database";
-	private static final String AUTH_CACHE_POLICY = "authenticationCachePolicy";
 	private static final String JWT_SECRET = "jwtSecret";
 	
 	@Valid

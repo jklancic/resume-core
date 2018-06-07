@@ -17,6 +17,7 @@ ext {
     mockitoVersion = '2.16.0'
     googleHttpClientVersion = '1.23.0'
     h2ConnectorVersion = '1.4.197'
+    dropwizardFlywayVersion = '1.3.0-3'
 }
 
 repositories {
@@ -31,6 +32,7 @@ dependencies {
     compile group: 'io.dropwizard', name: 'dropwizard-client', version: dropwizardVersion
     compile group: 'mysql', name: 'mysql-connector-java', version: mysqlConnectorVersion
     compile group: 'com.auth0', name: 'java-jwt', version: javaJwtVersion
+    compile group: 'io.dropwizard.modules', name: 'dropwizard-flyway', version: dropwizardFlywayVersion
     annotationProcessor group: 'com.google.dagger', name: 'dagger-compiler', version: daggerVersion
     implementation group: 'com.google.dagger', name: 'dagger', version: daggerVersion
     testCompile group: 'io.dropwizard', name: 'dropwizard-testing', version: dropwizardVersion

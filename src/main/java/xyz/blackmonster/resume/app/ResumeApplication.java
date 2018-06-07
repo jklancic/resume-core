@@ -11,7 +11,11 @@ import org.jdbi.v3.core.Jdbi;
 
 import io.dropwizard.Application;
 import io.dropwizard.auth.AuthDynamicFeature;
+import io.dropwizard.db.DataSourceFactory;
+import io.dropwizard.flyway.FlywayBundle;
+import io.dropwizard.flyway.FlywayFactory;
 import io.dropwizard.jdbi3.JdbiFactory;
+import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import xyz.blackmonster.resume.config.app.ResumeConfiguration;
 import xyz.blackmonster.resume.config.app.RuntimeConfiguration;

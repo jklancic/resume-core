@@ -1,5 +1,8 @@
 package xyz.blackmonster.resume.security.auth;
 
+/**
+ * Login credentials
+ */
 public class Credentials {
 
 	private String username;
