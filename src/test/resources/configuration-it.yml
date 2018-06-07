@@ -11,7 +11,7 @@ database:
   password: sa
 
   # the JDBC URL
-  url: jdbc:h2:resume
+  url: jdbc:h2:./resume
 
 # Server settings.
 server:

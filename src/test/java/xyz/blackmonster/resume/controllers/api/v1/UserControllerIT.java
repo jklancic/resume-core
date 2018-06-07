@@ -10,6 +10,8 @@ import javax.ws.rs.core.NewCookie;
 import javax.ws.rs.core.Response;
 
 import org.flywaydb.core.Flyway;
+import org.h2.tools.DeleteDbFiles;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Test;
@@ -23,6 +25,9 @@ import xyz.blackmonster.resume.security.auth.Credentials;
 import xyz.blackmonster.resume.security.auth.ResumeAuthFilter;
 import xyz.blackmonster.resume.ws.response.UserWS;
 
+/**
+ * Integration test for user controller.
+ */
 public class UserControllerIT {
 
 	private String accessToken;
@@ -34,25 +39,28 @@ public class UserControllerIT {
 
 	@Before
 	public void setUp() {
-		// TODO: set up DB migration, where we add a user to log
 		Flyway flyway = new Flyway();
 		DataSourceFactory dataSourceFactory = RULE.getConfiguration().getDataSourceFactory();
 		flyway.setDataSource(dataSourceFactory.getUrl(), dataSourceFactory.getUser(), dataSourceFactory.getPassword());
 		flyway.migrate();
 
-		// TODO: Create credentials for login
 		Credentials credentials = new Credentials();
-		credentials.setUsername("username");
-		credentials.setPassword("password");
+		credentials.setUsername("it_tester");
+		credentials.setPassword("tester2018");
 
 		Response response = RULE.client().target(
-			String.format("http://localhost:%d/session/login", RULE.getLocalPort()))
+			String.format("http://localhost:%d/api/v1/session/login", RULE.getLocalPort()))
 			.request()
 			.post(Entity.json(credentials));
 
 		Map<String, NewCookie> cookies = response.getCookies();
 		NewCookie cookie = cookies.get(ResumeAuthFilter.COOKIE_ACCESS_TOKEN);
 		accessToken = cookie.getValue();
+	}
+
+	@AfterClass
+	public static void tearDown() {
+		DeleteDbFiles.execute(".", "resume", true);
 	}
 
 	@Test
