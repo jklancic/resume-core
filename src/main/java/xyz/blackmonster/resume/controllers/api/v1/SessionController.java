@@ -3,7 +3,6 @@ package xyz.blackmonster.resume.controllers.api.v1;
 import javax.inject.Inject;
 import javax.naming.AuthenticationException;
 import javax.ws.rs.CookieParam;
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -37,7 +36,7 @@ public class SessionController {
 			.build();
 	}
 
-	@GET
+	@POST
 	@Path("/session/logout")
 	public Response logout(@CookieParam(ResumeAuthFilter.COOKIE_ACCESS_TOKEN) String accessToken) {
 		userService.deleteAccessToken(accessToken);

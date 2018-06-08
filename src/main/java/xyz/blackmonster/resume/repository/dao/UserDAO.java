@@ -18,7 +18,7 @@ public interface UserDAO {
 	List<User> getAll();
 
 	@SqlQuery("SELECT uuid, username, password, role FROM users WHERE uuid = :uuid")
-	Optional<User> getByUuid(@Bind("username") String uuid);
+	Optional<User> getByUuid(@Bind("uuid") String uuid);
 
 	@SqlQuery("SELECT uuid, username, password, role FROM users WHERE username = :username")
 	Optional<User> getByUsername(@Bind("username") String username);

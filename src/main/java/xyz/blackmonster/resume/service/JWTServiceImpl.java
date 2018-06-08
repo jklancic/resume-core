@@ -13,6 +13,7 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
+import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import xyz.blackmonster.resume.config.app.RuntimeConfiguration;
 
@@ -55,7 +56,8 @@ public class JWTServiceImpl implements JWTService {
 				.withIssuer(ISSUER)
 				.build(); //Reusable verifier instance
 			DecodedJWT jwt = verifier.verify(token);
-			return jwt.getPayload();
+			Claim sub = jwt.getClaim("sub");
+			return sub.asString();
 		} catch (UnsupportedEncodingException e){
 			LOGGER.error("UTF-8 encoding not supported: ", e);
 			throw new JWTVerificationException("UTF-8 encoding not supported.", e);

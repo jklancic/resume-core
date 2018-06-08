@@ -50,7 +50,7 @@ public class ResumeAuthenticator implements Authenticator<CookieToken, ResumeAut
 	}
 
 	private Optional<ResumeAuthUser> getResumeAuthUser(String userUuid, User user) throws AuthenticationException {
-		if(user.getUuid().equals(userUuid)) {
+		if(!user.getUuid().equals(userUuid)) {
 			throw new AuthenticationException("Access token is not valid.");
 		}
 		if(user.getRole().equals(Role.USER)) {
