@@ -6,9 +6,12 @@ import javax.ws.rs.CookieParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.Cookie;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.NewCookie;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 
 import xyz.blackmonster.resume.controllers.api.ApiVersioning;
 import xyz.blackmonster.resume.security.auth.Credentials;
@@ -28,21 +31,36 @@ public class SessionController {
 
 	@POST
 	@Path("/session/login")
-	public Response login(Credentials credentials) throws AuthenticationException {
+	public Response login(@Context UriInfo uriInfo, Credentials credentials) throws AuthenticationException {
 		String accessToken = userService.authenticateUser(credentials.getUsername(), credentials.getPassword());
+		NewCookie cookie = createSessionCookie(uriInfo, accessToken);
 		return Response
 			.status(Response.Status.OK)
-			.cookie(new NewCookie(ResumeAuthFilter.COOKIE_ACCESS_TOKEN, accessToken))
+			.cookie(cookie)
 			.build();
 	}
 
 	@POST
 	@Path("/session/logout")
-	public Response logout(@CookieParam(ResumeAuthFilter.COOKIE_ACCESS_TOKEN) String accessToken) {
+	public Response logout(@Context UriInfo uriInfo, @CookieParam(ResumeAuthFilter.COOKIE_ACCESS_TOKEN) String accessToken) {
 		userService.deleteAccessToken(accessToken);
+		NewCookie cookie = createSessionCookie(uriInfo, accessToken, 0);
 		return Response
 			.status(Response.Status.OK)
-			.cookie(new NewCookie(ResumeAuthFilter.COOKIE_ACCESS_TOKEN, null))
+			.cookie(cookie)
 			.build();
+	}
+
+	private NewCookie createSessionCookie(@Context UriInfo uriInfo, String accessToken) {
+		return createSessionCookie(uriInfo, accessToken, NewCookie.DEFAULT_MAX_AGE);
+	}
+
+	private NewCookie createSessionCookie(@Context UriInfo uriInfo, String accessToken, int maxAge) {
+		return new NewCookie(
+			ResumeAuthFilter.COOKIE_ACCESS_TOKEN, accessToken,
+			"/", uriInfo.getBaseUri().toString(),
+			Cookie.DEFAULT_VERSION, null,
+			maxAge, null,
+			false, false);
 	}
 }

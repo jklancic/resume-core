@@ -2,15 +2,16 @@ package xyz.blackmonster.resume.controllers.api.v1;
 
 import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.CookieParam;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
-import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -31,12 +32,6 @@ public class PersonController {
 	}
 
 	@GET
-	@Path("/persons/test/hello")
-	public Response hello() {
-		return Response.status(Response.Status.OK).entity("Hello").build();
-	}
-
-	@GET
 	@Path("/persons")
 	@RolesAllowed("ADMIN")
 	public Response getAll() {
@@ -51,8 +46,8 @@ public class PersonController {
 
 	@GET
 	@Path("/persons/retrieve")
-	public Response retrieveUuid(@HeaderParam("Origin") String origin) {
-		return Response.status(Response.Status.OK).entity(personService.getUuid(origin)).build();
+	public Response retrieveUuid(@Context HttpServletRequest requestContext) {
+		return Response.status(Response.Status.OK).entity(personService.getUuid(requestContext.getRemoteHost())).build();
 	}
 
 	@PUT
